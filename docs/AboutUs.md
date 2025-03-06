@@ -9,15 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Popova Mariia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/popova-mariia.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
+  Integration: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
 ### Jane Doe
 
