@@ -9,11 +9,20 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Nidhi Nandlal Patil
+
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+<img src="images/patil-np.png" width="200px">
+
+* Role: Documentation and Testing
+* Responsibilities: Responsible for the quality of various project documents. Ensures the testing of the project is done properly and on time.
+
 ### Popova Mariia
 
 <img src="images/popova-mariia.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
@@ -30,25 +39,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time.
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Sankar Niharika
 
