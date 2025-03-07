@@ -48,6 +48,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
+### Sankar Niharika
+
+<img src="images/niha81.png" width="200px">
+
+[[github](http://github.com/niha81)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
+
 ### Ming Sheng
 
 <img src="images/moingshoing.png" width="200px">
@@ -57,3 +67,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Code quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+
