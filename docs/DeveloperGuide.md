@@ -275,14 +275,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                                    | So that I can…​                                                 |
+|----------|---------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------------------------|
+| `* * *`  | user                                        | see usage instructions                                          | refer to instructions when I forget how to use the App          |
+| `* * *`  | new user                                    | see a quick-start guide                                         | learn how to use the app effectively from the beginning         |
+| `* * *`  | user                                        | add a new patient’s contact details                             | keep track of their information and reach out when needed       |
+| `* * *`  | home-visit nurse managing multiple patients | update a patient's contact details                              | always have the latest information to reach them                |
+| `* * *`  | user                                        | delete a person                                                 | remove entries that I no longer need                            |
+| `* * *`  | user                                        | see a confirmation message before deleting a patient record     | avoid accidentally removing important data                      |
+| `* * *`  | home-visit nurse managing multiple patients | search for a patient by name and view their details quickly     | find important information efficiently during a visit           |
+| `* * *`  | user                                        | search for a patient using partial names                        | find a patient even if I don’t remember their full name         |
+| `* * *`  | user                                        | have search results highlight matching text                     | quickly identify relevant records                               |
+| `* * *`  | user                                        | list all patients                                               | get an overview of all stored records                           |
+| `* *`    | home-visit nurse with many patients         | sort my patient list by name                                    | locate a person easily                                          |
+| `* *`    | home-visit nurse                            | filter search results by appointment date                       | quickly locate patients I am scheduled to see soon              |
+| `* *`    | user                                        | search for patients by phone number                             | retrieve contact details even if I only have a number available |
+| `* *`    | security-conscious user                     | lock or hide sensitive patient contact details                  | prevent unauthorized individuals from accessing them            |
+| `*`      | busy nurse                                  | categorize patients based on their conditions or priority level | focus on urgent cases first                                     |
+| `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                    |
+
 
 *{More to be added}*
 
@@ -326,7 +337,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **User**: A home-visit nurse who interacts with the SilverCare system to manage patient information.
+* **New User**: A first-time user of the system who may require guidance on how to use the application.
+* **Home-Visit Nurse**: A nurse who provides medical care to elderly patients in their homes, rather than at a hospital or clinic.
+* **Patient Management**: The ability to store, update, and retrieve patient details such as name, contact information, and medical history.
+* **Contact Details**: A patient’s phone number, address, and any other means of communication stored within the system.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patient Record**: A stored entry containing a patient's personal details, contact information, and relevant medical notes.
+* **Unique Identifier (Patient ID)**: A system-generated number assigned to each patient record to ensure easy identification and management.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
