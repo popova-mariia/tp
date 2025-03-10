@@ -262,13 +262,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* nurses who do home visits for elderly patients
 * has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: The app will help nurses caring for elderly patients manage contact details of their home-visit patients within one platform.
 
 
 ### User stories
@@ -299,38 +297,162 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SilverCare` and the **Actor** is the `nurse`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case 1: Add a new patient**
+
+**Goal: Add a new patient’s contact and medical information.**
+
+**MSS:**
+1. Nurse launches SilverCare via the GUI.
+2. Nurse requests to add a new patient contact by keying in the relevant command:
+   * add -n \<name> -p \<phone> -a \<address> \[-g \<gender>]
+3. System validates the input fields.
+4. System checks for duplicate records. 
+5. If validation passes, the patient is added, and the system assigns a unique patient ID. 
+6. System displays a confirmation message. 
+7. Patient appears in the main patient list.
+8. Use case ends.
+   
+**Extensions:**
+   * 3a. Missing required parameters:
+        * If any mandatory field is missing, the system displays an error message:
+            * Error: Patient \[name/phone/address] is required.
+            * Use case ends.
+   * 3b. Invalid input format:
+        * For incorrect field values, the system displays relevant error messages
+            * Invalid name:
+                * Error: Invalid patient name. Please use alphabets, spaces, hyphens, and apostrophes only.
+            * Invalid phone number:
+                * Error: Invalid phone number. Please enter a valid 8-digit number.
+            * Invalid gender:
+                * Error: Invalid gender. Please enter 'M', 'F', or 'O'.
+        * Use case ends.
+   * 4a. Duplicate patient record detected:
+        * If a record with the same name and phone number already exists:
+            * This contact number already exists, do you want to update the address? (yes/no)
+        * If the nurse selects no, the use case ends without changes.
+
+
+**Use case 2: Delete an existing patient**
+
+**Goal: Delete an existing patient’s contact and medical information.**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. Nurse launches SilverCare via the GUI.
+2. Nurse requests to delete an existing patient contact by keying in the relevant command:
+   * delete -id <patient_id>
+3. System validates the patient ID.
+4. If valid, the system displays a confirmation prompt:
+   * Are you sure you want to delete Patient John Doe and their contacts? (yes/no)
+5. Nurse confirms by entering yes.
+6. System removes the patient record from the patient list.
+7. System displays:
+    * Patient John Doe successfully deleted.
+8. Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. Invalid patient ID:
+    * If the ID is not an integer or out of range:
+        * Error: Invalid patient ID. Please provide a valid patient ID.
+    * Use case ends.
 
-  Use case ends.
+* 3b. Patient not found:
+    * If no patient matches the given ID:
+        * Error: Patient not found.
+    * Use case ends.
 
-* 3a. The given index is invalid.
+* 4a. Nurse cancels deletion:
+    * If the nurse enters no, the system displays:
+        * Deletion cancelled.
+    * Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Use case 3: Find a patient**
 
-      Use case resumes at step 2.
+**Goal: Search for a patient’s record by name.**
+
+**MSS**
+
+1. Nurse launches SilverCare via the GUI.
+2. Nurse requests to search for an existing patient contact by keying in the relevant command:
+    * find -n \<name>
+3. System validates the input:
+    * ensures the name is non-empty and follows the accepted character format.
+4. System searches for patients whose names contain the query (case-insensitive).
+5. If matches are found, the system displays a list:
+     * John Doe (ID: 1) - 83278919 - Clementi Ave 1
+     * John Dover (ID: 3) - 91234567 - Ang Mo Kio St 22
+6. Use case ends.
+
+**Extensions**
+
+* 3a. Empty search query:
+    * If no name is provided, the system displays:
+        * Error: Search query cannot be empty.
+    * Use case ends.
+* 4a. No matching patient records:
+    * If no patient matches the query, the system displays:
+        * Error: No patients found matching the query.
+    * Use case ends.
+
+
+**Use case 4: List all patients**
+
+**Goal: View all active patient records.**
+
+**MSS**
+
+1. Nurse launches SilverCare via the GUI.
+2. Nurse enters the following command in the command box:
+    * list
+3. System retrieves and displays a paginated list of all patient records:
+    * John Doe (ID: 1) - 83278919 - Clementi Ave 1
+    * Mary Tan (ID: 2) - 81234567 - Bukit Timah Rd
+4. Use case ends.
+
+**Extensions**
+
+* 3a. No patients in the system:
+    * If the system is empty, it displays:
+        * No patient records available.
+    * Use case ends.
+
+**Use case 5: Exit the application**
+
+**Goal: Safely terminate the SilverCare application.**
+
+**MSS**
+
+1. Nurse launches SilverCare via the GUI.
+2. Nurse enters the following command in the command box:
+    * exit
+3. System prompts for confirmation:
+    * Are you sure you want to exit? (yes/no)
+4. Nurse confirms by entering yes.
+5. System saves any unsaved changes and terminates the application.
+6. Use case ends.
+
+**Extensions**
+
+* 4a. Nurse cancels exit:
+    * If the nurse enters no, the system displays:
+        * Exit cancelled. Returning to main menu.
+    * Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 20 entries without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should be able to search patient records within 2 seconds.
+5. The interface should be accessible and navigable by nurses with basic training within 1 hour.
+   The app should allow viewing patient details even without an internet connection.
+6. The system’s user interface (UI) and documentation must be clear, comprehensive, and understandable for nurses and healthcare professionals without advanced IT skills.
+7. The app is not required to connect to the hospital’s database
 
 *{More to be added}*
 
