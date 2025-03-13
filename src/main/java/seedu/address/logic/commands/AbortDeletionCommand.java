@@ -5,11 +5,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Aborts the deletion process of a pending person deletion.
+ */
 public class AbortDeletionCommand extends Command {
     public static final String COMMAND_WORD = "n";
 
     public static final String MESSAGE_DELETE_PERSON_INTERRUPT = "Aborting deletion of Person: %1$s";
 
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.getPendingDeletion();
         if (person == null) {
