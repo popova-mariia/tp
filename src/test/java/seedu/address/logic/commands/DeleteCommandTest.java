@@ -34,11 +34,11 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(
                 "Are you sure you want to delete this person?\n"
-                + Messages.format(personToDelete)
-                + "\nType `y` to proceed or `n` to abort.");
+                        + Messages.format(personToDelete)
+                        + "\nType `y` to proceed or `n` to abort.");
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -64,9 +64,8 @@ public class DeleteCommandTest {
                         + "\nType `y` to proceed or `n` to abort.");
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        expectedModel.setPendingDeletion(personToDelete);
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 

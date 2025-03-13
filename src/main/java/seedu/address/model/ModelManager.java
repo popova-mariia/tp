@@ -139,7 +139,6 @@ public class ModelManager implements Model {
         if (!(other instanceof ModelManager)) {
             return false;
         }
-
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
@@ -158,6 +157,4 @@ public class ModelManager implements Model {
     public void clearPendingDeletion() {
         this.pendingDeletion = null;
     }
-
-
 }
