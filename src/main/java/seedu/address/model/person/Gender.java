@@ -16,7 +16,7 @@ public class Gender {
     /**
      * Constructs a {@code Gender}.
      *
-     * @param g A valid gender.
+     * @param gen A valid gender.
      */
     public Gender(String gen) {
         requireNonNull(gen);
