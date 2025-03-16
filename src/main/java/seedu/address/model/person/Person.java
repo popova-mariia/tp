@@ -35,8 +35,8 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.gender = gender;
         this.address = address;
+        this.gender = gender;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -106,13 +106,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && gender.equals(otherPerson.gender)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, gender, tags);
     }
 
     @Override
@@ -122,6 +123,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("gender", gender)
                 .add("tags", tags)
                 .toString();
     }
