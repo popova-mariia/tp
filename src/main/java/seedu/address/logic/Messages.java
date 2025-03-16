@@ -40,7 +40,6 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Tags: ");
