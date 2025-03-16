@@ -12,7 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_GENDER = new Prefix("-g ");
 
     // reminder to remove below prefixes if not necessary
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
