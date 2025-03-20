@@ -35,4 +35,7 @@ public class ResultDisplay extends UiPart<Region> {
         }
     }
 
+    public TextArea getResultDisplay() {
+        return resultDisplay;
+    }
 }
