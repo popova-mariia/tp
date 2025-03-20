@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Field;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TextArea;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class ResultDisplayTest {
 
@@ -23,6 +23,14 @@ public class ResultDisplayTest {
     }
 
     /**
+     * Shuts down the JavaFX platform after all tests have completed.
+     */
+    @AfterAll
+    public static void tearDown() {
+        Platform.exit();
+    }
+
+    /**
      * Tests that the setFeedbackToUser method properly updates the TextArea.
      */
     @Test
@@ -32,7 +40,8 @@ public class ResultDisplayTest {
 
         // Run the update on the JavaFX Application Thread.
         Platform.runLater(() -> resultDisplay.setFeedbackToUser(testFeedback));
-        // Allow time for the update to complete.
+
+        // Allow time for the Platform.runLater task to execute.
         Thread.sleep(100);
 
         // Use reflection to access the private TextArea field named "resultDisplay".
