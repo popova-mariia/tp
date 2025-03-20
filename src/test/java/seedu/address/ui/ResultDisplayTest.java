@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Field;
 
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.control.TextArea;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.TextArea;
 
 public class ResultDisplayTest {
 
