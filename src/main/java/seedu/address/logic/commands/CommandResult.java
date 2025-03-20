@@ -19,13 +19,38 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Track message type. */
+    private final DisplayType displayType;
+
+    /**
+     * Enum to define different types of messages.
+     */
+    public enum DisplayType {
+        INFO,
+        WARNING,
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, DisplayType displayType) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.displayType = displayType;
+    }
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, DisplayType displayType) {
+        this(feedbackToUser, false, false, displayType);
+    }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this(feedbackToUser, showHelp, exit, DisplayType.INFO);
     }
 
     /**
@@ -33,7 +58,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, DisplayType.INFO);
     }
 
     public String getFeedbackToUser() {
@@ -77,6 +102,10 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();
+    }
+
+    public DisplayType getDisplayType() {
+        return this.displayType;
     }
 
 }

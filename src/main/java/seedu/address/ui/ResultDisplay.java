@@ -25,4 +25,14 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.setText(feedbackToUser);
     }
 
+    public void setFeedbackToUser(String feedbackToUser, boolean isWarning) {
+        requireNonNull(feedbackToUser);
+        resultDisplay.setText(feedbackToUser);
+        if (isWarning) {
+            resultDisplay.getStyleClass().add("warning-text");
+        } else {
+            resultDisplay.getStyleClass().remove("warning-text");
+        }
+    }
+
 }
