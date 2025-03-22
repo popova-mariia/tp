@@ -46,15 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Gender gender = argMultimap.getValue(PREFIX_GENDER)
-                .flatMap(value -> {
-                    try {
-                        return Optional.of(ParserUtil.parseGender(value));
-                    } catch (ParseException e) {
-                        return Optional.empty(); // Handle error silently
-                    }
-                })
-                .orElse(null);
+        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
