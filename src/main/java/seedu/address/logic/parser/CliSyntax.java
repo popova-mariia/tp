@@ -13,6 +13,6 @@ public class CliSyntax {
 
     // reminder to remove below prefixes if not necessary
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_TAG = new Prefix("-t");
 
 }
