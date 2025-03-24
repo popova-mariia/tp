@@ -59,7 +59,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "not sure"; // gender needs to be M or F
-    public static final String INVALID_APPT_DATE = " " + PREFIX_APPT_DATE + "2025-14-10"; // invalid date
+    public static final String INVALID_APPT_DATE_DESC = " " + PREFIX_APPT_DATE + "2025-14-10"; // invalid date
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
