@@ -27,10 +27,16 @@ public class AppointmentDate {
     /**
      * Constructs an {@code AppointmentDate}.
      *
-     * @param input A valid date string, with or without time.
+     * @param input A valid date string, with or without time, or null (optional).
      */
     public AppointmentDate(String input) {
         requireNonNull(input);
+
+        if (input.isEmpty()) {
+            this.value = "";
+            return;
+        }
+
         checkArgument(isValidAppointmentDate(input), MESSAGE_CONSTRAINTS);
         this.value = normaliseDate(input);
     }
@@ -39,6 +45,9 @@ public class AppointmentDate {
      * Returns true if a given string is a valid date or date-time.
      */
     public static boolean isValidAppointmentDate(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -63,7 +72,7 @@ public class AppointmentDate {
 
     @Override
     public String toString() {
-        return value;
+        return value.isEmpty() ? "No appointment date" : value;
     }
 
     @Override
@@ -77,11 +86,12 @@ public class AppointmentDate {
         }
 
         AppointmentDate otherDate = (AppointmentDate) other;
-        return value.equals(otherDate.value);
+
+        return this.value.isEmpty() && otherDate.value.isEmpty() || this.value.equals(otherDate.value);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value != null ? value.hashCode() : 0;
     }
 }
