@@ -29,7 +29,7 @@ public class AppointmentDateTest {
         assertThrows(NullPointerException.class, () -> AppointmentDate.isValidAppointmentDate(null));
 
         // invalid inputs
-        assertFalse(AppointmentDate.isValidAppointmentDate(""));
+        assertFalse(AppointmentDate.isValidAppointmentDate(" "));
         assertFalse(AppointmentDate.isValidAppointmentDate("23-03-2025"));
         assertFalse(AppointmentDate.isValidAppointmentDate("2025-03-23T14:00"));
         assertFalse(AppointmentDate.isValidAppointmentDate("2025-03-23 14"));

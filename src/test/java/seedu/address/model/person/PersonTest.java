@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -85,6 +86,10 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withGender(VALID_GENDER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different appointment date -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAppointmentDate(VALID_APPT_DATE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -94,7 +99,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", address=" + ALICE.getAddress() + ", gender=" + ALICE.getGender()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", appointment date=" + ALICE.getAppointmentDate() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

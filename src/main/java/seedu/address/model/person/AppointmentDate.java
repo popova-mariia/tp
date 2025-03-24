@@ -72,7 +72,7 @@ public class AppointmentDate {
 
     @Override
     public String toString() {
-        return value.isEmpty() ? "No appointment date" : value;
+        return value;
     }
 
     @Override
