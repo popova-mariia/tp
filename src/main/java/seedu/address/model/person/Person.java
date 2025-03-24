@@ -107,6 +107,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && address.equals(otherPerson.address)
                 && gender.equals(otherPerson.gender)
+                && appointmentDate.equals(otherPerson.appointmentDate)
                 && tags.equals(otherPerson.tags);
     }
 
