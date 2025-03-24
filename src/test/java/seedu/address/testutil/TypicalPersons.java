@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -51,11 +53,11 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withAddress(VALID_ADDRESS_AMY)
-                .withGender(VALID_GENDER_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withAddress(VALID_ADDRESS_AMY).withGender(VALID_GENDER_AMY)
+                .withAppointmentDate(VALID_APPT_DATE_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withAddress(VALID_ADDRESS_BOB)
-                .withGender(VALID_GENDER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withAddress(VALID_ADDRESS_BOB).withGender(VALID_GENDER_BOB)
+                .withAppointmentDate(VALID_APPT_DATE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
