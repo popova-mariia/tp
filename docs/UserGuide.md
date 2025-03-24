@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+SilverCare is a **desktop app for managing patients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SilverCare can get your patient management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -28,9 +28,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add -n John Doe -p 98765432 -a John street, block 123, #01-01 -g male [-t condition]` : Adds a contact named `John Doe` to the Address Book with optional condition.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd patient shown in the current list.
+   
+   * `find john` : Searches and lists out all patients with names that contain "john".
+   
+   * `remark 1 r/ lives alone` : Adds the remark "lives alone" to the 1st patient in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -191,10 +195,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add -n NAME -p PHONE_NUMBER -a ADDRESS -g GENDER [-t TAG]…​` <br> e.g., `add -n James Ho -p 22224444 -a 123, Clementi Rd, 1234665 -g male -t/condition 1 t/condition 2`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Remark** | `remark INDEX r/remark`
 **List** | `list`
 **Help** | `help`
