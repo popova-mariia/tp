@@ -20,12 +20,11 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
-    public static final AppointmentDate EMPTY_APPT_DATE = new AppointmentDate("");
 
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                new Gender("Male"), EMPTY_APPT_DATE, EMPTY_REMARK, getTagSet("friends")),
+                new Gender("Male"), null, EMPTY_REMARK, getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Gender("Female"),
                     new AppointmentDate("2025-01-10"), EMPTY_REMARK, getTagSet("colleagues", "friends")),
@@ -40,7 +39,7 @@ public class SampleDataUtil {
                     new AppointmentDate("2025-02-10"), EMPTY_REMARK, getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Gender("Male"),
-                    EMPTY_APPT_DATE, EMPTY_REMARK, getTagSet("colleagues"))
+                    null, EMPTY_REMARK, getTagSet("colleagues"))
         };
     }
 
