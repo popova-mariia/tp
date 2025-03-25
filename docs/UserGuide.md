@@ -28,7 +28,7 @@ SilverCare is a **desktop app for managing patients, optimized for use via a Com
 
    * `list` : Lists all contacts.
 
-   * `add -n John Doe -p 98765432 -a John street, block 123, #01-01 -g male [-t condition]` : Adds a contact named `John Doe` to the Address Book with optional condition.
+   * `add -n John Doe -p 98765432 -a John street, block 123, #01-01 -g male [-d 2025-10-10] [-t condition]` : Adds a contact named `John Doe` to the Address Book with optional condition and appointment date on 10 Oct 2025.
 
    * `delete 3` : Deletes the 3rd patient shown in the current list.
    
@@ -81,7 +81,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add -n NAME -p PHONE_NUMBER -a ADDRESS [-t TAG]…​`
+Format: `add -n NAME -p PHONE_NUMBER -a ADDRESS [-d APPOINTMENT_DATE] [-t TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -89,7 +89,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add -n John Doe -p 98765432 -a John street, block 123, #01-01`
-* `add -n Betsy Crowe -t friend -a Newgate Prison -p 1234567 -t criminal`
+* `add -n Betsy Crowe -t friend -a Newgate Prison -p 1234567 -d 2023-01-01 -t criminal`
 
 ### Listing all persons : `list`
 
@@ -195,7 +195,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add -n NAME -p PHONE_NUMBER -a ADDRESS -g GENDER [-t TAG]…​` <br> e.g., `add -n James Ho -p 22224444 -a 123, Clementi Rd, 1234665 -g male -t/condition 1 t/condition 2`
+**Add** | `add -n NAME -p PHONE_NUMBER -a ADDRESS -g GENDER [-d APPOINTMENT_DATE] [-t TAG]…​` <br> e.g., `add -n James Ho -p 22224444 -a 123, Clementi Rd, 1234665 -g male -d 2023-10-10 -t condition 1 -t condition 2`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
