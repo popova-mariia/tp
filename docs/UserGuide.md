@@ -28,7 +28,7 @@ SilverCare is a **desktop app for managing patients, optimized for use via a Com
 
    * `list` : Lists all contacts.
 
-   * `add -n John Doe -p 98765432 -a John street, block 123, #01-01 -g male [-d 2025-10-10] [-t condition]` : Adds a contact named `John Doe` to the Address Book with optional condition and appointment date on 10 Oct 2025.
+   * `add -n John Doe -p 98765432 -a John street, block 123, #01-01 -g male [-d 2025-10-10] [-t condition]` : Adds a contact named `John Doe` to SilverCare with optional condition and appointment date on 10 Oct 2025.
 
    * `delete 3` : Deletes the 3rd patient shown in the current list.
    
@@ -49,6 +49,8 @@ SilverCare is a **desktop app for managing patients, optimized for use via a Com
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+
+* `APPOINTMENT_DATE` given must be of the form either `yyyy-MM-dd` or `yyyy-MM-dd HH:mm`.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -n NAME`, `NAME` is a parameter which can be used as `add -n John Doe`.
@@ -101,18 +103,16 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [-n NAME] [-p PHONE] [-a ADDRESS] [-t TAG]…​`
+Format: `edit INDEX [-n NAME] [-p PHONE] [-a ADDRESS] [-d APPOINTMENT_DATE] [-t TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 -p 91234567` Edits the phone number  of the 1st person to be `91234567`.
-*  `edit 2 -n Betsy Crower -t` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 -n Betsy Crower -t friend` Edits the name of the 2nd person to be `Betsy Crower` and edits tag to `friend`.
 
 ### Locating persons by name: `find`
 
@@ -160,15 +160,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SilverCare data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SilverCare data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SilverCare will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause SilverCare to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -180,7 +180,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SilverCare home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -198,7 +198,7 @@ Action | Format, Examples
 **Add** | `add -n NAME -p PHONE_NUMBER -a ADDRESS -g GENDER [-d APPOINTMENT_DATE] [-t TAG]…​` <br> e.g., `add -n James Ho -p 22224444 -a 123, Clementi Rd, 1234665 -g male -d 2023-10-10 -t condition 1 -t condition 2`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-a ADDRESS] [-d APPOINTMENT_DATE] [-t TAG]…​`<br> e.g.,`edit 2 -n James Lee -d 2024-01-02`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Remark** | `remark INDEX r/remark`
 **List** | `list`
