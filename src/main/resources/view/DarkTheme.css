@@ -132,6 +132,12 @@
     -fx-text-fill: #010504;
 }
 
+.highlighted-label {
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+    -fx-padding: 0 1 0 1;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

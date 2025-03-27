@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -25,38 +27,79 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+    private final List<String> keywords;
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private Label name;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private HBox cardPane;
     @FXML
-    private Label address;
+    private HBox name;
     @FXML
-    private Label email;
+    private HBox phone;
     @FXML
-    private Label remark;
+    private HBox address;
+    @FXML
+    private HBox remark;
     @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, List<String> keywords) {
         super(FXML);
         this.person = person;
+        this.keywords = keywords;
+
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        remark.setText(person.getRemark().value);
+        setHighlightedText(name, person.getName().fullName);
+        setHighlightedText(phone, person.getPhone().value);
+        setHighlightedText(address, person.getAddress().value);
+        setHighlightedText(remark, person.getRemark().value);
+
+        tags.getChildren().clear();
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    if (containsKeyword(tag.tagName)) {
+                        tagLabel.getStyleClass().add("highlighted-label");
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
     }
+
+    private void setHighlightedText(HBox fieldBox, String fullText) {
+        fieldBox.getChildren().clear();
+        String lower = fullText.toLowerCase();
+
+        int i = 0;
+        while (i < fullText.length()) {
+            boolean matched = false;
+            for (String keyword : keywords) {
+                String kw = keyword.toLowerCase();
+                if (lower.startsWith(kw, i)) {
+                    Label matchLabel = new Label(fullText.substring(i, i + kw.length()));
+                    matchLabel.getStyleClass().add("highlighted-label");
+                    fieldBox.getChildren().add(matchLabel);
+                    i += kw.length();
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                Label normalLabel = new Label(String.valueOf(fullText.charAt(i)));
+                normalLabel.setStyle("-fx-text-fill: white;");
+                fieldBox.getChildren().add(normalLabel);
+                i++;
+            }
+        }
+    }
+
+    private boolean containsKeyword(String text) {
+        return keywords.stream().anyMatch(kw -> text.toLowerCase().contains(kw.toLowerCase()));
+    }
+
+
 }

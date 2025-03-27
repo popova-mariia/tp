@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -20,6 +22,10 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Constructor for FindCommand.
+     * @param predicate
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
@@ -53,4 +59,13 @@ public class FindCommand extends Command {
                 .add("predicate", predicate)
                 .toString();
     }
+
+    /**
+     * Getter for keywords
+     * @return keywords
+     */
+    public List<String> getKeywords() {
+        return predicate.getKeywords();
+    }
+
 }

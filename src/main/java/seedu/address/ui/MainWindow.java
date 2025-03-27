@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Collections;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -109,8 +110,24 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
+    //    void fillInnerParts() {
+    //        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+    //        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    //
+    //        resultDisplay = new ResultDisplay();
+    //        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+    //
+    //        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+    //        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+    //
+    //        CommandBox commandBox = new CommandBox(this::executeCommand);
+    //        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    //    }
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(
+                logic.getFilteredPersonList(),
+                logic.getLastUsedFindKeywords().orElse(Collections.emptyList())
+        );
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -122,6 +139,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+
 
     /**
      * Sets the default size based on {@code guiSettings}.
