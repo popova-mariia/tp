@@ -4,6 +4,8 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "gender": "female",
+    "appointmentDate" : "2025-10-10",
     "remark" : "",
     "tags": [ "friends" ]
   }, {
@@ -11,6 +13,8 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
+    "gender": "female",
+    "appointmentDate" : "2025-10-10",
     "remark" : ""
   } ]
 }

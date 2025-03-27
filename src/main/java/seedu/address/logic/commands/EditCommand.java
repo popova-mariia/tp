@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,7 +24,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.AppointmentDate;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -42,12 +45,15 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_APPT_DATE + "APPOINTMENT DATE] "
+            + "[" + PREFIX_CONDITION + "CONDITION]"
+            + "[" + PREFIX_DETAILS + "DETAILS]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_GENDER + "male "
+            + PREFIX_APPT_DATE + "2020-02-02";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -98,12 +104,16 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
+        AppointmentDate updatedAppointmentDate = editPersonDescriptor.getAppointmentDate()
+                .orElse(personToEdit.getAppointmentDate());
         Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedConditionTags = editPersonDescriptor.getConditionTags().orElse(personToEdit.getConditionTags());
+        Set<Tag> updatedDetailTags = editPersonDescriptor.getDetailTags().orElse(personToEdit.getDetailTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedAddress,
+                updatedGender, updatedAppointmentDate, updatedRemark, updatedConditionTags, updatedDetailTags);
     }
 
     @Override
@@ -137,9 +147,11 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Gender gender;
+        private AppointmentDate appointmentDate;
+        private Set<Tag> conditionTags;
+        private Set<Tag> detailTags;
 
         public EditPersonDescriptor() {}
 
@@ -150,16 +162,18 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setGender(toCopy.gender);
+            setAppointmentDate(toCopy.appointmentDate);
+            setConditionTags(toCopy.conditionTags);
+            setDetailTags(toCopy.detailTags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, address, gender, appointmentDate, conditionTags, detailTags);
         }
 
         public void setName(Name name) {
@@ -178,12 +192,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setGender(Gender gender) {
+            this.gender = gender;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
         }
 
         public void setAddress(Address address) {
@@ -194,21 +208,46 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setAppointmentDate(AppointmentDate appointmentDate) {
+            this.appointmentDate = appointmentDate;
+        }
+
+        public Optional<AppointmentDate> getAppointmentDate() {
+            return Optional.ofNullable(appointmentDate);
+        }
+
         /**
-         * Sets {@code tags} to this object's {@code tags}.
+         * Sets {@code tags} to this object's {@code conditionTags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setConditionTags(Set<Tag> tags) {
+            this.conditionTags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code detailTags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setDetailTags(Set<Tag> tags) {
+            this.detailTags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code conditionTags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Tag>> getConditionTags() {
+            return (conditionTags != null) ? Optional.of(Collections.unmodifiableSet(conditionTags)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code detailTags} is null.
+         */
+        public Optional<Set<Tag>> getDetailTags() {
+            return (detailTags != null) ? Optional.of(Collections.unmodifiableSet(detailTags)) : Optional.empty();
         }
 
         @Override
@@ -225,9 +264,11 @@ public class EditCommand extends Command {
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(gender, otherEditPersonDescriptor.gender)
+                    && Objects.equals(appointmentDate, otherEditPersonDescriptor.appointmentDate)
+                    && Objects.equals(conditionTags, otherEditPersonDescriptor.conditionTags)
+                    && Objects.equals(detailTags, otherEditPersonDescriptor.detailTags);
         }
 
         @Override
@@ -235,9 +276,11 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("phone", phone)
-                    .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("gender", gender)
+                    .add("appointment date", appointmentDate)
+                    .add("conditionTags", conditionTags)
+                    .add("detailTags", detailTags)
                     .toString();
         }
     }

@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person pendingDeletion = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -138,11 +139,22 @@ public class ModelManager implements Model {
         if (!(other instanceof ModelManager)) {
             return false;
         }
-
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    public void setPendingDeletion(Person person) {
+        requireNonNull(person);
+        this.pendingDeletion = person;
+    }
+
+    public Person getPendingDeletion() {
+        return pendingDeletion;
+    }
+
+    public void clearPendingDeletion() {
+        this.pendingDeletion = null;
+    }
 }

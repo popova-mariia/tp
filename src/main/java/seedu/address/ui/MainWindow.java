@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private boolean isDarkMode = true;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -168,6 +170,25 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleToggleTheme() {
+        Scene scene = getPrimaryStage().getScene();
+
+        if (scene == null) {
+            return;
+        }
+
+        if (isDarkMode) {
+            scene.getStylesheets().remove("view/DarkTheme.css");
+            scene.getStylesheets().add("view/LightTheme.css");
+        } else {
+            scene.getStylesheets().remove("view/LightTheme.css");
+            scene.getStylesheets().add("view/DarkTheme.css");
+        }
+
+        isDarkMode = !isDarkMode;
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -189,6 +210,12 @@ public class MainWindow extends UiPart<Stage> {
                     logic.getLastUsedFindKeywords().orElse(Collections.emptyList())
             );
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+            if (commandResult.getDisplayType() == CommandResult.DisplayType.WARNING) {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), true);
+            } else {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), false);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

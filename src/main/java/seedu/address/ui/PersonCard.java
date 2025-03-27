@@ -31,18 +31,32 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private Label id;
+  
     @FXML
     private HBox cardPane;
+  
     @FXML
     private HBox name;
+  
     @FXML
     private HBox phone;
+  
     @FXML
     private HBox address;
+  
     @FXML
     private HBox remark;
+
+    private Label gender;
+  
     @FXML
-    private FlowPane tags;
+    private Label appointmentDate;
+  
+    @FXML
+    private FlowPane conditions;
+  
+    @FXML
+    private FlowPane details;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,6 +67,7 @@ public class PersonCard extends UiPart<Region> {
         this.keywords = keywords;
 
         id.setText(displayedIndex + ". ");
+
         setHighlightedText(name, person.getName().fullName);
         setHighlightedText(phone, person.getPhone().value);
         setHighlightedText(address, person.getAddress().value);
@@ -68,6 +83,15 @@ public class PersonCard extends UiPart<Region> {
                     }
                     tags.getChildren().add(tagLabel);
                 });
+      
+        gender.setText(person.getGender().gender);
+        appointmentDate.setText(person.getAppointmentDate().value);
+        person.getConditionTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> conditions.getChildren().add(new Label(tag.tagName)));
+        person.getDetailTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> details.getChildren().add(new Label(tag.tagName)));
     }
 
     private void setHighlightedText(HBox fieldBox, String fullText) {
