@@ -70,6 +70,10 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+
+    /**
+     * Opens the user guide.
+     */
     @FXML
     public void openUserGuide() {
         try {
