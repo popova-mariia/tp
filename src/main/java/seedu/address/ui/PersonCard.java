@@ -31,30 +31,22 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private Label id;
-  
     @FXML
     private HBox cardPane;
-  
     @FXML
     private HBox name;
-  
     @FXML
     private HBox phone;
-  
     @FXML
     private HBox address;
-  
     @FXML
     private HBox remark;
-
+    @FXML
     private Label gender;
-  
     @FXML
     private Label appointmentDate;
-  
     @FXML
     private FlowPane conditions;
-  
     @FXML
     private FlowPane details;
 
@@ -73,25 +65,33 @@ public class PersonCard extends UiPart<Region> {
         setHighlightedText(address, person.getAddress().value);
         setHighlightedText(remark, person.getRemark().value);
 
-        tags.getChildren().clear();
-        person.getTags().stream()
+        // Set gender and appointment date (no highlighting needed)
+        gender.setText(person.getGender().gender);
+        appointmentDate.setText(person.getAppointmentDate().value);
+
+        // Clear and add highlighted condition tags
+        conditions.getChildren().clear();
+        person.getConditionTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
                     if (containsKeyword(tag.tagName)) {
                         tagLabel.getStyleClass().add("highlighted-label");
                     }
-                    tags.getChildren().add(tagLabel);
+                    conditions.getChildren().add(tagLabel);
                 });
-      
-        gender.setText(person.getGender().gender);
-        appointmentDate.setText(person.getAppointmentDate().value);
-        person.getConditionTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> conditions.getChildren().add(new Label(tag.tagName)));
+
+        // Clear and add highlighted detail tags
+        details.getChildren().clear();
         person.getDetailTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> details.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    if (containsKeyword(tag.tagName)) {
+                        tagLabel.getStyleClass().add("highlighted-label");
+                    }
+                    details.getChildren().add(tagLabel);
+                });
     }
 
     private void setHighlightedText(HBox fieldBox, String fullText) {
