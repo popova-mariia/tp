@@ -27,8 +27,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-    public static final String TAG_DESC_FRIEND = " -t friend";
-    public static final String TAG_DESC_HUSBAND = " -t husband";
+    public static final String TAG_DESC_FRIEND = " -det friend";
+    public static final String TAG_DESC_HUSBAND = " -det husband";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -70,7 +70,7 @@ public class CommandTestUtil {
     public static final String INVALID_APPT_DATE_DESC = " " + PREFIX_APPT_DATE + "2025-14-10"; // invalid date
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "not sure";
     public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + "dementia*"; // '*' not allowed in tags
-    public static final String INVALID_TAG_DESC = " -t "; // Empty tag value, invalid
+    public static final String INVALID_TAG_DESC = " -det #invalid"; // '#' is not alphanumeric
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

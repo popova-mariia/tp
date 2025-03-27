@@ -88,9 +88,11 @@ public class ParserUtil {
      * @throws ParseException if the given {@code appointmentDate} is invalid.
      */
     public static AppointmentDate parseAppointmentDate(String appointmentDate) throws ParseException {
+        System.out.println("I am parseappointmentdate, parsing appointment date: " + appointmentDate);
         requireNonNull(appointmentDate);
         String trimmedDate = appointmentDate.trim();
         if (!AppointmentDate.isValidAppointmentDate(trimmedDate)) {
+            System.out.println("Hillo");
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
         }
         return new AppointmentDate(trimmedDate);
