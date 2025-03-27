@@ -61,7 +61,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
         }
         if (argMultimap.getValue(PREFIX_APPT_DATE).isPresent()) {
-            editPersonDescriptor.setAppointmentDate(ParserUtil.parseAppointmentDate(argMultimap.getValue(PREFIX_APPT_DATE).get()));
+            editPersonDescriptor.setAppointmentDate(ParserUtil.parseAppointmentDate(argMultimap.getValue(
+                    PREFIX_APPT_DATE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
