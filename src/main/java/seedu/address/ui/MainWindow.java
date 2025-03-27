@@ -196,6 +196,13 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            personListPanelPlaceholder.getChildren().clear();
+            personListPanel = new PersonListPanel(
+                    logic.getFilteredPersonList(),
+                    logic.getLastUsedFindKeywords().orElse(Collections.emptyList())
+            );
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
