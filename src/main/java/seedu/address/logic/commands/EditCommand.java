@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -22,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_APPT_DATE + "APPOINTMENT DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -100,11 +103,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
+        AppointmentDate updatedAppointmentDate = editPersonDescriptor.getAppointmentDate()
+                .orElse(personToEdit.getAppointmentDate());
         Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedAddress,
-                updatedGender, updatedRemark, updatedTags);
+                updatedGender, updatedAppointmentDate, updatedRemark, updatedTags);
     }
 
     @Override
@@ -140,6 +145,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Address address;
         private Gender gender;
+        private AppointmentDate appointmentDate;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -153,6 +159,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setGender(toCopy.gender);
+            setAppointmentDate(toCopy.appointmentDate);
             setTags(toCopy.tags);
         }
 
@@ -195,6 +202,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setAppointmentDate(AppointmentDate appointmentDate) {
+            this.appointmentDate = appointmentDate;
+        }
+
+        public Optional<AppointmentDate> getAppointmentDate() {
+            return Optional.ofNullable(appointmentDate);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -228,6 +243,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
+                    && Objects.equals(appointmentDate, otherEditPersonDescriptor.appointmentDate)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -238,6 +254,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("address", address)
                     .add("gender", gender)
+                    .add("appointment date", appointmentDate)
                     .add("tags", tags)
                     .toString();
         }
