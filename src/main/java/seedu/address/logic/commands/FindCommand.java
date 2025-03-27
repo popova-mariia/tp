@@ -17,9 +17,12 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = "Correct format: " + COMMAND_WORD + " <keyword>\n"
-            + "Example: " + COMMAND_WORD + " -n Alice "
-            + "OR " + COMMAND_WORD + " -d 2025-10-10";
+    public static final String MESSAGE_USAGE = "Correct format: " + COMMAND_WORD
+            + " -n <name>, -d <appointment date>, or upcoming\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " -n Alice\n"
+            + COMMAND_WORD + " -d 2025-04-01\n"
+            + COMMAND_WORD + " upcoming";
 
     private final Predicate<Person> predicate;
 
