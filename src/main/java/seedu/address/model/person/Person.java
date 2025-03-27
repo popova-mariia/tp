@@ -23,6 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final AppointmentDate appointmentDate;
     private final Remark remark;
     private final Set<Tag> conditionTags = new HashSet<>();
     private final Set<Tag> detailTags = new HashSet<>();
@@ -32,11 +33,12 @@ public class Person {
      */
     public Person(Name name, Phone phone, Address address, Gender gender, Remark remark, Set<Tag> conditionTags,
                   Set<Tag> detailTags) {
-        requireAllNonNull(name, phone, address, gender, conditionTags, detailTags);
+        requireAllNonNull(name, phone, address, gender, appointmentDate, conditionTags, detailTags);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gender = gender;
+        this.appointmentDate = appointmentDate;
         this.remark = remark;
         this.conditionTags.addAll(conditionTags);
         this.detailTags.addAll(detailTags);
@@ -56,6 +58,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public AppointmentDate getAppointmentDate() {
+        return appointmentDate;
     }
 
     public Remark getRemark() {
@@ -111,6 +117,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && address.equals(otherPerson.address)
                 && gender.equals(otherPerson.gender)
+                && appointmentDate.equals(otherPerson.appointmentDate)
                 && conditionTags.equals(otherPerson.conditionTags)
                 && detailTags.equals(otherPerson.detailTags);
     }
@@ -118,7 +125,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gender, conditionTags, detailTags);
+        return Objects.hash(name, phone, address, gender, appointmentDate, conditionTags, detailTags);
     }
 
     @Override
@@ -128,6 +135,7 @@ public class Person {
                 .add("phone", phone)
                 .add("address", address)
                 .add("gender", gender)
+                .add("appointment date", appointmentDate)
                 .add("conditionTags", conditionTags)
                 .add("detailTags", detailTags)
                 .toString();

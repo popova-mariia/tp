@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -27,13 +28,15 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_GENDER + "GENDER "
+            + PREFIX_APPT_DATE + "APPOINTMENT DATE "
             + "[" + PREFIX_CONDITION + "CONDITION] "
-            + "[" + PREFIX_DETAILS + "CONDITION]...\n"
+            + "[" + PREFIX_DETAILS + "DETAIL]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_GENDER + "male "
+            + PREFIX_APPT_DATE + "2025-01-17 10:30 "
             + PREFIX_CONDITION + " dementia "
             + PREFIX_DETAILS + " lives alone ";
 

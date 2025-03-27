@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -21,12 +22,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GENDER = "female";
+    public static final String DEFAULT_APPT_DATE = "2025-02-14";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
+    public static final String DEFAULT_TAG = "friends";
+
 
     private Name name;
     private Phone phone;
     private Address address;
     private Gender gender;
+    private AppointmentDate appointmentDate;
     private Remark remark;
     private Set<Tag> conditions;
     private Set<Tag> details;
@@ -39,6 +44,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
         gender = new Gender(DEFAULT_GENDER);
+        appointmentDate = new AppointmentDate(DEFAULT_APPT_DATE);
         remark = new Remark(DEFAULT_REMARK);
         conditions = new HashSet<>();
         details = new HashSet<>();
@@ -52,6 +58,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         address = personToCopy.getAddress();
         gender = personToCopy.getGender();
+        appointmentDate = personToCopy.getAppointmentDate();
         remark = personToCopy.getRemark();
         conditions = new HashSet<>(personToCopy.getConditionTags());
         details = new HashSet<>(personToCopy.getDetailTags());
@@ -125,6 +132,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code AppointmentDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointmentDate(String appointmentDate) {
+        this.appointmentDate = new AppointmentDate(appointmentDate);
+        return this;
+    }
+
+    /**
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
@@ -133,7 +148,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, address, gender, remark, conditions, details);
+        return new Person(name, phone, address, gender, appointmentDate, remark, conditions, details);
     }
 
 }

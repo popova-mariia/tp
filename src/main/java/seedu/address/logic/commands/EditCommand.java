@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -23,6 +24,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -45,11 +47,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_APPT_DATE + "APPOINTMENT DATE] "
             + "[" + PREFIX_CONDITION + "CONDITION]"
             + "[" + PREFIX_DETAILS + "DETAILS]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_GENDER + "male";
+            + PREFIX_GENDER + "male "
+            + PREFIX_APPT_DATE + "2020-02-02";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -102,12 +106,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
+        AppointmentDate updatedAppointmentDate = editPersonDescriptor.getAppointmentDate()
+                .orElse(personToEdit.getAppointmentDate());
         Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedConditionTags = editPersonDescriptor.getConditionTags().orElse(personToEdit.getConditionTags());
         Set<Tag> updatedDetailTags = editPersonDescriptor.getDetailTags().orElse(personToEdit.getDetailTags());
 
         return new Person(updatedName, updatedPhone, updatedAddress,
-                updatedGender, updatedRemark, updatedConditionTags, updatedDetailTags);
+                updatedGender, updatedAppointmentDate, updatedRemark, updatedConditionTags, updatedDetailTags);
     }
 
     @Override
@@ -143,6 +149,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Address address;
         private Gender gender;
+        private AppointmentDate appointmentDate;
         private Set<Tag> conditionTags;
         private Set<Tag> detailTags;
 
@@ -157,6 +164,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setGender(toCopy.gender);
+            setAppointmentDate(toCopy.appointmentDate);
             setConditionTags(toCopy.conditionTags);
             setDetailTags(toCopy.detailTags);
         }
@@ -165,7 +173,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, gender, conditionTags, detailTags);
+            return CollectionUtil.isAnyNonNull(name, phone, address, gender, appointmentDate, conditionTags, detailTags);
         }
 
         public void setName(Name name) {
@@ -198,6 +206,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setAppointmentDate(AppointmentDate appointmentDate) {
+            this.appointmentDate = appointmentDate;
+        }
+
+        public Optional<AppointmentDate> getAppointmentDate() {
+            return Optional.ofNullable(appointmentDate);
         }
 
         /**
@@ -250,6 +266,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
+                    && Objects.equals(appointmentDate, otherEditPersonDescriptor.appointmentDate)
                     && Objects.equals(conditionTags, otherEditPersonDescriptor.conditionTags)
                     && Objects.equals(detailTags, otherEditPersonDescriptor.detailTags);
         }
@@ -261,6 +278,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("address", address)
                     .add("gender", gender)
+                    .add("appointment date", appointmentDate)
                     .add("conditionTags", conditionTags)
                     .add("detailTags", detailTags)
                     .toString();

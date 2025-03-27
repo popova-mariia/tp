@@ -43,6 +43,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Gender: ")
                 .append(person.getGender())
+                .append("; Appointment Date: ")
+                .append(person.getAppointmentDate())
                 .append("; Tags: ");
         person.getConditionTags().forEach(builder::append);
         person.getDetailTags().forEach(builder::append);
