@@ -25,7 +25,7 @@ public class Tag {
         DETAIL
     }
     public final String tagName;
-    private final TagType tagType;
+    private TagType tagType = null;
 
     /**
      * Constructs a {@code Tag}.
