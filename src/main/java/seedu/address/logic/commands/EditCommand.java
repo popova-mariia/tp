@@ -50,7 +50,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_GENDER + "male";
+            + PREFIX_GENDER + "male "
+            + PREFIX_APPT_DATE + "2020-02-02";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -167,7 +168,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, gender, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, address, gender, appointmentDate, tags);
         }
 
         public void setName(Name name) {
