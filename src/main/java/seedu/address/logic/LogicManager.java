@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -55,10 +56,11 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        // Store keywords from find command
         if (command instanceof FindCommand) {
             FindCommand findCommand = (FindCommand) command;
             lastUsedFindKeywords = findCommand.getKeywords();
+        } else {
+            lastUsedFindKeywords = Collections.emptyList();
         }
 
         try {
