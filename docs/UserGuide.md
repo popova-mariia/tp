@@ -134,7 +134,10 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the address book. 
+
+Before finalised deletion, the command will ask for a confirmation:
+ "Are you sure you want to delete this person? <person details> Type y for yes and n for no".
 
 Format: `delete INDEX`
 
