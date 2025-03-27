@@ -38,7 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setGender(person.getGender());
         descriptor.setAppointmentDate(person.getAppointmentDate());
-        descriptor.setTags(person.getTags());
+        descriptor.setConditionTags(person.getConditionTags());
     }
 
     /**
@@ -86,8 +86,10 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        Set<Tag> tagSet = Stream.of(tags)
+                .map(tagName -> new Tag(tagName, Tag.TagType.DETAIL)) // or TagType.CONDITION
+                .collect(Collectors.toSet());
+        descriptor.setDetailTags(tagSet);
         return this;
     }
 

@@ -27,6 +27,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+    public static final String TAG_DESC_FRIEND = " -t friend";
+    public static final String TAG_DESC_HUSBAND = " -t husband";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -44,6 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_CONDITION_DEMENTIA = "dementia";
     public static final String VALID_DETAIL_ALONE = "lives alone";
     public static final String VALID_DETAIL_MORNING = "free in morning";
+    public static final String VALID_TAG_HUSBAND = "husband";
+    public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -66,6 +70,8 @@ public class CommandTestUtil {
     public static final String INVALID_APPT_DATE_DESC = " " + PREFIX_APPT_DATE + "2025-14-10"; // invalid date
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "not sure";
     public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + "dementia*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " -t "; // Empty tag value, invalid
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

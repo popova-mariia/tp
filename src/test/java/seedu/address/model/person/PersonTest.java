@@ -20,11 +20,15 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void asObservableList_modifyListWithDetailTags_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getDetailTags().remove(0));
     }
-
+    @Test
+    public void asObservableList_modifyListWithConditionTags_throwsUnsupportedOperationException() {
+        Person person = new PersonBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> person.getConditionTags().remove(0));
+    }
     @Test
     public void isSamePerson() {
         // same object -> returns true
@@ -35,7 +39,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withGender(VALID_GENDER_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withGender(VALID_GENDER_BOB).withDetails(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -91,7 +95,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withDetails(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -99,7 +103,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", address=" + ALICE.getAddress() + ", gender=" + ALICE.getGender()
-                + ", appointment date=" + ALICE.getAppointmentDate() + ", tags=" + ALICE.getTags() + "}";
+                + ", appointment date=" + ALICE.getAppointmentDate() + ", tags=" + ALICE.getDetailTags()
+                + ALICE.getConditionTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
