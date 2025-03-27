@@ -2,10 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -44,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GENDER + "GENDER] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_CONDITION + "CONDITION]"
+            + "[" + PREFIX_DETAILS + "DETAILS]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_GENDER + "male";
@@ -101,10 +103,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedConditionTags = editPersonDescriptor.getConditionTags().orElse(personToEdit.getConditionTags());
+        Set<Tag> updatedDetailTags = editPersonDescriptor.getDetailTags().orElse(personToEdit.getDetailTags());
 
         return new Person(updatedName, updatedPhone, updatedAddress,
-                updatedGender, updatedRemark, updatedTags);
+                updatedGender, updatedRemark, updatedConditionTags, updatedDetailTags);
     }
 
     @Override
@@ -140,7 +143,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Address address;
         private Gender gender;
-        private Set<Tag> tags;
+        private Set<Tag> conditionTags;
+        private Set<Tag> detailTags;
 
         public EditPersonDescriptor() {}
 
@@ -153,14 +157,15 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setGender(toCopy.gender);
-            setTags(toCopy.tags);
+            setConditionTags(toCopy.conditionTags);
+            setDetailTags(toCopy.detailTags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, gender, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, address, gender, conditionTags, detailTags);
         }
 
         public void setName(Name name) {
@@ -196,20 +201,37 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
+         * Sets {@code tags} to this object's {@code conditionTags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setConditionTags(Set<Tag> tags) {
+            this.conditionTags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code detailTags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setDetailTags(Set<Tag> tags) {
+            this.detailTags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code conditionTags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Tag>> getConditionTags() {
+            return (conditionTags != null) ? Optional.of(Collections.unmodifiableSet(conditionTags)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code detailTags} is null.
+         */
+        public Optional<Set<Tag>> getDetailTags() {
+            return (detailTags != null) ? Optional.of(Collections.unmodifiableSet(detailTags)) : Optional.empty();
         }
 
         @Override
@@ -228,7 +250,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(gender, otherEditPersonDescriptor.gender)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(conditionTags, otherEditPersonDescriptor.conditionTags)
+                    && Objects.equals(detailTags, otherEditPersonDescriptor.detailTags);
         }
 
         @Override
@@ -238,7 +261,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("address", address)
                     .add("gender", gender)
-                    .add("tags", tags)
+                    .add("conditionTags", conditionTags)
+                    .add("detailTags", detailTags)
                     .toString();
         }
     }

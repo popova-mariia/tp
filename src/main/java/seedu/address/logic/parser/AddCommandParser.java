@@ -2,10 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Optional;
 import java.util.Set;
@@ -34,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
-                        PREFIX_GENDER, PREFIX_TAG);
+                        PREFIX_GENDER, PREFIX_CONDITION, PREFIX_DETAILS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -56,9 +57,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 })
                 .orElse(null);
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> conditionList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_CONDITION),
+                Tag.TagType.CONDITION);
+        Set<Tag> detailList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_DETAILS), Tag.TagType.DETAIL);
 
-        Person person = new Person(name, phone, address, gender, remark, tagList);
+        Person person = new Person(name, phone, address, gender, remark, conditionList, detailList);
 
         return new AddCommand(person);
     }

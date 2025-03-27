@@ -28,7 +28,8 @@ public class PersonBuilder {
     private Address address;
     private Gender gender;
     private Remark remark;
-    private Set<Tag> tags;
+    private Set<Tag> conditions;
+    private Set<Tag> details;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,7 +40,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         gender = new Gender(DEFAULT_GENDER);
         remark = new Remark(DEFAULT_REMARK);
-        tags = new HashSet<>();
+        conditions = new HashSet<>();
+        details = new HashSet<>();
     }
 
     /**
@@ -51,7 +53,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         gender = personToCopy.getGender();
         remark = personToCopy.getRemark();
-        tags = new HashSet<>(personToCopy.getTags());
+        conditions = new HashSet<>(personToCopy.getConditionTags());
+        details = new HashSet<>(personToCopy.getDetailTags());
     }
 
     /**
@@ -62,13 +65,40 @@ public class PersonBuilder {
         return this;
     }
 
+//    /**
+//     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+//     */
+//    public PersonBuilder withTags(String ... tags) {
+//        this.tags = SampleDataUtil.getTagSet(tags);
+//        return this;
+//    }
+
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code conditionList} into a {@code Set<Tag>} of type CONDITION
+     * and sets them to the {@code Person} being built.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withConditions(String... conditionList) {
+        Set<Tag> conditionTags = SampleDataUtil.getTagSet(Tag.TagType.CONDITION, conditionList);
+        if (this.conditions == null) {
+            this.conditions = new HashSet<>();
+        }
+        this.conditions.addAll(conditionTags);
         return this;
     }
+
+    /**
+     * Parses the {@code detailList} into a {@code Set<Tag>} of type DETAIL
+     * and sets them to the {@code Person} being built.
+     */
+    public PersonBuilder withDetails(String... detailList) {
+        Set<Tag> detailTags = SampleDataUtil.getTagSet(Tag.TagType.DETAIL, detailList);
+        if (this.details == null) {
+            this.details = new HashSet<>();
+        }
+        this.details.addAll(detailTags);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
@@ -103,7 +133,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, address, gender, remark, tags);
+        return new Person(name, phone, address, gender, remark, conditions, details);
     }
 
 }

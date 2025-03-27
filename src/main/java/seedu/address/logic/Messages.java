@@ -44,7 +44,8 @@ public class Messages {
                 .append("; Gender: ")
                 .append(person.getGender())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        person.getConditionTags().forEach(builder::append);
+        person.getDetailTags().forEach(builder::append);
         return builder.toString();
     }
 

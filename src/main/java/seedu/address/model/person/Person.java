@@ -24,19 +24,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Remark remark;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> conditionTags = new HashSet<>();
+    private final Set<Tag> detailTags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Address address, Gender gender, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, address, gender, tags);
+    public Person(Name name, Phone phone, Address address, Gender gender, Remark remark, Set<Tag> conditionTags,
+                  Set<Tag> detailTags) {
+        requireAllNonNull(name, phone, address, gender, conditionTags, detailTags);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gender = gender;
         this.remark = remark;
-        this.tags.addAll(tags);
+        this.conditionTags.addAll(conditionTags);
+        this.detailTags.addAll(detailTags);
     }
 
     public Name getName() {
@@ -60,11 +63,19 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable condition set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Tag> getConditionTags() {
+        return Collections.unmodifiableSet(conditionTags);
+    }
+
+    /**
+     * Returns an immutable detail set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getDetailTags() {
+        return Collections.unmodifiableSet(detailTags);
     }
 
     /**
@@ -100,13 +111,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && address.equals(otherPerson.address)
                 && gender.equals(otherPerson.gender)
-                && tags.equals(otherPerson.tags);
+                && conditionTags.equals(otherPerson.conditionTags)
+                && detailTags.equals(otherPerson.detailTags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gender, tags);
+        return Objects.hash(name, phone, address, gender, conditionTags, detailTags);
     }
 
     @Override
@@ -116,7 +128,8 @@ public class Person {
                 .add("phone", phone)
                 .add("address", address)
                 .add("gender", gender)
-                .add("tags", tags)
+                .add("conditionTags", conditionTags)
+                .add("detailTags", detailTags)
                 .toString();
     }
 
