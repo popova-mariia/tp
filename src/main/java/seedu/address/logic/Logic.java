@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -47,4 +49,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the keywords from the last find command, if available.
+     */
+    Optional<List<String>> getLastUsedFindKeywords();
 }
