@@ -40,7 +40,8 @@ public class DeleteCommand extends Command {
         return new CommandResult(
                 "Are you sure you want to delete this person?\n"
                         + Messages.format(personToDelete)
-                        + "\nType `y` to proceed or `n` to abort."
+                        + "\nType `y` to proceed or `n` to abort.",
+                CommandResult.DisplayType.WARNING
         );
     }
     @Override

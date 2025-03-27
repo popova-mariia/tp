@@ -178,6 +178,12 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.getDisplayType() == CommandResult.DisplayType.WARNING) {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), true);
+            } else {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), false);
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

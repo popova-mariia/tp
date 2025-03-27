@@ -60,4 +60,13 @@ public class CommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+    @Test
+    public void getDisplayType() {
+        CommandResult infoCommandResult = new CommandResult("info message", CommandResult.DisplayType.INFO);
+        CommandResult warningCommandResult = new CommandResult("warning message", CommandResult.DisplayType.WARNING);
+
+        // Verify that getDisplayType() returns the correct type
+        assertEquals(CommandResult.DisplayType.INFO, infoCommandResult.getDisplayType());
+        assertEquals(CommandResult.DisplayType.WARNING, warningCommandResult.getDisplayType());
+    }
 }
