@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AppointmentDateContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -25,9 +26,15 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] split = trimmedArgs.substring(2).trim().split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (trimmedArgs.startsWith("-n ")) {
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(split)));
+        } else if (trimmedArgs.startsWith("-d ")) {
+            return new FindCommand(new AppointmentDateContainsKeywordsPredicate(Arrays.asList(split)));
+        } else {
+            throw new ParseException("Please specify a valid prefix: '-n ' for name, '-d ' for appointment date.");
+        }
     }
 
 }
