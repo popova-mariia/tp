@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
+@Disabled("Disabled on CI: requires JavaFX UI thread")
 public class HelpWindowTest {
 
     // Initializes JavaFX runtime
