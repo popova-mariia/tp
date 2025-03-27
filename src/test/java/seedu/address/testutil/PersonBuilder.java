@@ -24,6 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_GENDER = "female";
     public static final String DEFAULT_APPT_DATE = "2025-02-14";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
+    public static final String DEFAULT_TAG = "friends";
+
 
     private Name name;
     private Phone phone;
@@ -44,6 +46,7 @@ public class PersonBuilder {
         appointmentDate = new AppointmentDate(DEFAULT_APPT_DATE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
+        tags.add(new Tag(DEFAULT_TAG));
     }
 
     /**
