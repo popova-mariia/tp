@@ -43,7 +43,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane tags;
+    private FlowPane conditions;
+    @FXML
+    private FlowPane details;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,8 +60,11 @@ public class PersonCard extends UiPart<Region> {
         gender.setText(person.getGender().gender);
         appointmentDate.setText(person.getAppointmentDate().value);
         remark.setText(person.getRemark().value);
-        person.getTags().stream()
+        person.getConditionTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> conditions.getChildren().add(new Label(tag.tagName)));
+        person.getDetailTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> details.getChildren().add(new Label(tag.tagName)));
     }
 }
