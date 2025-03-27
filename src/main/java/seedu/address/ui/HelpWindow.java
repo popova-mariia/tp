@@ -35,6 +35,11 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Hyperlink helpLink;
 
+    /**
+     * Creates a new HelpWindow using the given {@code Stage} as the root.
+     *
+     * @param root the Stage to use as the root for this window
+     */
     public HelpWindow(Stage root) {
         super(FXML, root);
         quickStartMessage.setText(QUICK_START_MESSAGE);
@@ -44,6 +49,9 @@ public class HelpWindow extends UiPart<Stage> {
         this(new Stage());
     }
 
+    /**
+     * Shows the help window on screen and centers it.
+     */
     public void show() {
         logger.fine("Showing help page about the application.");
         getRoot().show();
