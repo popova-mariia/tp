@@ -32,7 +32,8 @@ class JsonAdaptedPerson {
     private final String gender;
     private final String appointmentDate;
     private final String remark;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedTag> conditionTags = new ArrayList<>();
+    private final List<JsonAdaptedTag> detailTags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,16 +41,21 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
              @JsonProperty("address") String address, @JsonProperty("gender") String gender,
-                         @JsonProperty("appointment date") String appointmentDate,
-                             @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                 @JsonProperty("appointment date") String appointmentDate,
+                     @JsonProperty("remark") String remark,
+                         @JsonProperty("conditions") List<JsonAdaptedTag> conditionTags,
+                             @JsonProperty("details") List<JsonAdaptedTag> detailTags) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gender = gender;
         this.appointmentDate = appointmentDate;
         this.remark = remark;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (conditionTags != null) {
+            this.conditionTags.addAll(conditionTags);
+        }
+        if (detailTags != null) {
+            this.detailTags.addAll(detailTags);
         }
     }
 
@@ -63,7 +69,11 @@ class JsonAdaptedPerson {
         gender = source.getGender().gender;
         appointmentDate = source.getAppointmentDate().value;
         remark = source.getRemark().value;
-        tags.addAll(source.getTags().stream()
+        conditionTags.addAll(source.getConditionTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+
+        detailTags.addAll(source.getDetailTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
@@ -74,9 +84,22 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final Set<Tag> modelConditionTags = new HashSet<>();
+        for (JsonAdaptedTag tag : conditionTags) {
+            Tag modelTag = tag.toModelType();
+            if (modelTag.getTagType() != Tag.TagType.CONDITION) {
+                throw new IllegalValueException("Expected tag of type CONDITION but got: " + modelTag.getTagType());
+            }
+            modelConditionTags.add(modelTag);
+        }
+
+        final Set<Tag> modelDetailTags = new HashSet<>();
+        for (JsonAdaptedTag tag : detailTags) {
+            Tag modelTag = tag.toModelType();
+            if (modelTag.getTagType() != Tag.TagType.DETAIL) {
+                throw new IllegalValueException("Expected tag of type DETAIL but got: " + modelTag.getTagType());
+            }
+            modelDetailTags.add(modelTag);
         }
 
         if (name == null) {
@@ -121,9 +144,9 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelAddress, modelGender,
-                modelAppointmentDate, modelRemark, modelTags);
+        return new Person(modelName, modelPhone, modelAddress, modelGender, modelAppointmentDate, modelRemark,
+                modelConditionTags, modelDetailTags);
+
     }
 
 }

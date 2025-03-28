@@ -3,10 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -35,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
-                        PREFIX_GENDER, PREFIX_APPT_DATE, PREFIX_TAG);
+                        PREFIX_GENDER, PREFIX_APPT_DATE, PREFIX_CONDITION, PREFIX_DETAILS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_GENDER)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -51,9 +52,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         AppointmentDate appointmentDate = ParserUtil.parseAppointmentDate(argMultimap
                 .getValue(PREFIX_APPT_DATE).orElse(""));
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> conditionList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_CONDITION),
+                Tag.TagType.CONDITION);
+        Set<Tag> detailList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_DETAILS), Tag.TagType.DETAIL);
 
-        Person person = new Person(name, phone, address, gender, appointmentDate, remark, tagList);
+        Person person = new Person(name, phone, address, gender, appointmentDate, remark, conditionList, detailList);
 
         return new AddCommand(person);
     }

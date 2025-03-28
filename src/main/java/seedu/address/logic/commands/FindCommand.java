@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,6 +27,10 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Constructor for FindCommand.
+     * @param predicate
+     */
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
@@ -59,4 +64,13 @@ public class FindCommand extends Command {
                 .add("predicate", predicate)
                 .toString();
     }
+
+    /**
+     * Getter for keywords
+     * @return keywords
+     */
+    public List<String> getKeywords() {
+        return predicate.getKeywords();
+    }
+
 }
