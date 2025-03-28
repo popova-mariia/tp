@@ -393,3 +393,6 @@
     -fx-padding: 5px;
 }
 
+.unmatched-text {
+    -fx-text-fill: white;
+}

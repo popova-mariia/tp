@@ -114,7 +114,7 @@ public class PersonCard extends UiPart<Region> {
             }
             if (!matched) {
                 Label normalLabel = new Label(String.valueOf(fullText.charAt(i)));
-                normalLabel.setStyle("-fx-text-fill: white;");
+                normalLabel.getStyleClass().add("unmatched-text");
                 fieldBox.getChildren().add(normalLabel);
                 i++;
             }
