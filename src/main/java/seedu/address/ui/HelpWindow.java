@@ -1,12 +1,12 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -16,51 +16,41 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String QUICK_START_MESSAGE = String.join("\n",
+            "Quick Start:",
+            "Try these example commands:",
+            "   • add -n John Doe -p 98765432 -a 123 Clementi Rd -g male -d 2025-04-01",
+            "   • list",
+            "   • edit 1 -p 91234567",
+            "   • delete 1",
+            "   • exit"
+    );
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Label quickStartMessage;
 
     @FXML
-    private Label helpMessage;
+    private Hyperlink helpLink;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new HelpWindow using the given {@code Stage} as the root.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root the Stage to use as the root for this window
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        quickStartMessage.setText(QUICK_START_MESSAGE);
     }
 
-    /**
-     * Creates a new HelpWindow.
-     */
     public HelpWindow() {
         this(new Stage());
     }
 
     /**
-     * Shows the help window.
-     * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
+     * Shows the help window on screen and centers it.
      */
     public void show() {
         logger.fine("Showing help page about the application.");
@@ -68,35 +58,28 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().centerOnScreen();
     }
 
-    /**
-     * Returns true if the help window is currently being shown.
-     */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
-    /**
-     * Hides the help window.
-     */
     public void hide() {
         getRoot().hide();
     }
 
-    /**
-     * Focuses on the help window.
-     */
     public void focus() {
         getRoot().requestFocus();
     }
 
+
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Opens the user guide.
      */
     @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    public void openUserGuide() {
+        try {
+            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+        } catch (Exception e) {
+            e.printStackTrace(); // Optional: add alert dialog here
+        }
     }
 }
