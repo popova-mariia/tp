@@ -50,7 +50,7 @@ public class AddressBookTest {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(ALICE)
                 .withAddress(VALID_ADDRESS_BOB)
-                .withDetails(new Tag(VALID_TAG_HUSBAND, TagType.DETAIL).toString())
+                .withDetails(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
