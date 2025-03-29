@@ -24,29 +24,29 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                    new Gender("Male"), null, EMPTY_REMARK,
+                    new Gender("Male"), new AppointmentDate("2015-10-20"), EMPTY_REMARK,
                 getTagSet(Tag.TagType.CONDITION, "Dementia"),
                     getTagSet(Tag.TagType.DETAIL, "lives alone")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Gender("Female"),
-                    new AppointmentDate("2025-01-10"), EMPTY_REMARK,
-                getTagSet(Tag.TagType.CONDITION, "Arthiritis"), getTagSet(Tag.TagType.DETAIL, "")),
+                        new AppointmentDate("2025-01-10"), EMPTY_REMARK, getTagSet(Tag.TagType.CONDITION, "Arthiritis"),
+                            getTagSet(Tag.TagType.DETAIL, "wheelchair bound")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Gender("Female"),
-                    new AppointmentDate("2025-02-01 11:30"), EMPTY_REMARK,
-                    getTagSet(Tag.TagType.CONDITION, "high risk"), getTagSet(Tag.TagType.DETAIL, "")),
+                        new AppointmentDate("2025-02-01 11:30"), EMPTY_REMARK, getTagSet(Tag.TagType.CONDITION,
+                    "high risk"), getTagSet(Tag.TagType.DETAIL, "no children")),
             new Person(new Name("David Li"), new Phone("91031282"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Gender("Male"),
-                    new AppointmentDate("2025-01-11"), EMPTY_REMARK,
-                getTagSet(Tag.TagType.CONDITION, ""), getTagSet(Tag.TagType.DETAIL, "no lift")),
+                        new AppointmentDate("2025-01-11"), EMPTY_REMARK,
+                            getTagSet(Tag.TagType.CONDITION, "Diabetic"), getTagSet(Tag.TagType.DETAIL, "no lift")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), new Gender("Male"),
-                    new AppointmentDate("2025-02-10"), EMPTY_REMARK,
-                    getTagSet(Tag.TagType.CONDITION, "Scoliosis"),
-                    getTagSet(Tag.TagType.DETAIL, "bedridden")),
+                        new AppointmentDate("2025-02-10"), EMPTY_REMARK, getTagSet(Tag.TagType.CONDITION, "Scoliosis"),
+                            getTagSet(Tag.TagType.DETAIL, "bedridden")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), new Gender("Male"), null, EMPTY_REMARK,
-                getTagSet(Tag.TagType.CONDITION, "High BP"), getTagSet(Tag.TagType.DETAIL, ""))
+                new Address("Blk 45 Aljunied Street 85, #11-31"), new Gender("Male"), new AppointmentDate("2025-01-12"),
+                    EMPTY_REMARK, getTagSet(Tag.TagType.CONDITION, "High BP"),
+                        getTagSet(Tag.TagType.DETAIL, "friendly"))
         };
     }
 
