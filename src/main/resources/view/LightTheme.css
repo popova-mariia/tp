@@ -70,6 +70,19 @@
     -fx-opacity: 1;
 }
 
+.unmatched-text {
+    -fx-text-fill: #0e3d59;
+}
+
+.list-view .list-cell:empty, .table-view .table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.highlighted-label {
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+}
+
 .table-view:focused .table-row-cell:filled:focused:selected {
     -fx-background-color: #d3eaff;
 }

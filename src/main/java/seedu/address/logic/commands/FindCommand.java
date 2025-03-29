@@ -2,12 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -17,16 +20,20 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = "Correct format: " + COMMAND_WORD + " <keyword>\n"
-            + "Example: " + COMMAND_WORD + " Alice";
+    public static final String MESSAGE_USAGE = "Correct format: " + COMMAND_WORD
+            + " -n <name>, -d <appointment date>, or upcoming\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " -n Alice\n"
+            + COMMAND_WORD + " -d 2025-04-01\n"
+            + COMMAND_WORD + " upcoming";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Person> predicate;
 
     /**
      * Constructor for FindCommand.
      * @param predicate
      */
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
 
@@ -65,7 +72,10 @@ public class FindCommand extends Command {
      * @return keywords
      */
     public List<String> getKeywords() {
-        return predicate.getKeywords();
+        if (predicate instanceof NameContainsKeywordsPredicate) {
+            NameContainsKeywordsPredicate predicateName = (NameContainsKeywordsPredicate) predicate;
+            return predicateName.getKeywords();
+        }
+        return Collections.emptyList();
     }
-
 }
