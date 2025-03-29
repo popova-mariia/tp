@@ -92,6 +92,29 @@ public class EditPersonDescriptorBuilder {
         descriptor.setDetailTags(tagSet);
         return this;
     }
+    /**
+     * Parses the {@code details} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withDetails(String... details) {
+        Set<Tag> tagSet = Stream.of(details)
+                .map(name -> new Tag(name, Tag.TagType.DETAIL)) // or TagType.CONDITION
+                .collect(Collectors.toSet());
+        descriptor.setConditionTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code conditions} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withConditions(String... conditions) {
+        Set<Tag> tagSet = Stream.of(conditions)
+                .map(name -> new Tag(name, Tag.TagType.CONDITION)) // or TagType.CONDITION
+                .collect(Collectors.toSet());
+        descriptor.setConditionTags(tagSet);
+        return this;
+    }
 
     public EditPersonDescriptor build() {
         return descriptor;
