@@ -56,8 +56,6 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withDetails(VALID_DETAIL_FRIEND).build();
 
         // whitespace only preamble
-        System.out.println("Date is " + APPT_DATE_DESC_BOB);
-        System.out.println("Expectedperson is " + expectedPerson);
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
                 + GENDER_DESC_AMY + APPT_DATE_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
@@ -189,7 +187,6 @@ public class AddCommandParserTest {
                 + APPT_DATE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        System.out.println("date is " + APPT_DATE_DESC_BOB);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB
                 + APPT_DATE_DESC_BOB + INVALID_TAG_DESC + VALID_DETAIL_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
