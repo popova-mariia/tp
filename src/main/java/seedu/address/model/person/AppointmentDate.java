@@ -31,6 +31,10 @@ public class AppointmentDate {
      */
     public AppointmentDate(String input) {
         requireNonNull(input);
+        if (input.isEmpty()) {
+            this.value = "";
+            return;
+        }
         checkArgument(isValidAppointmentDate(input), MESSAGE_CONSTRAINTS);
         this.value = normaliseDate(input);
     }
@@ -39,6 +43,9 @@ public class AppointmentDate {
      * Returns true if a given string is a valid date or date-time.
      */
     public static boolean isValidAppointmentDate(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
