@@ -2,14 +2,19 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -59,6 +64,9 @@ public class TypicalPersons {
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withAddress(VALID_ADDRESS_BOB).withGender(VALID_GENDER_BOB)
                 .withAppointmentDate(VALID_APPT_DATE_BOB).withDetails(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    public static final Person CHARLIE = new PersonBuilder().withName(VALID_NAME_CHARLIE).withPhone(VALID_PHONE_CHARLIE)
+            .withAddress(VALID_ADDRESS_CHARLIE).withGender(VALID_GENDER_CHARLIE)
+            .withAppointmentDate(VALID_APPT_DATE_CHARLIE).withDetails().build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
