@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_GENDER = "female";
     public static final String DEFAULT_APPT_DATE = "2025-02-14";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
-    public static final String DEFAULT_TAG = "friends";
+    public static final String DEFAULT_DETAIL = "friend";
 
 
     private Name name;
@@ -47,7 +47,8 @@ public class PersonBuilder {
         appointmentDate = new AppointmentDate(DEFAULT_APPT_DATE);
         remark = new Remark(DEFAULT_REMARK);
         conditions = new HashSet<>();
-        details = new HashSet<>();
+        details = new HashSet<>(Set.of(new Tag(DEFAULT_DETAIL, Tag.TagType.DETAIL)));
+
     }
 
     /**
@@ -71,14 +72,6 @@ public class PersonBuilder {
         this.name = new Name(name);
         return this;
     }
-
-//    /**
-//     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-//     */
-//    public PersonBuilder withTags(String ... tags) {
-//        this.tags = SampleDataUtil.getTagSet(tags);
-//        return this;
-//    }
 
     /**
      * Parses the {@code conditionList} into a {@code Set<Tag>} of type CONDITION

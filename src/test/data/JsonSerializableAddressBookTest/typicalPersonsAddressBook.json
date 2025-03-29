@@ -9,7 +9,7 @@
     "appointmentDate" : "2025-10-10",
     "remark" : "",
     "detailTags": [
-      { "tagName": "friends", "tagType": "DETAIL" }
+      { "tagName": "friend", "tagType": "DETAIL" }
     ]
   }, {
     "name" : "Benson Meier",
@@ -20,7 +20,7 @@
     "appointmentDate" : "2025-01-10 10:30",
     "remark" : "",
     "detailTags": [
-      { "tagName": "friends", "tagType": "DETAIL" },
+      { "tagName": "friend", "tagType": "DETAIL" },
       { "tagName": "owesMoney", "tagType": "DETAIL" }
     ]
   }, {
@@ -32,6 +32,7 @@
     "appointmentDate" : "2025-11-10 11:30",
     "remark" : "",
     "detailTags": [
+      { "tagName": "friend", "tagType": "DETAIL" }
     ]
   }, {
     "name" : "Daniel Meier",
@@ -42,7 +43,7 @@
     "appointmentDate" : "2025-12-05 09:00",
     "remark" : "",
     "detailTags": [
-      { "tagName": "friends", "tagType": "DETAIL" }
+      { "tagName": "friend", "tagType": "DETAIL" }
     ]
   }, {
     "name" : "Elle Meyer",
@@ -53,7 +54,7 @@
     "appointmentDate" : "2025-01-11",
     "remark" : "",
     "detailTags": [
-      { "tagName": "friends", "tagType": "DETAIL" }
+      { "tagName": "friend", "tagType": "DETAIL" }
     ]
   }, {
     "name" : "Fiona Kunz",
@@ -64,7 +65,7 @@
     "appointmentDate" : "2025-02-09",
     "remark" : "",
     "detailTags": [
-      { "tagName": "friends", "tagType": "DETAIL" }
+      { "tagName": "friend", "tagType": "DETAIL" }
     ]
   }, {
     "name" : "George Best",
@@ -75,7 +76,7 @@
     "appointmentDate" : "2025-09-12",
     "remark" : "",
     "detailTags": [
-      { "tagName": "friends", "tagType": "DETAIL" }
+      { "tagName": "friend", "tagType": "DETAIL" }
     ]
   } ]
 }
