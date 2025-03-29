@@ -45,11 +45,13 @@ public class TypicalPersons {
             .withAddress("10th street")
                 .withGender("male").withDetails("friends").withAppointmentDate("2025-12-05 09:00").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withAddress("michegan ave").withGender("female").withAppointmentDate("2025-01-11").build();
+            .withAddress("michegan ave").withGender("female").withDetails("friends").withAppointmentDate("2025-01-11").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withAddress("little tokyo").withGender("female").withAppointmentDate("2025-02-09").build();
+            .withAddress("little tokyo").withGender("female").withAppointmentDate("2025-02-09")
+            .withDetails("friends").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withAddress("4th street").withGender("male").withAppointmentDate("2025-09-12").build();
+            .withAddress("4th street").withGender("male").withAppointmentDate("2025-09-12")
+            .withDetails("friends").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
