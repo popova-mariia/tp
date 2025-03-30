@@ -99,7 +99,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + CONDITION_DESC_DEMENTIA + DETAIL_EMPTY + DETAIL_DESC_ALONE,
                 Tag.TagType.CONDITION.constraintMessage);
         assertParseFailure(parser, "1" + CONDITION_EMPTY + CONDITION_DESC_ECZEMA + DETAIL_DESC_MORNING,
-                Tag.MESSAGE_CONSTRAINTS);
+                Tag.TagType.CONDITION.emptyInputMessage);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY

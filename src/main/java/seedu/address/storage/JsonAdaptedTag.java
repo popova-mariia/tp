@@ -52,6 +52,10 @@ class JsonAdaptedTag {
         try {
             Tag.TagType type = Tag.TagType.valueOf(tagType.toUpperCase());
 
+            if (Tag.isEmptyTagName(tagName)) {
+                throw new IllegalValueException(type.emptyInputMessage);
+            }
+
             if (!Tag.isValidTagName(tagName)) {
                 throw new IllegalValueException(type.constraintMessage);
             }

@@ -20,18 +20,27 @@ public class Tag {
      *  CONDITION describes a medical condition or status-related attribute (e.g., "dementia", "non-verbal").
      * DETAIL: Provides additional contextual or logistical information (e.g., "lives alone", "wheelchair access").
      *
-     * Each tag type has its own specific validation error message.
+     * Each tag type has its own specific validation error message and empty input error message.
      */
     public enum TagType {
-        CONDITION("Condition tag names should be alphanumeric and may contain spaces"),
-        DETAIL("Detail tag names should be alphanumeric and may contain spaces");
+        CONDITION(
+                "Condition tag names should be alphanumeric and may contain spaces",
+                "Condition tag name cannot be empty"
+        ),
+        DETAIL(
+                "Detail tag names should be alphanumeric and may contain spaces",
+                "Detail tag name cannot be empty"
+        );
 
         public final String constraintMessage;
+        public final String emptyInputMessage;
 
-        TagType(String constraintMessage) {
+        TagType(String constraintMessage, String emptyInputMessage) {
             this.constraintMessage = constraintMessage;
+            this.emptyInputMessage = emptyInputMessage;
         }
     }
+
     public final String tagName;
     private TagType tagType = null;
 
@@ -55,6 +64,14 @@ public class Tag {
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    /**
+     * Returns true if a given string is null or blank.
+     */
+    public static boolean isEmptyTagName(String test) {
+        return test == null || test.trim().isEmpty();
+    }
+
 
     /**
      * Returns the type of this tag.
