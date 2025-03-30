@@ -17,6 +17,7 @@ import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 
 public class JsonAdaptedPersonTest {
 
@@ -156,6 +157,24 @@ public class JsonAdaptedPersonTest {
 
         assertThrows(IllegalValueException.class, person::toModelType);
 
+    }
+
+    @Test
+    public void toModelType_nullRemark_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_ADDRESS,
+                VALID_GENDER,
+                VALID_APPT_DATE,
+                null,
+                new ArrayList<>(),
+                new ArrayList<>()
+        );
+
+        assertThrows(IllegalValueException.class,
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()),
+                person::toModelType);
     }
 
 }
