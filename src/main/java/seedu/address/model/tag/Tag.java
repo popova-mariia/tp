@@ -106,7 +106,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        String prefix = tagType == TagType.CONDITION ? "[C:" : "[D:";
+        String prefix = tagType == TagType.CONDITION ? "[C: " : "[D: ";
         return prefix + tagName + "]";
     }
 
