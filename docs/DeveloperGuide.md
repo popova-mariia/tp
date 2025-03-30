@@ -304,35 +304,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Goal: Add a new patient’s contact and medical information.**
 
 **MSS:**
-1. Nurse launches SilverCare via the GUI.
-2. Nurse requests to add a new patient contact by keying in the relevant command:
-   * add -n \<name> -p \<phone> -a \<address> \[-g \<gender>]
-3. System validates the input fields.
-4. System checks for duplicate records. 
-5. If validation passes, the patient is added, and the system assigns a unique patient ID. 
-6. System displays a confirmation message. 
-7. Patient appears in the main patient list.
-8. Use case ends.
+1. Nurse provides the required patient information: name, phone number, address, and gender.
+2. Nurse may also provide optional information: appointment date, medical condition, and additional notes.
+3. System validates the data provided.
+4. System checks whether a patient with same identifying details already exists.
+5. System creates a new patient record and assigns it a unique ID.
+6. System confirms addition and displays the new patient in the patient list.
+7. Use case ends.
    
 **Extensions:**
-   * 3a. Missing required parameters:
-        * If any mandatory field is missing, the system displays an error message:
-            * Error: Patient \[name/phone/address] is required.
-            * Use case ends.
-   * 3b. Invalid input format:
-        * For incorrect field values, the system displays relevant error messages
-            * Invalid name:
-                * Error: Invalid patient name. Please use alphabets, spaces, hyphens, and apostrophes only.
-            * Invalid phone number:
-                * Error: Invalid phone number. Please enter a valid 8-digit number.
-            * Invalid gender:
-                * Error: Invalid gender. Please enter 'M', 'F', or 'O'.
-        * Use case ends.
-   * 4a. Duplicate patient record detected:
-        * If a record with the same name and phone number already exists:
-            * This contact number already exists, do you want to update the address? (yes/no)
-        * If the nurse selects no, the use case ends without changes.
-
+   * 2a. System detects invalid or incomplete entered data.
+     * 2a1. System requests for the correct data.
+     * 2a2. Nurse enters new data
+     * Steps 2a1-2a2 are repeated until the data entered are correct.
+     * Use case resumes from step 3.
+   * 3a. System detects duplicate patient
+     * 3a1. System informs Nurse that the patient already exists.
+     * 3a2. System cancels the add request.
+     * Use case ends.
 
 **Use case 2: Delete an existing patient**
 
@@ -340,36 +329,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse requests to delete an existing patient contact by keying in the relevant command:
-   * delete -id <patient_id>
-3. System validates the patient ID.
-4. If valid, the system displays a confirmation prompt:
-   * Are you sure you want to delete Patient John Doe and their contacts? (yes/no)
-5. Nurse confirms by entering yes.
-6. System removes the patient record from the patient list.
-7. System displays:
-    * Patient John Doe successfully deleted.
+1. Nurse requests to delete an existing patient contact.
+2. Nurse provides the patient's unique ID.
+3. System validates the provided patient ID.
+4. If valid, System prompts Nurse to confirm the deletion.
+5. Nurse confirms the deletion.
+6. System deletes the corresponding patient record.
+7. System informs Nurse that the deletion is successful.
 8. Use case ends.
 
 **Extensions**
 
-* 3a. Invalid patient ID:
-    * If the ID is not an integer or out of range:
-        * Error: Invalid patient ID. Please provide a valid patient ID.
+* 3a. System detects invalid patient ID.
+    * 3a1. System requests for the correct data.
+    * 3a2. Nurse enters new data
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+    * Use case resumes from step 4.
+
+* 3b. System does not find a patient with the provided ID.
+    * 3b1. System informs the Nurse that no matching patient exists. 
+    * 3b2. System requests a different patient ID. 
+    * 3b3. Nurse provides a new patient ID. 
+    * Steps 3b1–3b3 are repeated until a matching patient is found. 
+    * Use case resumes from step 4.
+
+* 4a. Nurse cancels deletion.
+    * Nurse declines the confirmation prompt.
+    * System informs Nurse that the deletion has been cancelled.
     * Use case ends.
 
-* 3b. Patient not found:
-    * If no patient matches the given ID:
-        * Error: Patient not found.
-    * Use case ends.
-
-* 4a. Nurse cancels deletion:
-    * If the nurse enters no, the system displays:
-        * Deletion cancelled.
-    * Use case ends.
-
-**Use case 3: Find a patient**
+**Use case 3: Find a patient by name**
 
 **Goal: Search for a patient’s record by name.**
 
@@ -392,13 +381,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * If no name is provided, the system displays:
         * Error: Search query cannot be empty.
     * Use case ends.
+* 3b. Invalid search query:
+  * If the name does not follow the accepted character format, the system displays an error.
+  * Use case ends.
 * 4a. No matching patient records:
     * If no patient matches the query, the system displays:
         * Error: No patients found matching the query.
     * Use case ends.
 
+**Use case 4: Find a patient by appointment date**
 
-**Use case 4: List all patients**
+**Goal: Search for a patient’s record by appointment date.**
+
+**MSS**
+
+1. Nurse launches SilverCare via the GUI.
+2. Nurse requests to search for an existing patient contact by keying in the relevant command:
+    * find -a \<appointment date>
+3. System validates the input:
+    * ensures the name is non-empty and follows the accepted date and time format.
+4. System searches for patients whose appointment date contain the query.
+5. If matches are found, the system displays a list:
+    * John Doe (ID: 1) - 83278919 - Clementi Ave 1 - 2025-10-13
+    * John Dover (ID: 3) - 91234567 - Ang Mo Kio St 22 - 2025-09-03
+6. Use case ends.
+
+**Extensions**
+
+* 3a. Empty search query:
+    * If no appointment date is provided, the system displays an error.
+    * Use case ends.
+* 3b. Invalid search query:
+    * If the name does not follow the accepted character format, the system displays an error.
+    * Use case ends.
+* 4a. No matching patient records:
+    * If no patient matches the query, the system displays:
+        * Error: No patients found matching the query.
+    * Use case ends.
+
+**Use case 5: List all patients**
 
 **Goal: View all active patient records.**
 
@@ -419,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         * No patient records available.
     * Use case ends.
 
-**Use case 5: Exit the application**
+**Use case 6: Exit the application**
 
 **Goal: Safely terminate the SilverCare application.**
 
