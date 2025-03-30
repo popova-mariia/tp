@@ -351,3 +351,13 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+/* Warning styling for the Result Display */
+.warning-text {
+    -fx-text-fill: red !important;
+    -fx-font-weight: bold;
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}

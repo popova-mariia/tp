@@ -384,12 +384,11 @@
 
 /* Warning styling for the Result Display */
 .warning-text {
-    -fx-text-fill: red !important;
+    -fx-text-fill: #FFB347 !important;
     -fx-font-weight: bold;
-    -fx-border-color: red;
+    -fx-border-color: #FFB347;
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
-    -fx-background-color: rgba(255, 0, 0, 0.2);
     -fx-padding: 5px;
 }
 
