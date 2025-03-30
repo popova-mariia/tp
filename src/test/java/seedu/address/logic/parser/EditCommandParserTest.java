@@ -95,9 +95,9 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "1" + CONDITION_DESC_DEMENTIA + CONDITION_DESC_ECZEMA + CONDITION_EMPTY,
-                Tag.TagType.CONDITION.constraintMessage);
+                Tag.TagType.CONDITION.emptyInputMessage);
         assertParseFailure(parser, "1" + CONDITION_DESC_DEMENTIA + DETAIL_EMPTY + DETAIL_DESC_ALONE,
-                Tag.TagType.CONDITION.constraintMessage);
+                Tag.TagType.DETAIL.emptyInputMessage);
         assertParseFailure(parser, "1" + CONDITION_EMPTY + CONDITION_DESC_ECZEMA + DETAIL_DESC_MORNING,
                 Tag.TagType.CONDITION.emptyInputMessage);
 
