@@ -54,6 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Set<Tag> conditionList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_CONDITION),
                 Tag.TagType.CONDITION);
+
         Set<Tag> detailList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_DETAILS), Tag.TagType.DETAIL);
 
         Person person = new Person(name, phone, address, gender, appointmentDate, remark, conditionList, detailList);
