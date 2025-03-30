@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "gender" : "female",
     "appointmentDate" : "2025-10-10",
-    "remark" : "",
+    "medicine" : "Painkiller",
     "detailTags": [
       { "tagName": "friend", "tagType": "DETAIL" }
     ]
@@ -18,7 +18,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "gender" : "male",
     "appointmentDate" : "2025-01-10 10:30",
-    "remark" : "",
+    "medicine" : "Paracetamol",
     "detailTags": [
       { "tagName": "friend", "tagType": "DETAIL" },
       { "tagName": "owesMoney", "tagType": "DETAIL" }
@@ -30,7 +30,7 @@
     "address" : "wall street",
     "gender" : "female",
     "appointmentDate" : "2025-11-10 11:30",
-    "remark" : "",
+    "medicine" : "Aspirin",
     "detailTags": [
       { "tagName": "friend", "tagType": "DETAIL" }
     ]
@@ -41,7 +41,7 @@
     "address" : "10th street",
     "gender" : "male",
     "appointmentDate" : "2025-12-05 09:00",
-    "remark" : "",
+    "medicine" : "Cough Syrup",
     "detailTags": [
       { "tagName": "friend", "tagType": "DETAIL" }
     ]
@@ -52,7 +52,7 @@
     "address" : "michegan ave",
     "gender" : "female",
     "appointmentDate" : "2025-01-11",
-    "remark" : "",
+    "medicine" : "zyrtec",
     "detailTags": [
       { "tagName": "friend", "tagType": "DETAIL" }
     ]
@@ -63,7 +63,7 @@
     "address" : "little tokyo",
     "gender" : "female",
     "appointmentDate" : "2025-02-09",
-    "remark" : "",
+    "medicine" : "loratadine",
     "detailTags": [
       { "tagName": "friend", "tagType": "DETAIL" }
     ]
@@ -74,7 +74,7 @@
     "address" : "4th street",
     "gender" : "male",
     "appointmentDate" : "2025-09-12",
-    "remark" : "",
+    "medicine" : "Panadol",
     "detailTags": [
       { "tagName": "friend", "tagType": "DETAIL" }
     ]

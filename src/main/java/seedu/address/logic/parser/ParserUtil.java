@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -140,5 +141,23 @@ public class ParserUtil {
         }
 
         return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a given string into a {@code Medicine} object.
+     *
+     * @param medicine The string to parse.
+     * @return A {@code Medicine} object containing the parsed value.
+     * @throws ParseException If the given string is invalid.
+     */
+    public static Medicine parseMedicine(String medicine) throws ParseException {
+        if (medicine == null || medicine.trim().isEmpty()) {
+            return new Medicine("");
+        }
+        String trimmedMedicine = medicine.trim();
+        if (!Medicine.isValidMedicine(trimmedMedicine)) {
+            throw new ParseException(Medicine.MESSAGE_CONSTRAINTS);
+        }
+        return new Medicine(trimmedMedicine);
     }
 }

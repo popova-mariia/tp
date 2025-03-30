@@ -14,10 +14,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 public class SampleDataUtilTest {
@@ -53,12 +53,12 @@ public class SampleDataUtilTest {
     public void getSampleAddressBook_allValidData_successfullyAddsAll() {
         Person[] validSamplePersons = new Person[] {
             new Person(new Name("Test A"), new Phone("12345678"), new Address("123 Street"),
-                    new Gender("Male"), new AppointmentDate("2025-01-01"), new Remark(""),
+                    new Gender("Male"), new AppointmentDate("2025-01-01"), new Medicine(""),
                     SampleDataUtil.getTagSet(Tag.TagType.CONDITION, "Healthy"),
                     SampleDataUtil.getTagSet(Tag.TagType.DETAIL, "Independent")),
 
             new Person(new Name("Test B"), new Phone("87654321"), new Address("321 Street"),
-                    new Gender("Female"), new AppointmentDate("2025-02-01"), new Remark(""),
+                    new Gender("Female"), new AppointmentDate("2025-02-01"), new Medicine(""),
                     SampleDataUtil.getTagSet(Tag.TagType.CONDITION, "Diabetic"),
                     SampleDataUtil.getTagSet(Tag.TagType.DETAIL, "Wheelchair"))
         };
@@ -83,7 +83,7 @@ public class SampleDataUtilTest {
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 new Gender("Male"),
                 new AppointmentDate("2025-01-10"),
-                new Remark("Prefers morning visits"),
+                new Medicine("Painkiller"),
                 SampleDataUtil.getTagSet(Tag.TagType.CONDITION, "Dementia"),
                 SampleDataUtil.getTagSet(Tag.TagType.DETAIL, "Lives alone")
         );

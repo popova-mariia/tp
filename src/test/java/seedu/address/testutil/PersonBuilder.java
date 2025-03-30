@@ -6,10 +6,10 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,7 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GENDER = "female";
     public static final String DEFAULT_APPT_DATE = "2025-02-14";
-    public static final String DEFAULT_REMARK = "She likes aardvarks.";
+    public static final String DEFAULT_MEDICINE = "Painkiller";
     public static final String DEFAULT_DETAIL = "friend";
 
 
@@ -32,7 +32,7 @@ public class PersonBuilder {
     private Address address;
     private Gender gender;
     private AppointmentDate appointmentDate;
-    private Remark remark;
+    private Medicine medicine;
     private Set<Tag> conditions;
     private Set<Tag> details;
 
@@ -45,7 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         gender = new Gender(DEFAULT_GENDER);
         appointmentDate = new AppointmentDate(DEFAULT_APPT_DATE);
-        remark = new Remark(DEFAULT_REMARK);
+        medicine = new Medicine(DEFAULT_MEDICINE);
         conditions = new HashSet<>();
         details = new HashSet<>(Set.of(new Tag(DEFAULT_DETAIL, Tag.TagType.DETAIL)));
 
@@ -60,7 +60,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         gender = personToCopy.getGender();
         appointmentDate = personToCopy.getAppointmentDate();
-        remark = personToCopy.getRemark();
+        medicine = personToCopy.getMedicine();
         conditions = new HashSet<>(personToCopy.getConditionTags());
         details = new HashSet<>(personToCopy.getDetailTags());
     }
@@ -133,15 +133,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code Medicine} of the {@code Person} that we are building.
      */
-    public PersonBuilder withRemark(String remark) {
-        this.remark = new Remark(remark);
+    public PersonBuilder withMedicine(String medicine) {
+        this.medicine = new Medicine(medicine);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, address, gender, appointmentDate, remark, conditions, details);
+        return new Person(name, phone, address, gender, appointmentDate, medicine, conditions, details);
     }
 
 }

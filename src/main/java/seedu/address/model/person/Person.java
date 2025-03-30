@@ -24,7 +24,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final AppointmentDate appointmentDate;
-    private final Remark remark;
+    private final Medicine medicine;
     private final Set<Tag> conditionTags = new HashSet<>();
     private final Set<Tag> detailTags = new HashSet<>();
 
@@ -32,14 +32,14 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Address address, Gender gender, AppointmentDate appointmentDate,
-                  Remark remark, Set<Tag> conditionTags, Set<Tag> detailTags) {
-        requireAllNonNull(name, phone, address, gender, appointmentDate, conditionTags, detailTags);
+                  Medicine medicine, Set<Tag> conditionTags, Set<Tag> detailTags) {
+        requireAllNonNull(name, phone, address, gender, appointmentDate, medicine, conditionTags, detailTags);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gender = gender;
         this.appointmentDate = appointmentDate;
-        this.remark = remark;
+        this.medicine = medicine;
         this.conditionTags.addAll(conditionTags);
         this.detailTags.addAll(detailTags);
     }
@@ -64,8 +64,8 @@ public class Person {
         return appointmentDate;
     }
 
-    public Remark getRemark() {
-        return remark;
+    public Medicine getMedicine() {
+        return medicine;
     }
 
     /**
@@ -119,13 +119,14 @@ public class Person {
                 && gender.equals(otherPerson.gender)
                 && appointmentDate.equals(otherPerson.appointmentDate)
                 && conditionTags.equals(otherPerson.conditionTags)
-                && detailTags.equals(otherPerson.detailTags);
+                && detailTags.equals(otherPerson.detailTags)
+                && medicine.equals(otherPerson.medicine);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gender, appointmentDate, conditionTags, detailTags);
+        return Objects.hash(name, phone, address, gender, appointmentDate, conditionTags, detailTags, medicine);
     }
 
     @Override
@@ -138,6 +139,7 @@ public class Person {
                 .add("appointment date", appointmentDate)
                 .add("conditionTags", conditionTags)
                 .add("detailTags", detailTags)
+                .add("medicine", medicine)
                 .toString();
     }
 

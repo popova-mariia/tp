@@ -37,7 +37,7 @@
         <FlowPane fx:id="conditions"/>
         <FlowPane fx:id="details"/>
       </HBox>
-      <HBox fx:id="remark" spacing="0" />
+      <Label fx:id="medicine" />
     </VBox>
   </GridPane>
 </HBox>

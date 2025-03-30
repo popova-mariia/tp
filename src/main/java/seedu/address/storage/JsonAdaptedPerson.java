@@ -14,10 +14,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String gender;
     private final String appointmentDate;
-    private final String remark;
+    private final String medicine;
     private final List<JsonAdaptedTag> conditionTags = new ArrayList<>();
     private final List<JsonAdaptedTag> detailTags = new ArrayList<>();
 
@@ -43,7 +43,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("address") String address, @JsonProperty("gender") String gender,
                              @JsonProperty("appointment date") String appointmentDate,
-                             @JsonProperty("remark") String remark,
+                             @JsonProperty("medicine") String medicine,
                              @JsonProperty("conditions") List<JsonAdaptedTag> conditionTags,
                              @JsonProperty("details") List<JsonAdaptedTag> detailTags) {
         this.name = name;
@@ -51,7 +51,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.gender = gender;
         this.appointmentDate = appointmentDate;
-        this.remark = remark;
+        this.medicine = medicine;
         if (conditionTags != null) {
             this.conditionTags.addAll(conditionTags);
         }
@@ -69,7 +69,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         gender = source.getGender().gender;
         appointmentDate = source.getAppointmentDate().value;
-        remark = source.getRemark().value;
+        medicine = source.getMedicine().value;
         conditionTags.addAll(source.getConditionTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -140,12 +140,13 @@ class JsonAdaptedPerson {
         }
         final AppointmentDate modelAppointmentDate = new AppointmentDate(appointmentDate);
 
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        if (medicine == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Medicine.class.getSimpleName()));
         }
-        final Remark modelRemark = new Remark(remark);
+        final Medicine modelMedicine = new Medicine(medicine);
 
-        return new Person(modelName, modelPhone, modelAddress, modelGender, modelAppointmentDate, modelRemark,
+        return new Person(modelName, modelPhone, modelAddress, modelGender, modelAppointmentDate, modelMedicine,
                 modelConditionTags, modelDetailTags);
 
     }
