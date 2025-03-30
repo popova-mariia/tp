@@ -360,34 +360,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case 3: Find a patient by name**
 
-**Goal: Search for a patient’s record by name.**
+**Goal: Search for a patient’s record by their name.**
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse requests to search for an existing patient contact by keying in the relevant command:
-    * find -n \<name>
-3. System validates the input:
-    * ensures the name is non-empty and follows the accepted character format.
-4. System searches for patients whose names contain the query (case-insensitive).
-5. If matches are found, the system displays a list:
-     * John Doe (ID: 1) - 83278919 - Clementi Ave 1
-     * John Dover (ID: 3) - 91234567 - Ang Mo Kio St 22
+1. Nurse requests to search for a patient by name.
+2. Nurse provides a name to search for. 
+3. System validates the provided name (e.g., non-empty, valid characters). 
+4. System searches for patient records containing the name (case-insensitive). 
+5. System displays a list of matching patient records. 
 6. Use case ends.
 
 **Extensions**
 
-* 3a. Empty search query:
-    * If no name is provided, the system displays:
-        * Error: Search query cannot be empty.
-    * Use case ends.
-* 3b. Invalid search query:
-  * If the name does not follow the accepted character format, the system displays an error.
-  * Use case ends.
-* 4a. No matching patient records:
-    * If no patient matches the query, the system displays:
-        * Error: No patients found matching the query.
-    * Use case ends.
+* 3a. Nurse provides empty name query.
+    * 3a1. System informs the Nurse that the name cannot be empty. 
+    * 3a2. System requests a valid name. 
+    * 3a3. Nurse provides a new search name. 
+    * Steps 3a1–3a3 are repeated until a valid name is entered. 
+    * Use case resumes from step 4.
+
+* 3b. Nurse provides invalid name query.
+    * 3b1. System informs the Nurse that the name format is invalid. 
+    * 3b2. System requests a valid name. 
+    * 3b3. Nurse provides a new search name. 
+    * Steps 3b1–3b3 are repeated until a valid name is entered. 
+    * Use case resumes from step 4.
+
+* 4a. No matching patient records found 
+    * 4a1. System informs the Nurse that no matching records were found. 
+    * 4a2. System requests a new search input. 
+    * 4a3. Nurse provides a new search name. 
+    * Steps 4a1–4a3 are repeated until a match is found or the search is cancelled. 
+    * Use case resumes from step 4 or ends if cancelled.
 
 **Use case 4: Find a patient by appointment date**
 
@@ -395,28 +400,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse requests to search for an existing patient contact by keying in the relevant command:
-    * find -a \<appointment date>
-3. System validates the input:
-    * ensures the name is non-empty and follows the accepted date and time format.
-4. System searches for patients whose appointment date contain the query.
-5. If matches are found, the system displays a list:
-    * John Doe (ID: 1) - 83278919 - Clementi Ave 1 - 2025-10-13
-    * John Dover (ID: 3) - 91234567 - Ang Mo Kio St 22 - 2025-09-03
+1. Nurse requests to search for a patient by appointment date.
+2. Nurse provides a date to search for.
+3. System validates the provided date format.
+4. System searches for patient records with matching appointment dates.
+5. System displays a list of matching patient records.
 6. Use case ends.
 
 **Extensions**
 
-* 3a. Empty search query:
-    * If no appointment date is provided, the system displays an error.
-    * Use case ends.
-* 3b. Invalid search query:
-    * If the name does not follow the accepted character format, the system displays an error.
-    * Use case ends.
-* 4a. No matching patient records:
-    * If no patient matches the query, the system displays:
-        * Error: No patients found matching the query.
+* 3a. Nurse provides empty name query.
+    * 3a1. System informs the Nurse that the appointment date cannot be empty.
+    * 3a2. System requests a valid date input.
+    * 3a3. Nurse provides a new date.
+    * Steps 3a1–3a3 are repeated until a valid name is entered.
+    * Use case resumes from step 4.
+
+* 3b. Nurse provides invalid name query.
+    * 3b1. System informs the Nurse that the name format is invalid.
+    * 3b2. System requests a valid date input.
+    * 3b3. Nurse provides a new date.
+    * Steps 3b1–3b3 are repeated until a valid name is entered.
+    * Use case resumes from step 4.
+
+* 4a. No matching patient records found
+    * 4a1. System informs the Nurse that no matching records were found.
+    * 4a2. System requests a new search input.
+    * 4a3. Nurse provides a new date.
+    * Steps 4a1–4a3 are repeated until a match is found or the search is cancelled.
+    * Use case resumes from step 4 or ends if cancelled.
+
+**Use case 5: Find upcoming appointments**
+
+**Goal: Retrieve all patient records with appointment dates that are scheduled after the current system time.**
+
+**MSS**
+
+1. Nurse requests to view upcoming appointments.
+2. System retrieves the current date and time.
+3. System searches for all patients whose appointment dates are scheduled after the current system time. 
+4. System displays a list of matching patient records. 
+5. Use case ends.
+
+**Extensions**
+
+* 3a. No upcoming appointments found
+    * 3a1. System informs Nurse that there are no upcoming appointments.
     * Use case ends.
 
 **Use case 5: List all patients**
