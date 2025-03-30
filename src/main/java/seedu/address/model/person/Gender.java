@@ -40,10 +40,10 @@ public class Gender {
      */
     private static String normaliseGender(String gender) {
         String normalisedGender = gender.toLowerCase();
-        if (normalisedGender.equals("m")) {
-            return "male";
-        } else if (normalisedGender.equals("f")) {
-            return "female";
+        if (normalisedGender.equals("m") || normalisedGender.equals("male")) {
+            return "Male";
+        } else if (normalisedGender.equals("f") || normalisedGender.equals("female")) {
+            return "Female";
         }
         return normalisedGender;
     }
