@@ -58,7 +58,7 @@ public class EditCommand extends Command {
             + PREFIX_ADDRESS + "Block 123 Clementi Street S1234567 "
             + PREFIX_APPT_DATE + "2020-02-02 "
             + PREFIX_CONDITION + "High BP "
-            + PREFIX_DETAILS + "Stays alone"
+            + PREFIX_DETAILS + "Stays alone "
             + PREFIX_MEDICINE + "paracetamol ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
