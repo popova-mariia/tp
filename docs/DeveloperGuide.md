@@ -448,6 +448,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System informs Nurse that there are no upcoming appointments.
     * Use case ends.
 
+**Use case 6: Edit a patient record**
+
+**Goal: Modify an existing patient's contact or medical information.**
+
+**MSS**
+
+1. Nurse requests to edit a patient record
+2. Nurse provides the patient ID and specifies one or more fields to update (e.g., name, phone, address, gender, etc.). 
+3. System validates the patient ID and each field to be updated. 
+4. System updates the patient record with the new information. 
+5. System confirms the successful update.
+6. Use case ends.
+
+**Extensions**
+
+* 3a. Invalid patient ID provided 
+    * 3a1. System informs Nurse that the patient ID is invalid or not found. 
+    * 3a2. System requests a valid patient ID. 
+    * 3a3. Nurse provides a new ID. 
+    * Steps 3a1–3a3 repeat until a valid patient ID is provided. 
+    * Use case resumes from step 3.
+
+* 3b. Invalid input for one or more fields 
+    * 3b1. System informs the Nurse of each invalid field and the corresponding format or constraint.
+    * 3b2. System requests corrected values for the invalid fields. 
+    * 3b3. Nurse provides corrected input. 
+    * Steps 3b1–3b3 repeat until all inputs are valid. 
+    * Use case resumes from step 4.
+
+* 4a. No changes detected 
+    * 4a1. If the new values are the same as the existing ones, System informs Nurse that no updates were made. 
+    * Use case ends.
+
+**Use case 7: Clear all patient records**
+
+**Goal: Remove all existing patient records from the system.**
+
+**MSS**
+
+1. Nurse requests to clear all patient records. 
+2. System prompts Nurse for confirmation before proceeding. 
+3. Nurse confirms the action. 
+4. System deletes all patient records from the system. 
+5. System informs Nurse that the address book has been cleared. 
+6. Use case ends.
+
+**Extensions**
+
+* 3a. Nurse cancels the clear request
+    * 3a1. Nurse declines the confirmation prompt. 
+    * 3a2. System informs Nurse that the clear action has been cancelled. 
+    * Use case ends. 
+
+* 4a. No records to clear 
+    * 4a1. System detects that there are no patient records to delete. 
+    * 4a2. System informs the Nurse that the address book is already empty. 
+    * Use case ends.
+
 **Use case 6: List all patients**
 
 **Goal: View all active patient records.**
