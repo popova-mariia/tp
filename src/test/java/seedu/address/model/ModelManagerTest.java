@@ -129,4 +129,18 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+    @Test
+    public void clearPendingClear_setsPendingClearToFalse() {
+        // Initially should be false
+        assertFalse(modelManager.isClearPending(), "Initial pending clear should be false");
+
+        // Set it to true
+        modelManager.setPendingClear();
+        assertTrue(modelManager.isClearPending(), "Pending clear should be true after setPendingClear");
+
+        // Clear it
+        modelManager.clearPendingClear();
+        assertFalse(modelManager.isClearPending(), "Pending clear should be false after clearPendingClear");
+    }
+
 }

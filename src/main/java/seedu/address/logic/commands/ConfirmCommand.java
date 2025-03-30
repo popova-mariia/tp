@@ -28,4 +28,8 @@ public class ConfirmCommand extends Command {
             throw new CommandException("No pending operation to confirm.");
         }
     }
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ConfirmCommand;
+    }
 }

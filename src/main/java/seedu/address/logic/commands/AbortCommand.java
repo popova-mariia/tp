@@ -25,4 +25,8 @@ public class AbortCommand extends Command {
             throw new CommandException("No pending operation to abort.");
         }
     }
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof AbortCommand;
+    }
 }
