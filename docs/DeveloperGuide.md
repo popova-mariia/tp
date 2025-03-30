@@ -506,7 +506,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a2. System informs the Nurse that the address book is already empty. 
     * Use case ends.
 
-**Use case 6: List all patients**
+**Use case 8: List all patients**
 
 **Goal: View all active patient records.**
 
@@ -523,7 +523,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System informs the Nurse that there are no patient records available.
     * Use case ends.
 
-**Use case 7: Exit the application**
+**Use case 9: Toggle application theme**
+
+**Goal: Switch the application’s appearance between light and dark mode.**
+
+**MSS**
+
+1. Nurse toggles the application theme. 
+2. System determines the current theme (light or dark). 
+3. System switches to the opposite theme. 
+4. System applies the new theme across the user interface. 
+5. Use case ends.
+
+**Use case 10: Display help information**
+
+**Goal: Provide guidance to Nurse on how to use the system’s commands and features.**
+
+**MSS**
+
+1. Nurse requests to view help information. 
+2. System opens a help window. 
+3. System displays example commands and usage instructions. 
+4. System provides a hyperlink to view the full user guide. 
+5. Use case ends.
+
+**Use case 11: Exit the application**
 
 **Goal: Safely terminate the SilverCare application.**
 
