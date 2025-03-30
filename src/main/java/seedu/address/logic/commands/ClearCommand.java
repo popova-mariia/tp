@@ -2,22 +2,21 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Requests user confirmation before clearing the address book.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
-
+    public static final String MESSAGE_CONFIRMATION = "Are you sure you want to clear the address book?\n"
+            + "Type `y` to proceed or `n` to abort.";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.setPendingClear();
+        return new CommandResult(MESSAGE_CONFIRMATION, CommandResult.DisplayType.WARNING);
     }
 }
