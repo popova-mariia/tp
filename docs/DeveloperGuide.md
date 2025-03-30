@@ -387,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3b1–3b3 are repeated until a valid name is entered. 
     * Use case resumes from step 4.
 
-* 4a. No matching patient records found 
+* 4a. No matching patient records found. 
     * 4a1. System informs the Nurse that no matching records were found. 
     * 4a2. System requests a new search input. 
     * 4a3. Nurse provides a new search name. 
@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3b1–3b3 are repeated until a valid name is entered.
     * Use case resumes from step 4.
 
-* 4a. No matching patient records found
+* 4a. No matching patient records found.
     * 4a1. System informs the Nurse that no matching records were found.
     * 4a2. System requests a new search input.
     * 4a3. Nurse provides a new date.
@@ -444,52 +444,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. No upcoming appointments found
+* 3a. No upcoming appointments found.
     * 3a1. System informs Nurse that there are no upcoming appointments.
     * Use case ends.
 
-**Use case 5: List all patients**
+**Use case 6: List all patients**
 
 **Goal: View all active patient records.**
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse enters the following command in the command box:
-    * list
-3. System retrieves and displays a paginated list of all patient records:
-    * John Doe (ID: 1) - 83278919 - Clementi Ave 1
-    * Mary Tan (ID: 2) - 81234567 - Bukit Timah Rd
+1. Nurse requests to view all patient records.
+2. System retrieves all stored patient records.
+3. System displays the list of patients.
 4. Use case ends.
 
 **Extensions**
 
-* 3a. No patients in the system:
-    * If the system is empty, it displays:
-        * No patient records available.
+* 2a. No patients found in the system.
+    * 2a1. System informs the Nurse that there are no patient records available.
     * Use case ends.
 
-**Use case 6: Exit the application**
+**Use case 7: Exit the application**
 
 **Goal: Safely terminate the SilverCare application.**
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse enters the following command in the command box:
-    * exit
-3. System prompts for confirmation:
-    * Are you sure you want to exit? (yes/no)
-4. Nurse confirms by entering yes.
-5. System saves any unsaved changes and terminates the application.
-6. Use case ends.
-
-**Extensions**
-
-* 4a. Nurse cancels exit:
-    * If the nurse enters no, the system displays:
-        * Exit cancelled. Returning to main menu.
-    * Use case ends.
+1. Nurse requests to exit the application. 
+2. System saves any unsaved data. 
+3. System terminates the application. 
+4. Use case ends.
 
 *{More to be added}*
 
