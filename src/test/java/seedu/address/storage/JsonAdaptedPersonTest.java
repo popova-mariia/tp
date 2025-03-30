@@ -122,7 +122,7 @@ public class JsonAdaptedPersonTest {
         invalidDetailTags.add(new JsonAdaptedTag("#friend", "DETAIL"));
         JsonAdaptedPerson person = new JsonAdaptedPerson(
                 VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_GENDER,
-                VALID_APPT_DATE, VALID_REMARK, invalidDetailTags, new ArrayList<>());
+                VALID_APPT_DATE, VALID_REMARK, new ArrayList<>(), invalidDetailTags);
 
         assertThrows(IllegalValueException.class, person::toModelType);
     }
@@ -134,7 +134,7 @@ public class JsonAdaptedPersonTest {
         invalidConditionTags.add(new JsonAdaptedTag("#friend", "CONDITION"));
         JsonAdaptedPerson person = new JsonAdaptedPerson(
                 VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_GENDER,
-                VALID_APPT_DATE, VALID_REMARK, new ArrayList<>(), invalidConditionTags);
+                VALID_APPT_DATE, VALID_REMARK, invalidConditionTags, new ArrayList<>());
 
         assertThrows(IllegalValueException.class, person::toModelType);
     }
