@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_DEMENTIA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAIL_MORNING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -37,23 +39,23 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
+        // same phone, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withGender(VALID_GENDER_BOB).withDetails(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        // different phone, all other attributes same -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // same phone but different case name -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // same phone with name having trailing spaces -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -74,28 +76,35 @@ public class PersonTest {
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
-        // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different name, different phone number -> returns false
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
+        // same name, different phone -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(ALICE.equals(editedAlice));
+
+        // different address, different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        // different gender, different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withGender(VALID_GENDER_BOB).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different gender -> returns false
-        editedAlice = new PersonBuilder(ALICE).withGender(VALID_GENDER_BOB).build();
+        // different appointment date, different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAppointmentDate(VALID_APPT_DATE_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different appointment date -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAppointmentDate(VALID_APPT_DATE_BOB).build();
+        // different conditions tag, different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withConditions(VALID_CONDITION_DEMENTIA)
+                .withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withDetails(VALID_TAG_HUSBAND).build();
+        // different details tag, different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDetails(VALID_DETAIL_MORNING)
+                .withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
