@@ -304,35 +304,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Goal: Add a new patient’s contact and medical information.**
 
 **MSS:**
-1. Nurse launches SilverCare via the GUI.
-2. Nurse requests to add a new patient contact by keying in the relevant command:
-   * add -n \<name> -p \<phone> -a \<address> \[-g \<gender>]
-3. System validates the input fields.
-4. System checks for duplicate records. 
-5. If validation passes, the patient is added, and the system assigns a unique patient ID. 
-6. System displays a confirmation message. 
-7. Patient appears in the main patient list.
-8. Use case ends.
+1. Nurse provides the required patient information: name, phone number, address, and gender.
+2. Nurse may also provide optional information: appointment date, medical condition, and additional notes.
+3. System validates the data provided.
+4. System checks whether a patient with same identifying details already exists.
+5. System creates a new patient record and assigns it a unique ID.
+6. System confirms addition and displays the new patient in the patient list.
+7. Use case ends.
    
 **Extensions:**
-   * 3a. Missing required parameters:
-        * If any mandatory field is missing, the system displays an error message:
-            * Error: Patient \[name/phone/address] is required.
-            * Use case ends.
-   * 3b. Invalid input format:
-        * For incorrect field values, the system displays relevant error messages
-            * Invalid name:
-                * Error: Invalid patient name. Please use alphabets, spaces, hyphens, and apostrophes only.
-            * Invalid phone number:
-                * Error: Invalid phone number. Please enter a valid 8-digit number.
-            * Invalid gender:
-                * Error: Invalid gender. Please enter 'M', 'F', or 'O'.
-        * Use case ends.
-   * 4a. Duplicate patient record detected:
-        * If a record with the same name and phone number already exists:
-            * This contact number already exists, do you want to update the address? (yes/no)
-        * If the nurse selects no, the use case ends without changes.
-
+   * 2a. System detects invalid or incomplete entered data.
+     * 2a1. System requests for the correct data.
+     * 2a2. Nurse enters new data
+     * Steps 2a1-2a2 are repeated until the data entered are correct.
+     * Use case resumes from step 3.
+   * 3a. System detects duplicate patient
+     * 3a1. System informs Nurse that the patient already exists.
+     * 3a2. System cancels the add request.
+     * Use case ends.
 
 **Use case 2: Delete an existing patient**
 
@@ -340,106 +329,234 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse requests to delete an existing patient contact by keying in the relevant command:
-   * delete -id <patient_id>
-3. System validates the patient ID.
-4. If valid, the system displays a confirmation prompt:
-   * Are you sure you want to delete Patient John Doe and their contacts? (yes/no)
-5. Nurse confirms by entering yes.
-6. System removes the patient record from the patient list.
-7. System displays:
-    * Patient John Doe successfully deleted.
+1. Nurse requests to delete an existing patient contact.
+2. Nurse provides the patient's unique ID.
+3. System validates the provided patient ID.
+4. If valid, System prompts Nurse to confirm the deletion.
+5. Nurse confirms the deletion.
+6. System deletes the corresponding patient record.
+7. System informs Nurse that the deletion is successful.
 8. Use case ends.
 
 **Extensions**
 
-* 3a. Invalid patient ID:
-    * If the ID is not an integer or out of range:
-        * Error: Invalid patient ID. Please provide a valid patient ID.
+* 3a. System detects invalid patient ID.
+    * 3a1. System requests for the correct data.
+    * 3a2. Nurse enters new data
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+    * Use case resumes from step 4.
+
+* 3b. System does not find a patient with the provided ID.
+    * 3b1. System informs the Nurse that no matching patient exists. 
+    * 3b2. System requests a different patient ID. 
+    * 3b3. Nurse provides a new patient ID. 
+    * Steps 3b1–3b3 are repeated until a matching patient is found. 
+    * Use case resumes from step 4.
+
+* 4a. Nurse cancels deletion.
+    * Nurse declines the confirmation prompt.
+    * System informs Nurse that the deletion has been cancelled.
     * Use case ends.
 
-* 3b. Patient not found:
-    * If no patient matches the given ID:
-        * Error: Patient not found.
-    * Use case ends.
+**Use case 3: Find a patient by name**
 
-* 4a. Nurse cancels deletion:
-    * If the nurse enters no, the system displays:
-        * Deletion cancelled.
-    * Use case ends.
-
-**Use case 3: Find a patient**
-
-**Goal: Search for a patient’s record by name.**
+**Goal: Search for a patient’s record by their name.**
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse requests to search for an existing patient contact by keying in the relevant command:
-    * find -n \<name>
-3. System validates the input:
-    * ensures the name is non-empty and follows the accepted character format.
-4. System searches for patients whose names contain the query (case-insensitive).
-5. If matches are found, the system displays a list:
-     * John Doe (ID: 1) - 83278919 - Clementi Ave 1
-     * John Dover (ID: 3) - 91234567 - Ang Mo Kio St 22
+1. Nurse requests to search for a patient by name.
+2. Nurse provides a name to search for. 
+3. System validates the provided name (e.g., non-empty, valid characters). 
+4. System searches for patient records containing the name (case-insensitive). 
+5. System displays a list of matching patient records. 
 6. Use case ends.
 
 **Extensions**
 
-* 3a. Empty search query:
-    * If no name is provided, the system displays:
-        * Error: Search query cannot be empty.
-    * Use case ends.
-* 4a. No matching patient records:
-    * If no patient matches the query, the system displays:
-        * Error: No patients found matching the query.
+* 3a. Nurse provides empty name query.
+    * 3a1. System informs the Nurse that the name cannot be empty. 
+    * 3a2. System requests a valid name. 
+    * 3a3. Nurse provides a new search name. 
+    * Steps 3a1–3a3 are repeated until a valid name is entered. 
+    * Use case resumes from step 4.
+
+* 3b. Nurse provides invalid name query.
+    * 3b1. System informs the Nurse that the name format is invalid. 
+    * 3b2. System requests a valid name. 
+    * 3b3. Nurse provides a new search name. 
+    * Steps 3b1–3b3 are repeated until a valid name is entered. 
+    * Use case resumes from step 4.
+
+* 4a. No matching patient records found. 
+    * 4a1. System informs the Nurse that no matching records were found. 
+    * 4a2. System requests a new search input. 
+    * 4a3. Nurse provides a new search name. 
+    * Steps 4a1–4a3 are repeated until a match is found or the search is cancelled. 
+    * Use case resumes from step 4 or ends if cancelled.
+
+**Use case 4: Find a patient by appointment date**
+
+**Goal: Search for a patient’s record by appointment date.**
+
+**MSS**
+
+1. Nurse requests to search for a patient by appointment date.
+2. Nurse provides a date to search for.
+3. System validates the provided date format.
+4. System searches for patient records with matching appointment dates.
+5. System displays a list of matching patient records.
+6. Use case ends.
+
+**Extensions**
+
+* 3a. Nurse provides empty name query.
+    * 3a1. System informs the Nurse that the appointment date cannot be empty.
+    * 3a2. System requests a valid date input.
+    * 3a3. Nurse provides a new date.
+    * Steps 3a1–3a3 are repeated until a valid name is entered.
+    * Use case resumes from step 4.
+
+* 3b. Nurse provides invalid name query.
+    * 3b1. System informs the Nurse that the name format is invalid.
+    * 3b2. System requests a valid date input.
+    * 3b3. Nurse provides a new date.
+    * Steps 3b1–3b3 are repeated until a valid name is entered.
+    * Use case resumes from step 4.
+
+* 4a. No matching patient records found.
+    * 4a1. System informs the Nurse that no matching records were found.
+    * 4a2. System requests a new search input.
+    * 4a3. Nurse provides a new date.
+    * Steps 4a1–4a3 are repeated until a match is found or the search is cancelled.
+    * Use case resumes from step 4 or ends if cancelled.
+
+**Use case 5: Find upcoming appointments**
+
+**Goal: Retrieve all patient records with appointment dates that are scheduled after the current system time.**
+
+**MSS**
+
+1. Nurse requests to view upcoming appointments.
+2. System retrieves the current date and time.
+3. System searches for all patients whose appointment dates are scheduled after the current system time. 
+4. System displays a list of matching patient records. 
+5. Use case ends.
+
+**Extensions**
+
+* 3a. No upcoming appointments found.
+    * 3a1. System informs Nurse that there are no upcoming appointments.
     * Use case ends.
 
+**Use case 6: Edit a patient record**
 
-**Use case 4: List all patients**
+**Goal: Modify an existing patient's contact or medical information.**
+
+**MSS**
+
+1. Nurse requests to edit a patient record
+2. Nurse provides the patient ID and specifies one or more fields to update (e.g., name, phone, address, gender, etc.). 
+3. System validates the patient ID and each field to be updated. 
+4. System updates the patient record with the new information. 
+5. System confirms the successful update.
+6. Use case ends.
+
+**Extensions**
+
+* 3a. Invalid patient ID provided 
+    * 3a1. System informs Nurse that the patient ID is invalid or not found. 
+    * 3a2. System requests a valid patient ID. 
+    * 3a3. Nurse provides a new ID. 
+    * Steps 3a1–3a3 repeat until a valid patient ID is provided. 
+    * Use case resumes from step 3.
+
+* 3b. Invalid input for one or more fields 
+    * 3b1. System informs the Nurse of each invalid field and the corresponding format or constraint.
+    * 3b2. System requests corrected values for the invalid fields. 
+    * 3b3. Nurse provides corrected input. 
+    * Steps 3b1–3b3 repeat until all inputs are valid. 
+    * Use case resumes from step 4.
+
+* 4a. No changes detected 
+    * 4a1. If the new values are the same as the existing ones, System informs Nurse that no updates were made. 
+    * Use case ends.
+
+**Use case 7: Clear all patient records**
+
+**Goal: Remove all existing patient records from the system.**
+
+**MSS**
+
+1. Nurse requests to clear all patient records. 
+2. System prompts Nurse for confirmation before proceeding. 
+3. Nurse confirms the action. 
+4. System deletes all patient records from the system. 
+5. System informs Nurse that the address book has been cleared. 
+6. Use case ends.
+
+**Extensions**
+
+* 3a. Nurse cancels the clear request
+    * 3a1. Nurse declines the confirmation prompt. 
+    * 3a2. System informs Nurse that the clear action has been cancelled. 
+    * Use case ends. 
+
+* 4a. No records to clear 
+    * 4a1. System detects that there are no patient records to delete. 
+    * 4a2. System informs the Nurse that the address book is already empty. 
+    * Use case ends.
+
+**Use case 8: List all patients**
 
 **Goal: View all active patient records.**
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse enters the following command in the command box:
-    * list
-3. System retrieves and displays a paginated list of all patient records:
-    * John Doe (ID: 1) - 83278919 - Clementi Ave 1
-    * Mary Tan (ID: 2) - 81234567 - Bukit Timah Rd
+1. Nurse requests to view all patient records.
+2. System retrieves all stored patient records.
+3. System displays the list of patients.
 4. Use case ends.
 
 **Extensions**
 
-* 3a. No patients in the system:
-    * If the system is empty, it displays:
-        * No patient records available.
+* 2a. No patients found in the system.
+    * 2a1. System informs the Nurse that there are no patient records available.
     * Use case ends.
 
-**Use case 5: Exit the application**
+**Use case 9: Toggle application theme**
+
+**Goal: Switch the application’s appearance between light and dark mode.**
+
+**MSS**
+
+1. Nurse toggles the application theme. 
+2. System determines the current theme (light or dark). 
+3. System switches to the opposite theme. 
+4. System applies the new theme across the user interface. 
+5. Use case ends.
+
+**Use case 10: Display help information**
+
+**Goal: Provide guidance to Nurse on how to use the system’s commands and features.**
+
+**MSS**
+
+1. Nurse requests to view help information. 
+2. System opens a help window. 
+3. System displays example commands and usage instructions. 
+4. System provides a hyperlink to view the full user guide. 
+5. Use case ends.
+
+**Use case 11: Exit the application**
 
 **Goal: Safely terminate the SilverCare application.**
 
 **MSS**
 
-1. Nurse launches SilverCare via the GUI.
-2. Nurse enters the following command in the command box:
-    * exit
-3. System prompts for confirmation:
-    * Are you sure you want to exit? (yes/no)
-4. Nurse confirms by entering yes.
-5. System saves any unsaved changes and terminates the application.
-6. Use case ends.
-
-**Extensions**
-
-* 4a. Nurse cancels exit:
-    * If the nurse enters no, the system displays:
-        * Exit cancelled. Returning to main menu.
-    * Use case ends.
+1. Nurse requests to exit the application. 
+2. System saves any unsaved data. 
+3. System terminates the application. 
+4. Use case ends.
 
 *{More to be added}*
 
