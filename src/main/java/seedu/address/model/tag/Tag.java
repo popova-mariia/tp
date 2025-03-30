@@ -15,14 +15,23 @@ public class Tag {
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     /**
-     * Represents the type of a tag.
+     * Represents the type of tag.
      * A tag can either be a CONDITION tag or a DETAIL tag.
-     * - CONDITION: describes a medical condition or status-related attribute (e.g., "dementia").
-     * - DETAIL: provides additional information or context (e.g., "wheelchair access").
+     *
+     *  CONDITION describes a medical condition or status-related attribute (e.g., "dementia", "non-verbal").
+     * DETAIL: Provides additional contextual or logistical information (e.g., "lives alone", "wheelchair access").
+     *
+     * Each tag type has its own specific validation error message.
      */
     public enum TagType {
-        CONDITION,
-        DETAIL
+        CONDITION("Condition tag names should be alphanumeric and may contain spaces"),
+        DETAIL("Detail tag names should be alphanumeric and may contain spaces");
+
+        public final String constraintMessage;
+
+        TagType(String constraintMessage) {
+            this.constraintMessage = constraintMessage;
+        }
     }
     public final String tagName;
     private TagType tagType = null;
@@ -31,11 +40,12 @@ public class Tag {
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
+     * @param tagType The type of tag (CONDITION or DETAIL).
      */
     public Tag(String tagName, TagType tagType) {
         requireNonNull(tagName);
         requireNonNull(tagType);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTagName(tagName), tagType.constraintMessage);
         this.tagName = tagName;
         this.tagType = tagType;
     }
