@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class Tag {
 
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} \\-]+";
 
     /**
      * Represents the type of tag.
@@ -24,11 +24,11 @@ public class Tag {
      */
     public enum TagType {
         CONDITION(
-                "Condition tag names should be alphanumeric and may contain spaces",
+                "Condition tag names should be alphanumeric, they may contain spaces and hyphens",
                 "Condition tag name cannot be empty"
         ),
         DETAIL(
-                "Detail tag names should be alphanumeric and may contain spaces",
+                "Detail tag names should be alphanumeric, they may contain spaces and hyphens",
                 "Detail tag name cannot be empty"
         );
 
