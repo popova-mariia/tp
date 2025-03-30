@@ -11,7 +11,6 @@ import java.util.Objects;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and may contain spaces";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     /**

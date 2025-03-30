@@ -89,14 +89,15 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS); // invalid gender
-        assertParseFailure(parser, "1" + INVALID_CONDITION_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        // invalid tag
+        assertParseFailure(parser, "1" + INVALID_CONDITION_DESC, Tag.TagType.CONDITION.constraintMessage);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "1" + CONDITION_DESC_DEMENTIA + CONDITION_DESC_ECZEMA + CONDITION_EMPTY,
-                Tag.MESSAGE_CONSTRAINTS);
+                Tag.TagType.CONDITION.constraintMessage);
         assertParseFailure(parser, "1" + CONDITION_DESC_DEMENTIA + DETAIL_EMPTY + DETAIL_DESC_ALONE,
-                Tag.MESSAGE_CONSTRAINTS);
+                Tag.TagType.CONDITION.constraintMessage);
         assertParseFailure(parser, "1" + CONDITION_EMPTY + CONDITION_DESC_ECZEMA + DETAIL_DESC_MORNING,
                 Tag.MESSAGE_CONSTRAINTS);
 
