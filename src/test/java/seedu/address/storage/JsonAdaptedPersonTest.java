@@ -178,7 +178,6 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, person::toModelType);
 
     }
-
     @Test
     public void toModelType_nullRemark_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(
@@ -191,11 +190,9 @@ public class JsonAdaptedPersonTest {
                 new ArrayList<>(),
                 new ArrayList<>()
         );
-
         assertThrows(IllegalValueException.class,
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()),
                 person::toModelType);
     }
-
 }
 
