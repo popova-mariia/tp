@@ -75,19 +75,19 @@ public class SampleDataUtilTest {
         ReadOnlyAddressBook sampleAddressBook = SampleDataUtil.getSampleAddressBookWithValidPersons();
 
         assertNotNull(sampleAddressBook);
-        assertEquals(2, sampleAddressBook.getPersonList().size());
+        assertEquals(5, sampleAddressBook.getPersonList().size());
 
-        Person expected = new Person(
-                new Name("Test A"),
-                new Phone("12345678"),
-                new Address("123 Street"),
+        Person expectedFirstPerson = new Person(
+                new Name("Alex Yeoh"),
+                new Phone("87438807"),
+                new Address("Blk 30 Geylang Street 29, #06-40"),
                 new Gender("Male"),
-                new AppointmentDate("2025-01-01"),
-                new Remark(""),
-                SampleDataUtil.getTagSet(Tag.TagType.CONDITION, "Healthy"),
-                SampleDataUtil.getTagSet(Tag.TagType.DETAIL, "Independent")
+                new AppointmentDate("2025-01-10"),
+                new Remark("Prefers morning visits"),
+                SampleDataUtil.getTagSet(Tag.TagType.CONDITION, "Dementia"),
+                SampleDataUtil.getTagSet(Tag.TagType.DETAIL, "Lives alone")
         );
 
-        assertEquals(expected, sampleAddressBook.getPersonList().get(0));
+        assertEquals(expectedFirstPerson, sampleAddressBook.getPersonList().get(0));
     }
 }
