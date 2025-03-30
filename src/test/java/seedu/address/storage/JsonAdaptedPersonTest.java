@@ -138,5 +138,25 @@ public class JsonAdaptedPersonTest {
 
         assertThrows(IllegalValueException.class, person::toModelType);
     }
+    @Test
+    public void toModelType_detailConditionTags_throwsIllegalValueException() {
+        List<JsonAdaptedTag> wrongConditionTags = new ArrayList<>();
+        wrongConditionTags.add(new JsonAdaptedTag("vegetarian", "DETAIL"));
+
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_ADDRESS,
+                VALID_GENDER,
+                VALID_APPT_DATE,
+                VALID_REMARK,
+                wrongConditionTags,
+                new ArrayList<>()
+        );
+
+        assertThrows(IllegalValueException.class, person::toModelType);
+
+    }
 
 }
+
