@@ -91,7 +91,6 @@ public class ParserUtil {
         if (appointmentDate == null || appointmentDate.trim().isEmpty()) {
             return new AppointmentDate("");
         }
-
         String trimmedDate = appointmentDate.trim();
         if (!AppointmentDate.isValidAppointmentDate(trimmedDate)) {
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);

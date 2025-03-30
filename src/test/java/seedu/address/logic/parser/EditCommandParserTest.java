@@ -113,7 +113,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_AMY).withGender(VALID_GENDER_AMY)
-                .withTags(VALID_CONDITION_DEMENTIA, VALID_DETAIL_ALONE).build();
+                .withTags(VALID_DETAIL_ALONE).withConditions(VALID_CONDITION_DEMENTIA).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -159,7 +159,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + CONDITION_DESC_DEMENTIA;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_CONDITION_DEMENTIA).build();
+        descriptor = new EditPersonDescriptorBuilder().withConditions(VALID_CONDITION_DEMENTIA).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -201,7 +201,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + CONDITION_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withConditions().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

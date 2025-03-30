@@ -45,8 +45,9 @@ public class Messages {
                 .append(person.getGender())
                 .append("; Appointment Date: ")
                 .append(person.getAppointmentDate())
-                .append("; Tags: ");
+                .append("; Condition Tags: ");
         person.getConditionTags().forEach(builder::append);
+        builder.append("; Detail Tags: ");
         person.getDetailTags().forEach(builder::append);
         return builder.toString();
     }

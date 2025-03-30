@@ -38,7 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setGender(person.getGender());
         descriptor.setAppointmentDate(person.getAppointmentDate());
-        descriptor.setTags(person.getTags());
+        descriptor.setConditionTags(person.getConditionTags());
     }
 
     /**
@@ -86,8 +86,33 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        Set<Tag> tagSet = Stream.of(tags)
+                .map(tagName -> new Tag(tagName, Tag.TagType.DETAIL)) // or TagType.CONDITION
+                .collect(Collectors.toSet());
+        descriptor.setDetailTags(tagSet);
+        return this;
+    }
+    /**
+     * Parses the {@code details} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withDetails(String... details) {
+        Set<Tag> tagSet = Stream.of(details)
+                .map(name -> new Tag(name, Tag.TagType.DETAIL)) // or TagType.CONDITION
+                .collect(Collectors.toSet());
+        descriptor.setConditionTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code conditions} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withConditions(String... conditions) {
+        Set<Tag> tagSet = Stream.of(conditions)
+                .map(name -> new Tag(name, Tag.TagType.CONDITION)) // or TagType.CONDITION
+                .collect(Collectors.toSet());
+        descriptor.setConditionTags(tagSet);
         return this;
     }
 
