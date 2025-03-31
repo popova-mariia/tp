@@ -15,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonLimitReachedException;
 
 /**
  * Adds a person to the address book.
@@ -41,7 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_APPT_DATE + "2025-01-17 16:30 "
             + PREFIX_CONDITION + " dementia "
             + PREFIX_DETAILS + " lives alone "
-            + PREFIX_MEDICINE + "paracetamol ";
+            + PREFIX_MEDICINE + " paracetamol ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -64,7 +65,12 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        try {
+            model.addPerson(toAdd);
+        } catch (PersonLimitReachedException e) {
+            throw new CommandException(e.getMessage());
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

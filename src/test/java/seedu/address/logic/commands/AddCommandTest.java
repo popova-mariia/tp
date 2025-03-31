@@ -20,6 +20,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
@@ -234,6 +235,83 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+    }
+
+    @Test
+    public void execute_personLimitReached_throwsCommandException() {
+        ModelStubPersonLimit modelStub = new ModelStubPersonLimit();
+        Person person = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(person);
+
+        assertThrows(CommandException.class,
+                "Cannot add more persons. Maximum person limit has been reached.", () -> addCommand.execute(modelStub));
+    }
+
+    /**
+     * A Model stub that always throws a PersonLimitReachedException when adding a person.
+     */
+    private class ModelStubPersonLimit extends ModelStub {
+        @Override
+        public boolean hasPerson(Person person) {
+            return false; // pretend person does not already exist
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            throw new seedu.address.model.person.exceptions.PersonLimitReachedException();
+        }
+    }
+
+    @Test
+    public void execute_upTo30Persons_success() throws Exception {
+        Model model = new ModelManager();
+
+        for (int i = 0; i < 30; i++) {
+            Person person = new PersonBuilder()
+                    .withName("Person " + i)
+                    .withPhone("900000" + String.format("%02d", i))
+                    .withAddress("123 Street " + i)
+                    .withGender("female")
+                    .withAppointmentDate("2025-12-12 14:00")
+                    .withMedicine("Panadol")
+                    .build();
+
+            AddCommand addCommand = new AddCommand(person);
+            CommandResult result = addCommand.execute(model);
+
+            assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(person)),
+                    result.getFeedbackToUser());
+            assertTrue(model.hasPerson(person));
+        }
+    }
+
+    @Test
+    public void execute_moreThan30Persons_throwsCommandException() throws Exception {
+        Model model = new ModelManager();
+
+        for (int i = 0; i < 30; i++) {
+            Person person = new PersonBuilder()
+                    .withName("Person " + i)
+                    .withPhone("900000" + String.format("%02d", i))
+                    .withAddress("123 Street " + i)
+                    .withGender("female")
+                    .withAppointmentDate("2025-12-12 14:00")
+                    .withMedicine("Panadol")
+                    .build();
+
+            model.addPerson(person);
+        }
+
+        Person overflow = new PersonBuilder()
+                .withName("Overflow")
+                .withPhone("99999999")
+                .build();
+
+        AddCommand addCommand = new AddCommand(overflow);
+
+        assertThrows(CommandException.class,
+                "Cannot add more persons. Maximum person limit has been reached.", ()
+                        -> addCommand.execute(model));
     }
 
 }
