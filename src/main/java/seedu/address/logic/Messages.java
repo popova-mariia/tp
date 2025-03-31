@@ -36,7 +36,8 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(" Name: ")
+                .append(person.getName())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Address: ")
@@ -45,6 +46,8 @@ public class Messages {
                 .append(person.getGender())
                 .append("; Appointment Date: ")
                 .append(person.getAppointmentDate())
+                .append("; Medicine: ")
+                .append(person.getMedicine())
                 .append("; Condition Tags: ");
         person.getConditionTags().forEach(builder::append);
         builder.append("; Detail Tags: ");
