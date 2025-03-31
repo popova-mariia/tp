@@ -13,8 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_CONDITION = new Prefix("-c");
     public static final Prefix PREFIX_DETAILS = new Prefix("-det");
     public static final Prefix PREFIX_APPT_DATE = new Prefix("-d ");
-
-    // reminder to remove below prefixes if not necessary
-    public static final Prefix PREFIX_MEDICINE = new Prefix("-med ");
+    public static final Prefix PREFIX_MEDICINE = new Prefix("-med");
 
 }

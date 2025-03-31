@@ -31,9 +31,9 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_GENDER + "GENDER "
             + "[" + PREFIX_APPT_DATE + "APPOINTMENT DATE] "
-            + "[" + PREFIX_CONDITION + "CONDITION] "
-            + "[" + PREFIX_DETAILS + "DETAIL] "
-            + PREFIX_MEDICINE + "MEDICINE " + "\n"
+            + "[" + PREFIX_CONDITION + " CONDITION] "
+            + "[" + PREFIX_DETAILS + " DETAIL] "
+            + "[" + PREFIX_MEDICINE + " MEDICINE] " + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_APPT_DATE + "2025-01-17 16:30 "
             + PREFIX_CONDITION + " dementia "
             + PREFIX_DETAILS + " lives alone "
-            + PREFIX_MEDICINE + "paracetamol ";
+            + PREFIX_MEDICINE + " paracetamol ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
