@@ -81,7 +81,7 @@ public class CommandTestUtil {
     public static final String INVALID_APPT_DATE_DESC = " " + PREFIX_APPT_DATE + "2025-14-10"; // invalid date
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "not sure";
     public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + "dementia*"; // '*' not allowed in tags
-    public static final String INVALID_TAG_DESC = " -det #invalid"; // '#' is not alphanumeric
+    public static final String INVALID_DETAIL_DESC = " " + PREFIX_DETAILS + "#invalid"; // '#' is not alphanumeric
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

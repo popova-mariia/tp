@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private Person pendingDeletion = null;
+    private boolean pendingClear = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -149,12 +150,25 @@ public class ModelManager implements Model {
         requireNonNull(person);
         this.pendingDeletion = person;
     }
-
     public Person getPendingDeletion() {
         return pendingDeletion;
     }
 
+    public boolean isDeletePending() {
+        return pendingDeletion != null;
+    }
+
     public void clearPendingDeletion() {
         this.pendingDeletion = null;
+    }
+
+    public void setPendingClear() {
+        this.pendingClear = true;
+    }
+    public boolean isClearPending() {
+        return pendingClear;
+    }
+    public void clearPendingClear() {
+        this.pendingClear = false;
     }
 }

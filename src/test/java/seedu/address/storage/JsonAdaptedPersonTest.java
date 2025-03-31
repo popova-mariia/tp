@@ -194,5 +194,24 @@ public class JsonAdaptedPersonTest {
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()),
                 person::toModelType);
     }
+
+    @Test
+    public void toModelType_nullTagName_throwsIllegalValueException() {
+        JsonAdaptedTag tag = new JsonAdaptedTag(null, "CONDITION");
+        assertThrows(IllegalValueException.class, tag::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTagType_throwsIllegalValueException() {
+        JsonAdaptedTag tag = new JsonAdaptedTag("dementia", null);
+        assertThrows(IllegalValueException.class, tag::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyTagName_throwsIllegalValueException() {
+        JsonAdaptedTag tag = new JsonAdaptedTag("   ", "DETAIL");
+        assertThrows(IllegalValueException.class, tag::toModelType);
+    }
+
 }
 

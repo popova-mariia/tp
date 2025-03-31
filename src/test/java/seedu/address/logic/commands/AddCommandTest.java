@@ -159,6 +159,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setPendingClear() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isClearPending() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearPendingClear() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isDeletePending() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPendingDeletion(Person person) {
             throw new AssertionError("This method should not be called.");
         }

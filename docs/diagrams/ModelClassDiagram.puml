@@ -15,10 +15,21 @@ Class UserPrefs
 Class UniquePersonList
 Class Person
 Class Address
-Class Email
 Class Name
 Class Phone
-Class Tag
+Class Gender
+Class AppointmentDate
+Class Medicine
+
+Enum TagType <<enumeration>> {
+    CONDITION
+    DETAIL
+}
+
+class Tag {
+    - tagName : String
+    - tagType : TagType
+}
 
 Class I #FFFFFF
 }
@@ -39,16 +50,24 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
-Person *--> Email
 Person *--> Address
+Person *--> Gender
+Person *--> AppointmentDate
 Person *--> "*" Tag
+Person *--> "*" Medicine
+
+Tag ..> TagType
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Address -[hidden]right-> Gender
+Gender -[hidden]right->AppointmentDate
+AppointmentDate -[hidden]right->Tag
+Tag -[hidden]right->Medicine
+
 
 ModelManager --> "~* filtered" Person
 @enduml
