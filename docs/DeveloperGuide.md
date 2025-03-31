@@ -239,10 +239,43 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Find upcoming appointments
 
-_{Explain here how the data archiving feature will be implemented}_
+The `upcoming` feature under the `find` command allows users to filter and display only those persons who have future appointments scheduled. This functionality is useful for quickly identifying clients with pending appointments.
 
+#### Overview
+
+* Command format: `find upcoming`
+* Filters out persons whose appointment dates are **before or equal** to the current date and time.
+* Supports both date-only and full datetime formats (e.g., `2025-04-01` or `2025-04-01 14:30`).
+
+#### Key Classes & Logic
+
+1. `FindCommandParser`
+    * Detects if the user input is exactly `"upcoming"` (case-insensitive). 
+    * If matched, it returns a `FindCommand` initialized with an `UpcomingAppointmentPredicate`. 
+    * This diverges from the usual `-n` (name) or `-d` (appointment date) prefixes.
+2. `UpcomingAppointmentPredicate`
+    * Implements `Predicate<Person>`. 
+    * Extracts the `appointmentDate` from each `Person`. 
+    * Attempts to parse the string as either:
+      * a full datetime using format `yyyy-MM-dd HH:mm`, or 
+      * a date-only format `yyyy-MM-dd` (defaults to `00:00` for comparison). 
+    * Compares the parsed result to `LocalDateTime.now()` and returns `true` only if the appointment is strictly after the current moment.
+3. `AppointmentDate`
+   * Normalizes and validates user-inputted date strings. 
+   * Accepts and validates both formats using regex and Java's `DateTimeFormatter`. 
+   * Helps maintain consistent formatting throughout the system.
+4. `FindCommand`
+   * When executed, it passes the predicate to the model's `updateFilteredPersonList()`, causing the filtered list to update with only persons matching the predicate.
+
+![UpcomingAppointmentClassDiagram](images/UpcomingAppointmentClassDiagram.png)
+
+#### Design Considerations
+
+* **Fault Tolerance:** Any parsing errors during predicate evaluation result in a safe `false` return, preventing the app from crashing. 
+* **Extensibility:** This approach cleanly separates predicates, allowing future filters (e.g., "past appointments", "appointments this week") to be added by introducing new `Predicate<Person>` classes. 
+* **Single Responsibility:** Each class follows the SRP principle—e.g., `FindCommandParser` handles parsing, `UpcomingAppointmentPredicate` handles logic, and `AppointmentDate` handles formatting.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -638,3 +671,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
