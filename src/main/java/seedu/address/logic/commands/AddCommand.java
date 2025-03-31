@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_APPT_DATE + "APPOINTMENT DATE] "
             + "[" + PREFIX_CONDITION + " CONDITION] "
             + "[" + PREFIX_DETAILS + " DETAIL] "
-            + "[" + PREFIX_MEDICINE + " MEDICINE] " + "\n"
+            + "[" + PREFIX_MEDICINE + "MEDICINE]" + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
