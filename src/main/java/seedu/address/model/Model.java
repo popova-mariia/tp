@@ -87,12 +87,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
     void setPendingClear();
-
     boolean isClearPending();
-
     void clearPendingClear();
-
     boolean isDeletePending();
+    boolean hasPeopleToClear();
 }
