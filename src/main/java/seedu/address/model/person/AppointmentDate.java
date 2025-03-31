@@ -15,12 +15,15 @@ import java.time.format.DateTimeParseException;
 public class AppointmentDate {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be in the format yyyy-MM-dd or yyyy-MM-dd HH:mm";
+    public static final String INVALID_DATE = "Date given does not exist. Please give a valid date"
+            + "\ne.g. 2020-02-02 [12:00]";
 
     // Matches "yyyy-MM-dd" or "yyyy-MM-dd HH:mm" formats
     public static final String VALIDATION_REGEX =
             "^\\d{4}-\\d{2}-\\d{2}( \\d{2}:\\d{2})?$";
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm");
 
     public final String value;
 
@@ -28,6 +31,7 @@ public class AppointmentDate {
      * Constructs an {@code AppointmentDate}.
      *
      * @param input A valid date string, with or without time, or null (optional).
+     * @throws IllegalArgumentException if the given input string does not match the expected format.
      */
     public AppointmentDate(String input) {
         requireNonNull(input);
@@ -40,9 +44,12 @@ public class AppointmentDate {
     }
 
     /**
-     * Returns true if a given string is a valid date or date-time.
+     * Returns true if a given string is a valid date or date-time format.
+     *
+     * @param test The string to be tested.
+     * @return True if the string matches the valid date format; false otherwise.
      */
-    public static boolean isValidAppointmentDate(String test) {
+    public static boolean isValidFormatAppointmentDate(String test) {
         if (test.isEmpty()) {
             return true;
         }
@@ -50,15 +57,44 @@ public class AppointmentDate {
     }
 
     /**
+     * Returns true if the given string is a valid appointment date.
+     * This checks if the date string is properly formatted and represents a valid date.
+     * The string can also contain time in the format "HH:mm".
+     *
+     * @param test The string to be validated.
+     * @return True if the string represents a valid date or date-time; false otherwise.
+     */
+    public static boolean isValidAppointmentDate(String test) {
+        try {
+            if (test.contains(" ")) {
+                String[] parts = test.split(" ");
+                LocalDate date = LocalDate.parse(parts[0], DATE_FORMAT);
+                LocalTime time = LocalTime.parse(parts[1], TIME_FORMAT);
+            } else {
+                LocalDate date = LocalDate.parse(test, DATE_FORMAT);
+            }
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
      * Normalizes the date/time string into a consistent format.
+     * If the input includes a time, it combines the date and time into one string in the format
+     * "yyyy-MM-dd HH:mm". If the input only contains a date, it returns it in "yyyy-MM-dd" format.
+     *
+     * @param input The date/time string to normalize.
+     * @return The normalized date/time string.
+     * @throws IllegalArgumentException if the input string is not in the expected format.
      */
     private static String normaliseDate(String input) {
         try {
             if (input.trim().contains(" ")) {
                 LocalDate datePart = LocalDate.parse(input.substring(0, 10), DATE_FORMAT);
                 LocalTime timePart = LocalTime.parse(input.substring(11),
-                        DateTimeFormatter.ofPattern("HH:mm"));
-                return datePart.format(DATE_FORMAT) + " " + timePart.format(DateTimeFormatter.ofPattern("HH:mm"));
+                        TIME_FORMAT);
+                return datePart.format(DATE_FORMAT) + " " + timePart.format(TIME_FORMAT);
             } else {
                 LocalDate date = LocalDate.parse(input, DATE_FORMAT);
                 return date.format(DATE_FORMAT);
@@ -68,11 +104,23 @@ public class AppointmentDate {
         }
     }
 
+    /**
+     * Returns the string representation of the appointment date.
+     *
+     * @return The appointment date as a string.
+     */
     @Override
     public String toString() {
         return value;
     }
 
+    /**
+     * Compares this AppointmentDate to another object for equality.
+     * Two AppointmentDate objects are considered equal if their value fields are equal.
+     *
+     * @param other The object to compare with.
+     * @return True if the objects are equal; false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -88,6 +136,12 @@ public class AppointmentDate {
         return this.value.equals(otherDate.value);
     }
 
+    /**
+     * Returns the hash code of this AppointmentDate.
+     * The hash code is based on the value field.
+     *
+     * @return The hash code of this AppointmentDate.
+     */
     @Override
     public int hashCode() {
         return value.hashCode();
