@@ -269,6 +269,8 @@ The `upcoming` feature under the `find` command allows users to filter and displ
 4. `FindCommand`
    * When executed, it passes the predicate to the model's `updateFilteredPersonList()`, causing the filtered list to update with only persons matching the predicate.
 
+The following class diagram shows the relationship between key classes involved:
+
 ![UpcomingAppointmentClassDiagram](images/UpcomingAppointmentClassDiagram.png)
 
 #### Design Considerations
