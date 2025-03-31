@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -17,10 +18,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Medicine;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
-                        PREFIX_GENDER, PREFIX_APPT_DATE, PREFIX_CONDITION, PREFIX_DETAILS);
+                        PREFIX_GENDER, PREFIX_APPT_DATE, PREFIX_CONDITION, PREFIX_DETAILS, PREFIX_MEDICINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_GENDER)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -51,13 +52,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         AppointmentDate appointmentDate = ParserUtil.parseAppointmentDate(argMultimap
                 .getValue(PREFIX_APPT_DATE).orElse(""));
-        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
+        Medicine medicine = ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).orElse(""));
         Set<Tag> conditionList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_CONDITION),
                 Tag.TagType.CONDITION);
 
         Set<Tag> detailList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_DETAILS), Tag.TagType.DETAIL);
 
-        Person person = new Person(name, phone, address, gender, appointmentDate, remark, conditionList, detailList);
+        Person person = new Person(name, phone, address, gender, appointmentDate, medicine, conditionList, detailList);
 
         return new AddCommand(person);
     }

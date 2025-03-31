@@ -6,7 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "gender": "female",
     "appointmentDate" : "2025-10-10",
-    "remark" : "",
+    "medicine" : "Painkiller",
     "tags": [ "friend" ]
   }, {
     "name": "Alice Pauline",
@@ -15,6 +15,6 @@
     "address": "4th street",
     "gender": "female",
     "appointmentDate" : "2025-10-10",
-    "remark" : ""
+    "medicine" : "Paracetamol"
   } ]
 }

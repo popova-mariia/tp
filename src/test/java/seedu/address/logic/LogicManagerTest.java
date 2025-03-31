@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.APPT_DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DETAIL_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.MEDICINE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -169,7 +170,7 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + ADDRESS_DESC_AMY + GENDER_DESC_AMY + APPT_DATE_DESC_AMY + DETAIL_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + GENDER_DESC_AMY + APPT_DATE_DESC_AMY + MEDICINE_DESC_AMY + DETAIL_DESC_FRIEND;
         Person expectedPerson = new PersonBuilder(AMY).withConditions().withDetails().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);

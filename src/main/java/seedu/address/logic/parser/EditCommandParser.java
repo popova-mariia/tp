@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -35,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS,
-                        PREFIX_GENDER, PREFIX_APPT_DATE, PREFIX_CONDITION, PREFIX_DETAILS);
+                        PREFIX_GENDER, PREFIX_APPT_DATE, PREFIX_MEDICINE, PREFIX_CONDITION, PREFIX_DETAILS);
 
         Index index;
 
@@ -64,6 +65,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_APPT_DATE).isPresent()) {
             editPersonDescriptor.setAppointmentDate(ParserUtil.parseAppointmentDate(argMultimap
                     .getValue(PREFIX_APPT_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_MEDICINE).isPresent()) {
+            editPersonDescriptor.setMedicine(ParserUtil.parseMedicine(argMultimap
+                    .getValue(PREFIX_MEDICINE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_CONDITION),
                 Tag.TagType.CONDITION).ifPresent(editPersonDescriptor::setConditionTags);

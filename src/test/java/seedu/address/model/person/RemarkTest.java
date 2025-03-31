@@ -1,3 +1,4 @@
+/*
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,3 +30,4 @@ public class RemarkTest {
         assertFalse(remark.equals(differentRemark));
     }
 }
+*/
