@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEDICINE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEDICINE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
