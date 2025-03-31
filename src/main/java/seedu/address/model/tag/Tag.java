@@ -11,19 +11,36 @@ import java.util.Objects;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and may contain spaces";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} \\-]+";
 
     /**
-     * Represents the type of a tag.
+     * Represents the type of tag.
      * A tag can either be a CONDITION tag or a DETAIL tag.
-     * - CONDITION: describes a medical condition or status-related attribute (e.g., "dementia").
-     * - DETAIL: provides additional information or context (e.g., "wheelchair access").
+     *
+     *  CONDITION describes a medical condition or status-related attribute (e.g., "dementia", "non-verbal").
+     * DETAIL: Provides additional contextual or logistical information (e.g., "lives alone", "wheelchair access").
+     *
+     * Each tag type has its own specific validation error message and empty input error message.
      */
     public enum TagType {
-        CONDITION,
-        DETAIL
+        CONDITION(
+                "Condition tag names should be alphanumeric, they may contain spaces and hyphens",
+                "Condition tag name cannot be empty"
+        ),
+        DETAIL(
+                "Detail tag names should be alphanumeric, they may contain spaces and hyphens",
+                "Detail tag name cannot be empty"
+        );
+
+        public final String constraintMessage;
+        public final String emptyInputMessage;
+
+        TagType(String constraintMessage, String emptyInputMessage) {
+            this.constraintMessage = constraintMessage;
+            this.emptyInputMessage = emptyInputMessage;
+        }
     }
+
     public final String tagName;
     private TagType tagType = null;
 
@@ -31,11 +48,12 @@ public class Tag {
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
+     * @param tagType The type of tag (CONDITION or DETAIL).
      */
     public Tag(String tagName, TagType tagType) {
         requireNonNull(tagName);
         requireNonNull(tagType);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTagName(tagName), tagType.constraintMessage);
         this.tagName = tagName;
         this.tagType = tagType;
     }
@@ -46,6 +64,14 @@ public class Tag {
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    /**
+     * Returns true if a given string is null or blank.
+     */
+    public static boolean isEmptyTagName(String test) {
+        return test == null || test.trim().isEmpty();
+    }
+
 
     /**
      * Returns the type of this tag.
@@ -80,7 +106,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        String prefix = tagType == TagType.CONDITION ? "[C:" : "[D:";
+        String prefix = tagType == TagType.CONDITION ? "[C: " : "[D: ";
         return prefix + tagName + "]";
     }
 
