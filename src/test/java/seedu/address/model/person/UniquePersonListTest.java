@@ -16,6 +16,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonLimitReachedException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -172,4 +173,32 @@ public class UniquePersonListTest {
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
+
+    @Test
+    public void add_moreThanMaxLimit_throwsPersonLimitReachedException() {
+        UniquePersonList list = new UniquePersonList();
+        for (int i = 0; i < 30; i++) {
+            Person person = new PersonBuilder()
+                    .withName("Person " + i)
+                    .withPhone("900000" + String.format("%02d", i))
+                    .withGender("female")
+                    .withAddress("123 Main St")
+                    .withAppointmentDate("2025-12-12 14:00")
+                    .withMedicine("Panadol")
+                    .build();
+            list.add(person);
+        }
+
+        Person overflow = new PersonBuilder()
+                .withName("Overflow")
+                .withPhone("99999999")
+                .withGender("female")
+                .withAddress("456 Another Rd")
+                .withAppointmentDate("2025-12-13 10:00")
+                .withMedicine("Ibuprofen")
+                .build();
+
+        assertThrows(PersonLimitReachedException.class, () -> list.add(overflow));
+    }
+
 }
