@@ -15,6 +15,17 @@ import seedu.address.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
+    public void execute_emptyAddressBook_setsClearPending() {
+        Model model = new ModelManager();
+
+        CommandResult result = new ClearCommand().execute(model);
+
+        assertEquals(ConfirmCommand.MESSAGE_NOTHING_TO_CLEAR, result.getFeedbackToUser());
+        assertFalse(model.isClearPending());
+        assertEquals(new ModelManager(), model); // nothing actually cleared yet
+    }
+
+    @Test
     public void execute_nonEmptyAddressBook_setsClearPending() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
