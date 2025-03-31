@@ -48,18 +48,18 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GENDER + "GENDER] "
-            + "[" + PREFIX_APPT_DATE + "APPOINTMENT DATE] "
-            + "[" + PREFIX_CONDITION + "CONDITION] "
-            + "[" + PREFIX_DETAILS + "DETAILS] "
-            + "[" + PREFIX_MEDICINE + "MEDICINE]" + "\n"
+            + "[" + PREFIX_APPT_DATE + " APPOINTMENT DATE] "
+            + "[" + PREFIX_CONDITION + " CONDITION] "
+            + "[" + PREFIX_DETAILS + " DETAILS] "
+            + "[" + PREFIX_MEDICINE + " MEDICINE]" + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_GENDER + "male "
             + PREFIX_ADDRESS + "Block 123 Clementi Street S1234567 "
-            + PREFIX_APPT_DATE + "2020-02-02 "
-            + PREFIX_CONDITION + "High BP "
-            + PREFIX_DETAILS + "Stays alone "
-            + PREFIX_MEDICINE + "paracetamol ";
+            + PREFIX_APPT_DATE + " 2020-02-02 "
+            + PREFIX_CONDITION + " High BP "
+            + PREFIX_DETAILS + " Stays alone "
+            + PREFIX_MEDICINE + " paracetamol ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
