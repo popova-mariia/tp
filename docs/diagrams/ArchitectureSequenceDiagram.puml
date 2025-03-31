@@ -14,26 +14,68 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("delete 1")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : deletePerson(p)
+logic -[LOGIC_COLOR]> model : setPendingDeletion(person)
 activate model MODEL_COLOR
-
-model -[MODEL_COLOR]-> logic
+model --[MODEL_COLOR]> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> storage : saveAddressBook(addressBook)
-activate storage STORAGE_COLOR
-
-storage -[STORAGE_COLOR]> storage : Save to file
-activate storage STORAGE_COLOR_T1
-storage --[STORAGE_COLOR]> storage
-deactivate storage
-
-storage --[STORAGE_COLOR]> logic
-deactivate storage
-
-logic --[LOGIC_COLOR]> ui
+logic --[LOGIC_COLOR]> ui : "Are you sure you want to delete this person?\nType `y` to confirm or `n` to abort."
 deactivate logic
 
-ui--[UI_COLOR]> user
+ui --[UI_COLOR]> user : display confirmation prompt
+
 deactivate ui
+
+alt Confirmation Yes ("y")
+    user -[USER_COLOR]> ui : "y"
+    activate ui UI_COLOR
+
+    ui -[UI_COLOR]> logic : execute("y")
+    activate logic LOGIC_COLOR
+
+    logic -[LOGIC_COLOR]> model : deletePerson(person)
+    activate model MODEL_COLOR
+    model --[MODEL_COLOR]> logic
+    deactivate model
+
+    logic -[LOGIC_COLOR]> model : clearPendingDeletion()
+        activate model MODEL_COLOR
+        model --[MODEL_COLOR]> logic
+        deactivate model
+
+    logic -[LOGIC_COLOR]> storage : saveAddressBook(addressBook)
+    activate storage STORAGE_COLOR
+
+    storage -[STORAGE_COLOR]> storage : Save to file
+    activate storage STORAGE_COLOR_T1
+    storage --[STORAGE_COLOR]> storage
+    deactivate storage
+
+    storage --[STORAGE_COLOR]> logic
+    deactivate storage
+
+    logic --[LOGIC_COLOR]> ui : "Deleted Person: [person]"
+    deactivate logic
+
+    ui --[UI_COLOR]> user
+    deactivate ui
+else Abortion No ("n")
+    user -[USER_COLOR]> ui : "n"
+    activate ui UI_COLOR
+
+    ui -[UI_COLOR]> logic : execute("n")
+    activate logic LOGIC_COLOR
+
+    logic -[LOGIC_COLOR]> model : clearPendingDeletion()
+    activate model MODEL_COLOR
+    model --[MODEL_COLOR]> logic : pending deletion cleared
+    deactivate model
+
+    logic --[LOGIC_COLOR]> ui : "Deletion aborted."
+    deactivate logic
+
+    ui --[UI_COLOR]> user
+    deactivate ui
+end
+
 @enduml
