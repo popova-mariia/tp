@@ -83,18 +83,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String appointmentDate} into an {@code AppointmentDate}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses the given string into an {@code AppointmentDate} object.
+     * This method checks if the input string is non-null, non-empty, and matches a valid date format
+     * (either "yyyy-MM-dd" or "yyyy-MM-dd HH:mm"). If the input is invalid, a {@link ParseException}
+     * is thrown with an appropriate error message.
      *
-     * @throws ParseException if the given {@code appointmentDate} is invalid.
+     * @param appointmentDate The string representing the appointment date to be parsed.
+     * @return An {@code AppointmentDate} object representing the parsed date.
+     * @throws ParseException If the input string is null, empty, or does not match the valid date format
+     *         or if the date is invalid.
      */
     public static AppointmentDate parseAppointmentDate(String appointmentDate) throws ParseException {
         if (appointmentDate == null || appointmentDate.trim().isEmpty()) {
             return new AppointmentDate("");
         }
         String trimmedDate = appointmentDate.trim();
-        if (!AppointmentDate.isValidAppointmentDate(trimmedDate)) {
+        if (!AppointmentDate.isValidFormatAppointmentDate(trimmedDate)) {
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
+        if (!AppointmentDate.isValidAppointmentDate(trimmedDate)) {
+            throw new ParseException(AppointmentDate.INVALID_DATE);
         }
         return new AppointmentDate(trimmedDate);
     }
