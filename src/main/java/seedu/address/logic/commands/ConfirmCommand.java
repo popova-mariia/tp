@@ -22,11 +22,8 @@ public class ConfirmCommand extends Command {
             model.deletePerson(person);
             model.clearPendingDeletion();
             return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, Messages.format(person)));
-        } else if (model.isClearPending() && model.hasPeopleToClear()) {
+        } else if (model.isClearPending()) {
             model.setAddressBook(new seedu.address.model.AddressBook());
-            model.clearPendingClear();
-            return new CommandResult(MESSAGE_CLEAR_SUCCESS);
-        } else if (model.isClearPending() && !model.hasPeopleToClear()) {
             model.clearPendingClear();
             return new CommandResult(MESSAGE_CLEAR_SUCCESS);
         } else {

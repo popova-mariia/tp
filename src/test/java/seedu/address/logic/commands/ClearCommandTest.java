@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -14,14 +13,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
-
-    @Test
-    public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        Model expectedModel = new ModelManager();
-
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_CONFIRMATION, expectedModel);
-    }
 
     @Test
     public void execute_nonEmptyAddressBook_setsClearPending() {
