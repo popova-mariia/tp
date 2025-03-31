@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -35,17 +34,22 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_setsClearPendingWhenDeleteAlreadyPending() {
+    public void execute_nonEmptyAddressBook_setsClearPendingWhenDeleteAlreadyPending() throws Exception {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        CommandResult result = new ClearCommand().execute(model);
+        deleteCommand.execute(model);
+
+        assertTrue(model.isDeletePending());
+
+        ClearCommand clearCommand = new ClearCommand();
+        CommandResult result = clearCommand.execute(model); // this should clear the pending delete
 
         assertEquals(ClearCommand.MESSAGE_CONFIRMATION, result.getFeedbackToUser());
         assertTrue(model.isClearPending());
-        assertEquals(getTypicalAddressBook(), model.getAddressBook()); // nothing actually cleared yet
+        assertFalse(model.isDeletePending());
     }
+
 
 
 }
