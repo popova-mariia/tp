@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,7 +13,7 @@ import java.time.format.DateTimeParseException;
  * Represents an Appointment's date and optional time.
  * Guarantees: immutable; is valid as declared in {@link #isValidAppointmentDate(String)}
  */
-public class AppointmentDate {
+public class AppointmentDate implements Comparable<AppointmentDate> {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be in the format yyyy-MM-dd or yyyy-MM-dd HH:mm";
 
@@ -91,5 +92,29 @@ public class AppointmentDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(AppointmentDate other) {
+        if (this.value.isEmpty()) {
+            return 1; // Empty dates go to the end
+        }
+        if (other.value.isEmpty()) {
+            return -1;
+        }
+
+        // Try parsing to LocalDateTime for comparison
+        LocalDateTime thisDateTime = parseToLocalDateTime(this.value);
+        LocalDateTime otherDateTime = parseToLocalDateTime(other.value);
+
+        return thisDateTime.compareTo(otherDateTime);
+    }
+
+    private static LocalDateTime parseToLocalDateTime(String value) {
+        if (value.contains(" ")) {
+            return LocalDateTime.parse(value, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } else {
+            return LocalDate.parse(value, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay();
+        }
     }
 }

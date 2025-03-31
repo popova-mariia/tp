@@ -52,6 +52,15 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        sortList();
+    }
+
+    /**
+     * Sorts the internal list of persons in ascending order based on their appointment dates.
+     * Persons without an appointment date are placed at the end of the list.
+     */
+    private void sortList() {
+        internalList.sort(Person.COMPARE_BY_APPOINTMENT);
     }
 
     /**
