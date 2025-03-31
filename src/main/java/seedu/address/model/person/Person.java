@@ -94,7 +94,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.equals(this);
     }
 
     /**
@@ -113,8 +113,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+        return phone.equals(otherPerson.phone)
+                || name.equals(otherPerson.name)
                 && address.equals(otherPerson.address)
                 && gender.equals(otherPerson.gender)
                 && appointmentDate.equals(otherPerson.appointmentDate)
