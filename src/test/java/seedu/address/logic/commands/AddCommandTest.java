@@ -73,8 +73,8 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different person but with same number -> returns true
+        assertTrue(addAliceCommand.equals(addBobCommand));
     }
 
     @Test
@@ -155,6 +155,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPendingClear() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isClearPending() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearPendingClear() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isDeletePending() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -46,11 +46,20 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        if (tagName == null || tagType == null) {
+            throw new IllegalValueException("Missing tag name or tag type.");
         }
         try {
             Tag.TagType type = Tag.TagType.valueOf(tagType.toUpperCase());
+
+            if (Tag.isEmptyTagName(tagName)) {
+                throw new IllegalValueException(type.emptyInputMessage);
+            }
+
+            if (!Tag.isValidTagName(tagName)) {
+                throw new IllegalValueException(type.constraintMessage);
+            }
+
             return new Tag(tagName, type);
         } catch (IllegalArgumentException | NullPointerException e) {
             throw new IllegalValueException("Invalid or missing tag type: " + tagType);
