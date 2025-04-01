@@ -92,4 +92,5 @@ public interface Model {
     void clearPendingClear();
     boolean isDeletePending();
     boolean hasPeopleToClear();
+    void sortPersonList();
 }

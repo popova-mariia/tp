@@ -25,7 +25,7 @@
       </stylesheets>
 
       <VBox>
-        <Label text=" SilverCare" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-alignment: center-left;"/>
+        <Label text=" ⚕ SilverCare" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-alignment: center-left;"/>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />

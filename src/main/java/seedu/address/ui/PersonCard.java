@@ -40,11 +40,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox address;
     @FXML
-    private Label gender;
+    private HBox gender;
     @FXML
     private Label appointmentDate;
     @FXML
-    private Label medicine;
+    private HBox medicine;
     @FXML
     private FlowPane conditions;
     @FXML
@@ -63,11 +63,12 @@ public class PersonCard extends UiPart<Region> {
         setHighlightedText(name, person.getName().fullName);
         setHighlightedText(phone, person.getPhone().value);
         setHighlightedText(address, person.getAddress().value);
+        setHighlightedText(medicine, person.getMedicine().value);
+        setHighlightedText(gender, person.getGender().gender);
 
         // Set gender and appointment date (no highlighting needed)
-        gender.setText(person.getGender().gender);
+        //gender.setText(person.getGender().gender);
         appointmentDate.setText(person.getAppointmentDate().value);
-        medicine.setText(person.getMedicine().value);
 
         // Clear and add highlighted condition tags
         conditions.getChildren().clear();
