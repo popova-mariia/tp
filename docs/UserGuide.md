@@ -31,9 +31,9 @@ SilverCare is a **desktop app for managing patients, optimized for use via a Com
    * `add -n John Doe -p 98765432 -a John street, block 123, #01-01 -g male [-d 2025-10-10] [-t condition]` : Adds a contact named `John Doe` to SilverCare with optional condition and appointment date on 10 Oct 2025.
 
    * `delete 3` : Deletes the 3rd patient shown in the current list.
-   
+
    * `find john` : Searches and lists out all patients with names that contain "john".
-   
+
    * `remark 1 r/ lives alone` : Adds the remark "lives alone" to the 1st patient in the current list.
 
    * `clear` : Deletes all contacts.
@@ -134,7 +134,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book. 
+Deletes the specified person from the address book.
 
 Before finalised deletion, the command will ask for a confirmation:
  "Are you sure you want to delete this person? <person details> Type y for yes and n for no".
