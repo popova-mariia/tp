@@ -150,6 +150,9 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
 
     @Override
     public int compareTo(AppointmentDate other) {
+        if (this.value.isEmpty() && other.value.isEmpty()) {
+            return 0;
+        }
         if (this.value.isEmpty()) {
             return 1; // Empty dates go to the end
         }
@@ -164,7 +167,7 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
         return thisDateTime.compareTo(otherDateTime);
     }
 
-    private static LocalDateTime parseToLocalDateTime(String value) {
+    protected static LocalDateTime parseToLocalDateTime(String value) {
         if (value.contains(" ")) {
             return LocalDateTime.parse(value, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         } else {
