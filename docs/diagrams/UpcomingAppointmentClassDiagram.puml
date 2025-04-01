@@ -1,0 +1,20 @@
+@startuml
+hide members
+hide footbox
+hide circle
+
+skinparam arrowColor DARKRED
+
+class FindCommandParser
+class FindCommand
+interface "<<interface>>\nPredicate" as Predicate<T>
+class UpcomingAppointmentPredicate
+class Person
+class AppointmentDate
+
+FindCommandParser --> FindCommand : creates
+FindCommand --> Predicate : uses
+UpcomingAppointmentPredicate ..|> Predicate
+UpcomingAppointmentPredicate --> Person : tests
+Person *--> "1" AppointmentDate
+@enduml
