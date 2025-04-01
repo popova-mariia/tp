@@ -12,6 +12,8 @@ public class ConfirmCommand extends Command {
     public static final String COMMAND_WORD = "y";
     public static final String MESSAGE_DELETE_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_CLEAR_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_NOTHING_TO_CLEAR = "Address book empty, nothing to clear!";
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
