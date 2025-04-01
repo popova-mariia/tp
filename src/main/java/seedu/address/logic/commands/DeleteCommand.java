@@ -35,8 +35,10 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
+        if (model.hasPerson(personToDelete)) {
+            model.clearPendingClear();
+        }
         model.setPendingDeletion(personToDelete);
-
         return new CommandResult(
                 "Are you sure you want to delete this person?\n"
                         + Messages.format(personToDelete)
