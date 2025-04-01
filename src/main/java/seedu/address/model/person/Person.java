@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -15,6 +16,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+
+    // Comparator to compare persons by appointment date and time
+    public static final Comparator<Person> COMPARE_BY_APPOINTMENT = Comparator.comparing(Person::getAppointmentDate);
 
     // Identity fields
     private final Name name;
@@ -142,5 +146,4 @@ public class Person {
                 .add("medicine", medicine)
                 .toString();
     }
-
 }
