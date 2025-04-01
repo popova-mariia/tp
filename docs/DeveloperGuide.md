@@ -252,19 +252,19 @@ The `upcoming` feature under the `find` command allows users to filter and displ
 #### Key Classes & Logic
 
 1. `FindCommandParser`
-    * Detects if the user input is exactly `"upcoming"` (case-insensitive). 
-    * If matched, it returns a `FindCommand` initialized with an `UpcomingAppointmentPredicate`. 
+    * Detects if the user input is exactly `"upcoming"` (case-insensitive).
+    * If matched, it returns a `FindCommand` initialized with an `UpcomingAppointmentPredicate`.
     * This diverges from the usual `-n` (name) or `-d` (appointment date) prefixes.
 2. `UpcomingAppointmentPredicate`
-    * Implements `Predicate<Person>`. 
-    * Extracts the `appointmentDate` from each `Person`. 
+    * Implements `Predicate<Person>`.
+    * Extracts the `appointmentDate` from each `Person`.
     * Attempts to parse the string as either:
-      * a full datetime using format `yyyy-MM-dd HH:mm`, or 
-      * a date-only format `yyyy-MM-dd` (defaults to `00:00` for comparison). 
+      * a full datetime using format `yyyy-MM-dd HH:mm`, or
+      * a date-only format `yyyy-MM-dd` (defaults to `00:00` for comparison).
     * Compares the parsed result to `LocalDateTime.now()` and returns `true` only if the appointment is strictly after the current moment.
 3. `AppointmentDate`
-   * Normalizes and validates user-inputted date strings. 
-   * Accepts and validates both formats using regex and Java's `DateTimeFormatter`. 
+   * Normalizes and validates user-inputted date strings.
+   * Accepts and validates both formats using regex and Java's `DateTimeFormatter`.
    * Helps maintain consistent formatting throughout the system.
 4. `FindCommand`
    * When executed, it passes the predicate to the model's `updateFilteredPersonList()`, causing the filtered list to update with only persons matching the predicate.
@@ -275,8 +275,8 @@ The following class diagram shows the relationship between key classes involved:
 
 #### Design Considerations
 
-* **Fault Tolerance:** Any parsing errors during predicate evaluation result in a safe `false` return, preventing the app from crashing. 
-* **Extensibility:** This approach cleanly separates predicates, allowing future filters (e.g., "past appointments", "appointments this week") to be added by introducing new `Predicate<Person>` classes. 
+* **Fault Tolerance:** Any parsing errors during predicate evaluation result in a safe `false` return, preventing the app from crashing.
+* **Extensibility:** This approach cleanly separates predicates, allowing future filters (e.g., "past appointments", "appointments this week") to be added by introducing new `Predicate<Person>` classes.
 * **Single Responsibility:** Each class follows the SRP principle—e.g., `FindCommandParser` handles parsing, `UpcomingAppointmentPredicate` handles logic, and `AppointmentDate` handles formatting.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -382,10 +382,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes from step 4.
 
 * 3b. System does not find a patient with the provided ID.
-    * 3b1. System informs the Nurse that no matching patient exists. 
+    * 3b1. System informs the Nurse that no matching patient exists.
     * 3b2. System requests a different patient ID. 
     * 3b3. Nurse provides a new patient ID. 
-    * Steps 3b1–3b3 are repeated until a matching patient is found. 
+    * Steps 3b1–3b3 are repeated until a matching patient is found.
     * Use case resumes from step 4.
 
 * 4a. Nurse cancels deletion.
@@ -400,33 +400,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Nurse requests to search for a patient by name.
-2. Nurse provides a name to search for. 
-3. System validates the provided name (e.g., non-empty, valid characters). 
-4. System searches for patient records containing the name (case-insensitive). 
-5. System displays a list of matching patient records. 
+2. Nurse provides a name to search for.
+3. System validates the provided name (e.g., non-empty, valid characters).
+4. System searches for patient records containing the name (case-insensitive).
+5. System displays a list of matching patient records.
 6. Use case ends.
 
 **Extensions**
 
 * 3a. Nurse provides empty name query.
-    * 3a1. System informs the Nurse that the name cannot be empty. 
-    * 3a2. System requests a valid name. 
-    * 3a3. Nurse provides a new search name. 
-    * Steps 3a1–3a3 are repeated until a valid name is entered. 
+    * 3a1. System informs the Nurse that the name cannot be empty.
+    * 3a2. System requests a valid name.
+    * 3a3. Nurse provides a new search name.
+    * Steps 3a1–3a3 are repeated until a valid name is entered.
     * Use case resumes from step 4.
 
 * 3b. Nurse provides invalid name query.
-    * 3b1. System informs the Nurse that the name format is invalid. 
-    * 3b2. System requests a valid name. 
-    * 3b3. Nurse provides a new search name. 
-    * Steps 3b1–3b3 are repeated until a valid name is entered. 
+    * 3b1. System informs the Nurse that the name format is invalid.
+    * 3b2. System requests a valid name.
+    * 3b3. Nurse provides a new search name.
+    * Steps 3b1–3b3 are repeated until a valid name is entered.
     * Use case resumes from step 4.
 
-* 4a. No matching patient records found. 
-    * 4a1. System informs the Nurse that no matching records were found. 
-    * 4a2. System requests a new search input. 
-    * 4a3. Nurse provides a new search name. 
-    * Steps 4a1–4a3 are repeated until a match is found or the search is cancelled. 
+* 4a. No matching patient records found.
+    * 4a1. System informs the Nurse that no matching records were found.
+    * 4a2. System requests a new search input.
+    * 4a3. Nurse provides a new search name.
+    * Steps 4a1–4a3 are repeated until a match is found or the search is cancelled.
     * Use case resumes from step 4 or ends if cancelled.
 
 **Use case 4: Find a patient by appointment date**
@@ -473,8 +473,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Nurse requests to view upcoming appointments.
 2. System retrieves the current date and time.
-3. System searches for all patients whose appointment dates are scheduled after the current system time. 
-4. System displays a list of matching patient records. 
+3. System searches for all patients whose appointment dates are scheduled after the current system time.
+4. System displays a list of matching patient records.
 5. Use case ends.
 
 **Extensions**
@@ -490,30 +490,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Nurse requests to edit a patient record
-2. Nurse provides the patient ID and specifies one or more fields to update (e.g., name, phone, address, gender, etc.). 
-3. System validates the patient ID and each field to be updated. 
-4. System updates the patient record with the new information. 
+2. Nurse provides the patient ID and specifies one or more fields to update (e.g., name, phone, address, gender, etc.).
+3. System validates the patient ID and each field to be updated.
+4. System updates the patient record with the new information.
 5. System confirms the successful update.
 6. Use case ends.
 
 **Extensions**
 
 * 3a. Invalid patient ID provided 
-    * 3a1. System informs Nurse that the patient ID is invalid or not found. 
-    * 3a2. System requests a valid patient ID. 
-    * 3a3. Nurse provides a new ID. 
-    * Steps 3a1–3a3 repeat until a valid patient ID is provided. 
+    * 3a1. System informs Nurse that the patient ID is invalid or not found.
+    * 3a2. System requests a valid patient ID.
+    * 3a3. Nurse provides a new ID.
+    * Steps 3a1–3a3 repeat until a valid patient ID is provided.
     * Use case resumes from step 3.
 
 * 3b. Invalid input for one or more fields 
     * 3b1. System informs the Nurse of each invalid field and the corresponding format or constraint.
-    * 3b2. System requests corrected values for the invalid fields. 
-    * 3b3. Nurse provides corrected input. 
-    * Steps 3b1–3b3 repeat until all inputs are valid. 
+    * 3b2. System requests corrected values for the invalid fields.
+    * 3b3. Nurse provides corrected input.
+    * Steps 3b1–3b3 repeat until all inputs are valid.
     * Use case resumes from step 4.
 
 * 4a. No changes detected 
-    * 4a1. If the new values are the same as the existing ones, System informs Nurse that no updates were made. 
+    * 4a1. If the new values are the same as the existing ones, System informs Nurse that no updates were made.
     * Use case ends.
 
 **Use case 7: Clear all patient records**
@@ -522,23 +522,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Nurse requests to clear all patient records. 
-2. System prompts Nurse for confirmation before proceeding. 
-3. Nurse confirms the action. 
-4. System deletes all patient records from the system. 
-5. System informs Nurse that the address book has been cleared. 
+1. Nurse requests to clear all patient records.
+2. System prompts Nurse for confirmation before proceeding.
+3. Nurse confirms the action.
+4. System deletes all patient records from the system.
+5. System informs Nurse that the address book has been cleared.
 6. Use case ends.
 
 **Extensions**
 
 * 3a. Nurse cancels the clear request
-    * 3a1. Nurse declines the confirmation prompt. 
-    * 3a2. System informs Nurse that the clear action has been cancelled. 
-    * Use case ends. 
+    * 3a1. Nurse declines the confirmation prompt.
+    * 3a2. System informs Nurse that the clear action has been cancelled.
+    * Use case ends.
 
-* 4a. No records to clear 
-    * 4a1. System detects that there are no patient records to delete. 
-    * 4a2. System informs the Nurse that the address book is already empty. 
+* 4a. No records to clear
+    * 4a1. System detects that there are no patient records to delete.
+    * 4a2. System informs the Nurse that the address book is already empty.
     * Use case ends.
 
 **Use case 8: List all patients**
@@ -564,10 +564,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Nurse toggles the application theme. 
-2. System determines the current theme (light or dark). 
-3. System switches to the opposite theme. 
-4. System applies the new theme across the user interface. 
+1. Nurse toggles the application theme.
+2. System determines the current theme (light or dark).
+3. System switches to the opposite theme.
+4. System applies the new theme across the user interface.
 5. Use case ends.
 
 **Use case 10: Display help information**
@@ -576,10 +576,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Nurse requests to view help information. 
-2. System opens a help window. 
-3. System displays example commands and usage instructions. 
-4. System provides a hyperlink to view the full user guide. 
+1. Nurse requests to view help information.
+2. System opens a help window.
+3. System displays example commands and usage instructions.
+4. System provides a hyperlink to view the full user guide.
 5. Use case ends.
 
 **Use case 11: Exit the application**
@@ -588,9 +588,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Nurse requests to exit the application. 
-2. System saves any unsaved data. 
-3. System terminates the application. 
+1. Nurse requests to exit the application.
+2. System saves any unsaved data.
+3. System terminates the application.
 4. Use case ends.
 
 *{More to be added}*
