@@ -24,11 +24,8 @@ deactivate logic
 
 ui --[UI_COLOR]> user : display confirmation prompt
 
-deactivate ui
-
 alt Confirmation Yes ("y")
     user -[USER_COLOR]> ui : "y"
-    activate ui UI_COLOR
 
     ui -[UI_COLOR]> logic : execute("y")
     activate logic LOGIC_COLOR
@@ -58,10 +55,8 @@ alt Confirmation Yes ("y")
     deactivate logic
 
     ui --[UI_COLOR]> user
-    deactivate ui
 else Abortion No ("n")
     user -[USER_COLOR]> ui : "n"
-    activate ui UI_COLOR
 
     ui -[UI_COLOR]> logic : execute("n")
     activate logic LOGIC_COLOR
@@ -75,7 +70,9 @@ else Abortion No ("n")
     deactivate logic
 
     ui --[UI_COLOR]> user
-    deactivate ui
+
 end
+
+deactivate ui
 
 @enduml
