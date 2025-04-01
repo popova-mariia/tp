@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. System creates a new patient record and assigns it a unique ID.
 6. System confirms addition and displays the new patient in the patient list.
 7. Use case ends.
-   
+
 **Extensions:**
    * 2a. System detects invalid or incomplete entered data.
      * 2a1. System requests for the correct data.
@@ -383,8 +383,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. System does not find a patient with the provided ID.
     * 3b1. System informs the Nurse that no matching patient exists.
-    * 3b2. System requests a different patient ID. 
-    * 3b3. Nurse provides a new patient ID. 
+    * 3b2. System requests a different patient ID.
+    * 3b3. Nurse provides a new patient ID.
     * Steps 3b1–3b3 are repeated until a matching patient is found.
     * Use case resumes from step 4.
 
@@ -498,21 +498,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. Invalid patient ID provided 
+* 3a. Invalid patient ID provided
     * 3a1. System informs Nurse that the patient ID is invalid or not found.
     * 3a2. System requests a valid patient ID.
     * 3a3. Nurse provides a new ID.
     * Steps 3a1–3a3 repeat until a valid patient ID is provided.
     * Use case resumes from step 3.
 
-* 3b. Invalid input for one or more fields 
+* 3b. Invalid input for one or more fields
     * 3b1. System informs the Nurse of each invalid field and the corresponding format or constraint.
     * 3b2. System requests corrected values for the invalid fields.
     * 3b3. Nurse provides corrected input.
     * Steps 3b1–3b3 repeat until all inputs are valid.
     * Use case resumes from step 4.
 
-* 4a. No changes detected 
+* 4a. No changes detected
     * 4a1. If the new values are the same as the existing ones, System informs Nurse that no updates were made.
     * Use case ends.
 
