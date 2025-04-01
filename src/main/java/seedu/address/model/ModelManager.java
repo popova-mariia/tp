@@ -165,9 +165,11 @@ public class ModelManager implements Model {
     public void setPendingClear() {
         this.pendingClear = true;
     }
+
     public boolean isClearPending() {
         return pendingClear;
     }
+
     public void clearPendingClear() {
         this.pendingClear = false;
     }

@@ -15,6 +15,11 @@ public class ConfirmCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (model.isDeletePending() && model.isClearPending()) {
+            model.clearPendingDeletion();
+            model.clearPendingClear();
+            throw new CommandException("Too many pending operations, try again.");
+        }
         if (model.isDeletePending()) {
             Person person = model.getPendingDeletion();
             model.deletePerson(person);

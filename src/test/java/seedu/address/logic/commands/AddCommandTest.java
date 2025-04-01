@@ -166,7 +166,7 @@ public class AddCommandTest {
 
         @Override
         public boolean isClearPending() {
-            throw new AssertionError("This method should not be called.");
+            return false;
         }
 
         @Override
@@ -176,7 +176,7 @@ public class AddCommandTest {
 
         @Override
         public boolean isDeletePending() {
-            throw new AssertionError("This method should not be called.");
+            return false;
         }
 
         @Override
