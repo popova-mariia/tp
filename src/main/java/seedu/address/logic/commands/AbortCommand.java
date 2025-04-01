@@ -14,7 +14,7 @@ public class AbortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (model.isDeletePending() && !model.isClearPending()) {
+        if (model.isDeletePending() && model.isClearPending()) {
             model.clearPendingClear();
             model.clearPendingDeletion();
             throw new CommandException("Too many pending operations");
