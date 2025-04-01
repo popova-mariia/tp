@@ -173,6 +173,7 @@ public class ModelManager implements Model {
     }
     public boolean hasPeopleToClear() {
         return addressBook.getPersonList().size() > 0;
+    }
     public void sortPersonList() {
         addressBook.sortPersonList();
     }

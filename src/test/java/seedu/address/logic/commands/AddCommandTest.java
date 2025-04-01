@@ -197,7 +197,9 @@ public class AddCommandTest {
         @Override
         public boolean hasPeopleToClear() {
             throw new AssertionError("This method should not be called.");
+        }
         public void sortPersonList() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
