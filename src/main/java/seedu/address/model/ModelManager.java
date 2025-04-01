@@ -171,4 +171,8 @@ public class ModelManager implements Model {
     public void clearPendingClear() {
         this.pendingClear = false;
     }
+
+    public void sortPersonList() {
+        addressBook.sortPersonList();
+    }
 }

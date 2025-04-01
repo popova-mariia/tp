@@ -26,9 +26,16 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <HBox fx:id="name" spacing="0" />
+        <HBox>
+          <HBox fx:id="name"/>
+        </HBox>
       </HBox>
       <FlowPane fx:id="tags" />
+
+      <HBox spacing="4" alignment="CENTER_LEFT">
+        <Label text="♂♀" />
+        <HBox fx:id="gender" styleClass="cell_small_label" />
+      </HBox>
 
       <HBox spacing="4" alignment="CENTER_LEFT">
         <Label text="📞" />
@@ -40,10 +47,17 @@
         <HBox fx:id="address" spacing="0" />
       </HBox>
 
-      <Label fx:id="appointmentDate" styleClass="cell_big_label" text="\$appointmentDate" />
-      <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
-      <Label fx:id="medicine" />
-      <HBox spacing="2" alignment="BASELINE_LEFT">
+      <HBox spacing="4" alignment="CENTER_LEFT">
+        <Label text="💊" />
+        <HBox fx:id="medicine" spacing="0" />
+      </HBox>
+
+      <HBox spacing="8">
+        <Label text="📅" />
+        <Label fx:id="appointmentDate" styleClass="cell_big_label" />
+      </HBox>
+
+      <HBox spacing="1" alignment="CENTER_LEFT">
         <FlowPane fx:id="conditions"/>
         <FlowPane fx:id="details"/>
       </HBox>
