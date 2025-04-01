@@ -393,6 +393,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * System informs Nurse that the deletion has been cancelled.
     * Use case ends.
 
+* 4b. Nurse types unrecognised, non-command input for confirmation.
+  * 4b1. System re-prompts Nurse to confirm deletion (expects yes or no).
+  * 4b2. Steps 4 continues until a valid response is provided.
+  * Use case resumes from 5 (if yes) or 4a (if no).
+
+* 4c. Nurse requests for another command.
+  * 4c1. System assumes the deletion has been abandoned.
+  * 4c2. System cancels the deletion request without deleting any patient.
+  * Use case ends.
+
 **Use case 3: Find a patient by name**
 
 **Goal: Search for a patient’s record by their name.**
