@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -194,4 +195,11 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseAppointmentDate_nullInput_returnsEmptyAppointmentDate() throws Exception {
+        AppointmentDate expected = new AppointmentDate("");
+        assertEquals(expected, ParserUtil.parseAppointmentDate(null));
+    }
+
 }
