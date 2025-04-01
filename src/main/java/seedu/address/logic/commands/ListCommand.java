@@ -18,6 +18,12 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (model.isClearPending()) {
+            model.clearPendingClear();
+        }
+        if (model.isDeletePending()) {
+            model.clearPendingDeletion();
+        }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

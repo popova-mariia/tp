@@ -13,6 +13,12 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        if (model.isClearPending()) {
+            model.clearPendingClear();
+        }
+        if (model.isDeletePending()) {
+            model.clearPendingDeletion();
+        }
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
     }
 

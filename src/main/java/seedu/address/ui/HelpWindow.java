@@ -15,7 +15,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2425s2-cs2103t-t12-4.github.io/tp/UserGuide.html";
     public static final String QUICK_START_MESSAGE = String.join("\n",
             "Quick Start:",
             "Try these example commands:",
