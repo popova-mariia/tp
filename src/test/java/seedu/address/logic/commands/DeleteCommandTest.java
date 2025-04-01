@@ -120,4 +120,28 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
+
+    @Test
+    public void execute_nonEmptyAddressBook_setsDeletePendingWhenClearAlreadyPending() throws Exception {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        ClearCommand clearCommand = new ClearCommand();
+        clearCommand.execute(model);
+
+        assertTrue(model.isClearPending());
+
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        CommandResult result = deleteCommand.execute(model);
+
+        String expectedMessage = String.format(
+                "Are you sure you want to delete this person?\n"
+                        + Messages.format(personToDelete)
+                        + "\nType `y` to proceed or `n` to abort.");
+
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertTrue(model.isDeletePending());
+        assertFalse(model.isClearPending());
+    }
+
 }

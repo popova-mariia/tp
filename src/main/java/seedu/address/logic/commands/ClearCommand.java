@@ -16,6 +16,9 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (model.isDeletePending()) {
+            model.clearPendingDeletion();
+        }
         model.setPendingClear();
         return new CommandResult(MESSAGE_CONFIRMATION, CommandResult.DisplayType.WARNING);
     }

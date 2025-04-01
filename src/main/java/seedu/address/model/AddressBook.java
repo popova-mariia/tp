@@ -57,6 +57,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    /**
+     * Sorts the list based on appointment date/time
+     */
+    void sortPersonList() {
+        persons.sortList();
+    }
     //// person-level operations
 
     /**
