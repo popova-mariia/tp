@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -16,11 +15,14 @@ import seedu.address.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyAddressBook_setsClearPending() {
         Model model = new ModelManager();
-        Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_CONFIRMATION, expectedModel);
+        CommandResult result = new ClearCommand().execute(model);
+
+        assertEquals(ConfirmCommand.MESSAGE_NOTHING_TO_CLEAR, result.getFeedbackToUser());
+        assertFalse(model.isClearPending());
+        assertEquals(new ModelManager(), model); // nothing actually cleared yet
     }
 
     @Test

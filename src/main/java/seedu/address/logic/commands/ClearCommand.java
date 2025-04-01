@@ -19,6 +19,9 @@ public class ClearCommand extends Command {
         if (model.isDeletePending()) {
             model.clearPendingDeletion();
         }
+        if (!model.hasPeopleToClear()) {
+            return new CommandResult(ConfirmCommand.MESSAGE_NOTHING_TO_CLEAR);
+        }
         model.setPendingClear();
         return new CommandResult(MESSAGE_CONFIRMATION, CommandResult.DisplayType.WARNING);
     }

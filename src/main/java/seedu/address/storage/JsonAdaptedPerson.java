@@ -135,7 +135,11 @@ class JsonAdaptedPerson {
         }
         final Gender modelGender = new Gender(gender);
 
-        if (!AppointmentDate.isValidAppointmentDate(appointmentDate)) {
+        if (appointmentDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AppointmentDate.class.getSimpleName()));
+        }
+        if (!AppointmentDate.isValidFormatAppointmentDate(appointmentDate)) {
             throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS);
         }
         final AppointmentDate modelAppointmentDate = new AppointmentDate(appointmentDate);
