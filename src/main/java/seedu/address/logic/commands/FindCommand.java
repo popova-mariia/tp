@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.AppointmentDateContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
@@ -88,6 +89,10 @@ public class FindCommand extends Command {
         if (predicate instanceof NameContainsKeywordsPredicate) {
             NameContainsKeywordsPredicate predicateName = (NameContainsKeywordsPredicate) predicate;
             return predicateName.getKeywords();
+        } else if (predicate instanceof AppointmentDateContainsKeywordsPredicate) {
+            AppointmentDateContainsKeywordsPredicate datePredicate =
+                    (AppointmentDateContainsKeywordsPredicate) predicate;
+            return datePredicate.getKeywords();
         }
         return Collections.emptyList();
     }

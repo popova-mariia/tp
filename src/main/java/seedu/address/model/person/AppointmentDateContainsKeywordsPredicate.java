@@ -18,8 +18,16 @@ public class AppointmentDateContainsKeywordsPredicate implements Predicate<Perso
     @Override
     public boolean test(Person person) {
         String appointmentDate = person.getAppointmentDate().value;
-        return keywords.stream()
-                .anyMatch(keyword -> appointmentDate.toLowerCase().contains(keyword.toLowerCase()));
+
+        return keywords.stream().anyMatch(keyword -> {
+            if (keyword.contains(" ")) {
+                // Full date + time match required
+                return appointmentDate.equals(keyword);
+            } else {
+                // Match by date prefix only
+                return appointmentDate.startsWith(keyword);
+            }
+        });
     }
 
     @Override
@@ -42,5 +50,12 @@ public class AppointmentDateContainsKeywordsPredicate implements Predicate<Perso
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
-}
 
+    /**
+     * Getter for keywords
+     * @return the keywords
+     */
+    public List<String> getKeywords() {
+        return keywords;
+    }
+}

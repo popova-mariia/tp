@@ -34,27 +34,27 @@
 
       <HBox spacing="4" alignment="CENTER_LEFT">
         <Label text="♂♀" />
-        <HBox fx:id="gender" styleClass="cell_small_label" />
+        <Label fx:id="gender" styleClass="cell_small_label" />
       </HBox>
 
       <HBox spacing="4" alignment="CENTER_LEFT">
         <Label text="📞" />
-        <HBox fx:id="phone" spacing="0" />
+        <Label fx:id="phone" styleClass="cell_big_label" />
       </HBox>
 
       <HBox spacing="4" alignment="CENTER_LEFT">
         <Label text="🏠" />
-        <HBox fx:id="address" spacing="0" />
+        <Label fx:id="address" styleClass="cell_big_label" />
       </HBox>
 
       <HBox spacing="4" alignment="CENTER_LEFT">
         <Label text="💊" />
-        <HBox fx:id="medicine" spacing="0" />
+        <Label fx:id="medicine" styleClass="cell_big_label" />
       </HBox>
 
       <HBox spacing="8">
         <Label text="📅" />
-        <Label fx:id="appointmentDate" styleClass="cell_big_label" />
+        <HBox fx:id="appointmentDate" />
       </HBox>
 
       <HBox spacing="1" alignment="CENTER_LEFT">

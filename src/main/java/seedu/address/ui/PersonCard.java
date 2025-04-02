@@ -36,15 +36,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox name;
     @FXML
-    private HBox phone;
+    private Label phone;
     @FXML
-    private HBox address;
+    private Label address;
     @FXML
-    private HBox gender;
+    private Label gender;
     @FXML
-    private Label appointmentDate;
+    private HBox appointmentDate;
     @FXML
-    private HBox medicine;
+    private Label medicine;
     @FXML
     private FlowPane conditions;
     @FXML
@@ -60,71 +60,58 @@ public class PersonCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
 
-        setHighlightedText(name, person.getName().fullName);
-        setHighlightedText(phone, person.getPhone().value);
-        setHighlightedText(address, person.getAddress().value);
-        setHighlightedText(medicine, person.getMedicine().value);
-        setHighlightedText(gender, person.getGender().gender);
+        // Set name and appointment date as highlight-able text
+        setHighlightedName(name, person.getName().fullName);
+        setHighlightedDate(appointmentDate, person.getAppointmentDate().value);
 
-        // Set gender and appointment date (no highlighting needed)
-        //gender.setText(person.getGender().gender);
-        appointmentDate.setText(person.getAppointmentDate().value);
+        // Remaining non-highlight-able fields
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        gender.setText(person.getGender().gender);
+        medicine.setText(person.getMedicine().value);
 
-        // Clear and add highlighted condition tags
-        conditions.getChildren().clear();
         person.getConditionTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
-                    if (containsKeyword(tag.tagName)) {
-                        tagLabel.getStyleClass().add("highlighted-label");
-                    }
                     conditions.getChildren().add(tagLabel);
                 });
 
-        // Clear and add highlighted detail tags
-        details.getChildren().clear();
         person.getDetailTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
-                    if (containsKeyword(tag.tagName)) {
-                        tagLabel.getStyleClass().add("highlighted-label");
-                    }
                     details.getChildren().add(tagLabel);
                 });
     }
 
-    private void setHighlightedText(HBox fieldBox, String fullText) {
+    private void setHighlightedName(HBox fieldBox, String fullText) {
         fieldBox.getChildren().clear();
-        String lower = fullText.toLowerCase();
 
-        int i = 0;
-        while (i < fullText.length()) {
-            boolean matched = false;
-            for (String keyword : keywords) {
-                String kw = keyword.toLowerCase();
-                if (lower.startsWith(kw, i)) {
-                    Label matchLabel = new Label(fullText.substring(i, i + kw.length()));
-                    matchLabel.getStyleClass().add("highlighted-label");
-                    fieldBox.getChildren().add(matchLabel);
-                    i += kw.length();
-                    matched = true;
-                    break;
-                }
+        String[] words = fullText.split("(?<=\\s)|(?=\\s)");
+        for (String word : words) {
+            Label label = new Label(word);
+            if (containsKeyword(word)) {
+                label.getStyleClass().add("highlighted-label");
+            } else {
+                label.getStyleClass().add("unmatched-text");
             }
-            if (!matched) {
-                Label normalLabel = new Label(String.valueOf(fullText.charAt(i)));
-                normalLabel.getStyleClass().add("unmatched-text");
-                fieldBox.getChildren().add(normalLabel);
-                i++;
-            }
+            fieldBox.getChildren().add(label);
         }
+    }
+
+    private void setHighlightedDate(HBox fieldBox, String fullText) {
+        fieldBox.getChildren().clear();
+        Label label = new Label(fullText);
+        if (containsKeyword(fullText)) {
+            label.getStyleClass().add("highlighted-label");
+        } else {
+            label.getStyleClass().add("unmatched-text");
+        }
+        fieldBox.getChildren().add(label);
     }
 
     private boolean containsKeyword(String text) {
         return keywords.stream().anyMatch(kw -> text.toLowerCase().contains(kw.toLowerCase()));
     }
-
-
 }

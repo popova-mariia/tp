@@ -143,6 +143,12 @@
     -fx-text-fill: #34495e;
 }
 
+.highlighted-label {
+    -fx-background-color: #ffe0b2;
+    -fx-padding: 0 1 0 1;
+    -fx-background-radius: 3;
+}
+
 .stack-pane {
      -fx-background-color: #f6f9fc;
 }
