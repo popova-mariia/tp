@@ -341,6 +341,52 @@ Dark Mode
 
 ## FAQ
 
+**Q**: The app doesn’t open when I run it. What should I check?
+
+**A**: Here are some common issues to troubleshoot:
+* Java not installed or wrong version 
+
+  Make sure Java 17 or above is installed.
+  
+  You can check this by running: `java -version`
+* File name or location changed 
+
+  Make sure the file is still named silvercare.jar and hasn't been renamed by accident.
+* Not in the right folder
+
+   Open your terminal or command prompt and navigate (cd) to the folder where silvercare.jar is located before running:
+   `java -jar silvercare.jar`
+
+
+
+**Q**: What happens if I type the command wrongly?
+
+**A**: Don’t worry, SilverCare has built-in error handling. If you make a mistake in your command format (like missing a field or typing something incorrectly), the app will:
+* Show an error message
+* Give you an example of the correct format so you can try again
+
+    Example: If you type `add -n John`, SilverCare will tell you that required fields are missing and show you the correct format.
+
+
+**Q**: How do I transfer my data to another computer?
+
+**A**: When you first run SilverCare on a new computer, it automatically creates a data file in a folder named data, located in the same folder as the app (silvercare.jar).
+
+
+To transfer your data:
+1. Install Java and place silvercare.jar on the new computer.
+2. Run the app once, this will create the default data file (data/addressbook.json).
+3. Close the app.
+4. On your old computer, go to the folder where you last used SilverCare. Inside the data folder, find the file named:
+
+   `addressbook.json`
+5. Copy this file to a USB drive or cloud storage.
+6. On your new computer, replace the newly created addressbook.json file in the data folder with the one from your old computer.
+7. Reopen SilverCare and your old data should now be visible.
+
+> If your .jar file is in Documents/SilverCare, your data file will be at:
+Documents/SilverCare/data/addressbook.json
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SilverCare home folder.
 
