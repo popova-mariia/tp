@@ -42,5 +42,12 @@ public class AppointmentDateContainsKeywordsPredicate implements Predicate<Perso
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
-}
 
+    /**
+     * Getter for keywords
+     * @return the keywords
+     */
+    public List<String> getKeywords() {
+        return keywords;
+    }
+}
