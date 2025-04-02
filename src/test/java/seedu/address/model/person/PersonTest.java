@@ -44,9 +44,9 @@ public class PersonTest {
                 .withGender(VALID_GENDER_BOB).withDetails(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different phone, all other attributes same -> returns true
+        // different phone, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // same phone but different case name -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
@@ -80,9 +80,9 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // same name, different phone -> returns true
+        // same name, different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
         // different address, different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withPhone(VALID_PHONE_BOB).build();

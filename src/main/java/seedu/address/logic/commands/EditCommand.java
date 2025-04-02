@@ -49,8 +49,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_APPT_DATE + "APPOINTMENT DATE] "
-            + "[" + PREFIX_CONDITION + " CONDITION] "
-            + "[" + PREFIX_DETAILS + " DETAILS] "
+            + "[" + PREFIX_CONDITION + " CONDITION]... "
+            + "[" + PREFIX_DETAILS + " DETAILS]... "
             + "[" + PREFIX_MEDICINE + "MEDICINE]" + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "John Doe "
@@ -101,7 +101,9 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToEdit.isSamePerson(editedPerson)
+                && model.getAddressBook().getPersonList().stream()
+                .anyMatch(p -> !p.equals(personToEdit) && p.isSamePerson(editedPerson))) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

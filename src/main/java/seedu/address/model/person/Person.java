@@ -118,13 +118,10 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return phone.equals(otherPerson.phone)
-                || name.equals(otherPerson.name)
+                || (name.equals(otherPerson.name)
                 && address.equals(otherPerson.address)
                 && gender.equals(otherPerson.gender)
-                && appointmentDate.equals(otherPerson.appointmentDate)
-                && conditionTags.equals(otherPerson.conditionTags)
-                && detailTags.equals(otherPerson.detailTags)
-                && medicine.equals(otherPerson.medicine);
+                && phone.equals(otherPerson.phone));
     }
 
     @Override

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class HelpCommandTest {
     private Model model = new ModelManager();
@@ -16,5 +18,25 @@ public class HelpCommandTest {
     public void execute_help_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_clearsClearPendingFlag() {
+        model.setPendingClear();
+
+        CommandResult expectedResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        assertCommandSuccess(new HelpCommand(), model, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void execute_clearsDeletePendingFlag() {
+        Person person = new PersonBuilder().build();
+        model.addPerson(person);
+        model.setPendingDeletion(person);
+
+        expectedModel.addPerson(person);
+
+        CommandResult expectedResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        assertCommandSuccess(new HelpCommand(), model, expectedResult, expectedModel);
     }
 }
