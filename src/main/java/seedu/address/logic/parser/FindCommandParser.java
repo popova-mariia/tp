@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,13 +33,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new UpcomingAppointmentPredicate());
         }
 
-        String[] split = trimmedArgs.substring(2).trim().split("\\s+");
+        String keyword = trimmedArgs.substring(2).trim();
 
         if (trimmedArgs.startsWith("-n ")) {
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(split)));
+            return new FindCommand(new NameContainsKeywordsPredicate(List.of(keyword)));
         } else if (trimmedArgs.startsWith("-d ")) {
             try {
-                ParserUtil.parseAppointmentDate(Arrays.asList(split).get(0));
+                ParserUtil.parseAppointmentDate(keyword);
             } catch (ParseException e) {
                 if (e.getMessage().equals(AppointmentDate.MESSAGE_CONSTRAINTS)) {
                     throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
@@ -47,7 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     throw new ParseException(AppointmentDate.INVALID_DATE);
                 }
             }
-            return new FindCommand(new AppointmentDateContainsKeywordsPredicate(Arrays.asList(split)));
+            return new FindCommand(new AppointmentDateContainsKeywordsPredicate(List.of(keyword)));
         } else {
             throw new ParseException("Please specify a valid prefix: '-n ' for name, '-d ' for appointment date.");
         }

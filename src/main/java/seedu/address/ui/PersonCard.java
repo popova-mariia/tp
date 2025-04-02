@@ -61,8 +61,8 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
 
         // Set name and appointment date as highlight-able text
-        setHighlightedText(name, person.getName().fullName);
-        setHighlightedText(appointmentDate, person.getAppointmentDate().value);
+        setHighlightedName(name, person.getName().fullName);
+        setHighlightedDate(appointmentDate, person.getAppointmentDate().value);
 
         // Remaining non-highlight-able fields
         phone.setText(person.getPhone().value);
@@ -85,7 +85,7 @@ public class PersonCard extends UiPart<Region> {
                 });
     }
 
-    private void setHighlightedText(HBox fieldBox, String fullText) {
+    private void setHighlightedName(HBox fieldBox, String fullText) {
         fieldBox.getChildren().clear();
 
         String[] words = fullText.split("(?<=\\s)|(?=\\s)");
@@ -98,6 +98,17 @@ public class PersonCard extends UiPart<Region> {
             }
             fieldBox.getChildren().add(label);
         }
+    }
+
+    private void setHighlightedDate(HBox fieldBox, String fullText) {
+        fieldBox.getChildren().clear();
+        Label label = new Label(fullText);
+        if (containsKeyword(fullText)) {
+            label.getStyleClass().add("highlighted-label");
+        } else {
+            label.getStyleClass().add("unmatched-text");
+        }
+        fieldBox.getChildren().add(label);
     }
 
     private boolean containsKeyword(String text) {
