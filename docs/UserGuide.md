@@ -3,7 +3,15 @@ layout: page
 title: User Guide
 ---
 
-SilverCare is a **desktop app for managing patients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SilverCare can get your patient management tasks done faster than traditional GUI apps.
+**Welcome to SilverCare!**
+
+SilverCare is a **simple desktop app** that helps you keep track of your patients during home visits.
+It’s built to be **fast** and **easy** to use, so you can spend less time on admin and more time with your patients.
+
+Most actions, like adding a new patient or looking someone up, are done by typing **short commands**.
+It might seem unfamiliar initially, but it becomes second nature with some practice.
+
+There are also a few helpful buttons for things like getting help, changing the colour theme, or closing the app, just what you need, without the clutter.
 
 * Table of Contents
 {:toc}
