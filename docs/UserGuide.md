@@ -403,11 +403,13 @@ Documents/SilverCare/data/addressbook.json
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add -n NAME -p PHONE_NUMBER -a ADDRESS -g GENDER [-d APPOINTMENT_DATE] [-t TAG]…​` <br> e.g., `add -n James Ho -p 22224444 -a 123, Clementi Rd, 1234665 -g male -d 2023-10-10 -t condition 1 -t condition 2`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-a ADDRESS] [-d APPOINTMENT_DATE] [-t TAG]…​`<br> e.g.,`edit 2 -n James Lee -d 2024-01-02`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Remark** | `remark INDEX r/remark`
-**List** | `list`
-**Help** | `help`
+**Add** | `add -n NAME -p PHONE -a ADDRESS -g GENDER [-d APPOINTMENT DATE] [-c CONDITION]…​[-det DETAILS]…​[-med MEDICINE]` <br> e.g. `add -n James Ho -p 22224444 -a 123 Clementi Rd -g male -d 2023-10-10 -c HIGH BP -det lives alone -med paracetamol, ibuprofen`
+**Clear** | `clear` (Asks for confirmation before deleting all records)
+**Delete** | `delete INDEX`<br> e.g., `delete 3` (Asks for confirmation before deleting the selected patient)
+**Edit** | `edit INDEX [-n NAME] [-p PHONE] [-a ADDRESS] [-g GENDER] [-d APPOINTMENT_DATE] [-c CONDITION]…​[-det DETAILS]…​[-med MEDICINE]`<br> e.g.,`edit 2 -n James Lee -p 92131231 -c Asthma -med panadol, omeprazole`
+**Find** name | `find -n KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -n James Jake `
+**Find** date | `find -nd yyyy-MM-dd [HH:mm]`<br> e.g., `find -d 2025-06-12`
+**Find** upcoming | `find upcoming`
+**List** | `list` (Sorted by upcoming appointments first. Those without dates appear in order added.)
+**Help** | `help` or click the Help button in the menu bar
+**Toggle Theme** | **(Button only)** Click the Toggle Theme button under the View menu (top-left) to switch between light and dark modes
