@@ -47,8 +47,15 @@ public class FindCommand extends Command {
             model.clearPendingDeletion();
         }
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        int numPatients = model.getFilteredPersonList().size();
+        if (numPatients != 0) {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, numPatients));
+        } else {
+            return new CommandResult(
+                    Messages.MESSAGE_NO_SUCH_PERSONS
+            );
+        }
     }
 
     @Override
