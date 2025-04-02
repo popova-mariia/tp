@@ -2,6 +2,8 @@ package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_UNCLEAR_CLEAR_CONFIRMATION;
+import static seedu.address.logic.Messages.MESSAGE_UNCLEAR_DELETE_CONFIRMATION;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.APPT_DATE_DESC_AMY;
@@ -16,11 +18,14 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -29,10 +34,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
 
@@ -175,5 +182,109 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_gibberishInputWhileDeletePending_throwsParseException() {
+        Model model = new ModelManager();
+        model.setPendingDeletion(new PersonBuilder().build());
+        Logic logic = new LogicManager(model, new StubStorage());
+
+        seedu.address.logic.parser.exceptions.ParseException exception =
+                org.junit.jupiter.api.Assertions.assertThrows(
+                        seedu.address.logic.parser.exceptions.ParseException.class, ()
+                                -> logic.execute("blarghxyz")
+                );
+
+        assertEquals(MESSAGE_UNCLEAR_DELETE_CONFIRMATION, exception.getMessage());
+    }
+
+    @Test
+    public void execute_invalidPersonIndex_throwsCommandException() {
+        Model model = new ModelManager();
+        Logic logic = new LogicManager(model, new StubStorage());
+
+        seedu.address.logic.commands.exceptions.CommandException exception =
+                org.junit.jupiter.api.Assertions.assertThrows(
+                        seedu.address.logic.commands.exceptions.CommandException.class, ()
+                                -> logic.execute("delete 1")
+                );
+
+        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
+    }
+
+    @Test
+    public void execute_unknownCommand_throwsParseException() {
+        Model model = new ModelManager();
+        Logic logic = new LogicManager(model, new StubStorage());
+
+        seedu.address.logic.parser.exceptions.ParseException exception =
+                org.junit.jupiter.api.Assertions.assertThrows(
+                        seedu.address.logic.parser.exceptions.ParseException.class, ()
+                                -> logic.execute("unknownCommand")
+                );
+
+        assertEquals(MESSAGE_UNKNOWN_COMMAND, exception.getMessage());
+    }
+
+    @Test
+    public void execute_gibberishInputWhileClearPending_throwsParseException() {
+        Model model = new ModelManager();
+        model.setPendingClear(); // assuming this sets the pendingClear flag
+        Logic logic = new LogicManager(model, new StubStorage());
+
+        seedu.address.logic.parser.exceptions.ParseException exception =
+                org.junit.jupiter.api.Assertions.assertThrows(
+                        seedu.address.logic.parser.exceptions.ParseException.class, ()
+                                -> logic.execute("blarghxyz")
+                );
+
+        assertEquals(MESSAGE_UNCLEAR_CLEAR_CONFIRMATION, exception.getMessage());
+    }
+
+    /**
+     * A stub Storage implementation that performs no actual file I/O.
+     */
+    public class StubStorage implements Storage {
+
+        @Override
+        public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
+            return Optional.of(new UserPrefs());
+        }
+
+        @Override
+        public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
+            // No-op
+        }
+
+        @Override
+        public Path getUserPrefsFilePath() {
+            return Paths.get("stub", "userprefs.json");
+        }
+
+        @Override
+        public Path getAddressBookFilePath() {
+            return Paths.get("stub", "addressbook.json");
+        }
+
+        @Override
+        public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+            return Optional.empty();
+        }
+
+        @Override
+        public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+            // No-op
+        }
+
+        @Override
+        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+            // No-op
+        }
     }
 }
