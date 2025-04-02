@@ -31,7 +31,10 @@ public class HelpCommandTest {
     @Test
     public void execute_clearsDeletePendingFlag() {
         Person person = new PersonBuilder().build();
+        model.addPerson(person);
         model.setPendingDeletion(person);
+
+        expectedModel.addPerson(person);
 
         CommandResult expectedResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedResult, expectedModel);
