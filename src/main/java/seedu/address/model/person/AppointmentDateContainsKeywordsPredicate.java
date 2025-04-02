@@ -19,7 +19,7 @@ public class AppointmentDateContainsKeywordsPredicate implements Predicate<Perso
     public boolean test(Person person) {
         String appointmentDate = person.getAppointmentDate().value;
         return keywords.stream()
-                .anyMatch(keyword -> appointmentDate.toLowerCase().contains(keyword.toLowerCase()));
+                .anyMatch(appointmentDate::contains);
     }
 
     @Override
