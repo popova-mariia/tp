@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -121,51 +122,18 @@ public class DeleteCommandTest {
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
 
-    //    @Test
-    //    public void execute_nonEmptyAddressBook_setsDeletePendingWhenClearAlreadyPending() throws Exception {
-    //        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //
-    //        ClearCommand clearCommand = new ClearCommand();
-    //        clearCommand.execute(model);
-    //
-    //        assertTrue(model.isClearPending());
-    //
-    //        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-    //        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        CommandResult result = deleteCommand.execute(model);
-    //
-    //        String expectedMessage = String.format(
-    //                "Are you sure you want to delete this person?\n"
-    //                        + Messages.format(personToDelete)
-    //                        + "\nType `y` to proceed or `n` to abort.");
-    //
-    //        assertEquals(expectedMessage, result.getFeedbackToUser());
-    //        assertTrue(model.isDeletePending());
-    //        assertFalse(model.isClearPending());
-    //    }
-    //
-    //    @Test
-    //    public void execute_personInModel_clearsPendingClear() throws Exception {
-    //        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //
-    //        model.setPendingClear();
-    //        assertTrue(model.isClearPending());
-    //
-    //        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-    //
-    //        CommandResult result = deleteCommand.execute(model);
-    //
-    //        String expectedMessage = String.format(
-    //                "Are you sure you want to delete this person?\n"
-    //                        + Messages.format(personToDelete)
-    //                        + "\nType `y` to proceed or `n` to abort.");
-    //
-    //        assertEquals(expectedMessage, result.getFeedbackToUser());
-    //
-    //        assertFalse(model.isClearPending());
-    //        assertTrue(model.isDeletePending());
-    //    }
-    //
-    //
+    @Test
+    public void execute_personNotInAddressBook_throwsCommandException() {
+        Model model = new ModelManager();
+        Person ghostPerson = new PersonBuilder().build();
+        model.updateFilteredPersonList(unused -> true);
+        model.setPendingDeletion(ghostPerson);
+
+        model.updateFilteredPersonList(p -> p.equals(ghostPerson));
+
+        DeleteCommand deleteCommand = new DeleteCommand(Index.fromZeroBased(0));
+
+        assertCommandFailure(deleteCommand, model, "The patient index provided is invalid");
+    }
+
 }
