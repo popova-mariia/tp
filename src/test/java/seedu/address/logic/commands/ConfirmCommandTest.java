@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -51,5 +52,20 @@ public class ConfirmCommandTest {
     public void execute_noPendingOperation_throwsCommandException() {
         ConfirmCommand confirmCommand = new ConfirmCommand();
         assertThrows(CommandException.class, () -> confirmCommand.execute(model));
+    }
+
+    @Test
+    public void execute_bothDeleteAndClearPending_throwsCommandException() {
+        model.addPerson(ALICE);
+        model.setPendingClear();
+        model.setPendingDeletion(ALICE);
+
+        ConfirmCommand confirmCommand = new ConfirmCommand();
+
+        CommandException exception = assertThrows(CommandException.class, () -> confirmCommand.execute(model));
+        assertEquals("Too many pending operations, try again.", exception.getMessage());
+
+        assertFalse(model.isDeletePending());
+        assertFalse(model.isClearPending());
     }
 }
