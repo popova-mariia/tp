@@ -69,26 +69,28 @@ The Help window shows example commands to get you started, and even includes a l
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes on Command Format:**<br>
 
-* `APPOINTMENT_DATE` given must be of the form either `yyyy-MM-dd` or `yyyy-MM-dd HH:mm`.
+Before jumping into the features, here are a few simple tips on how commands work in SilverCare:
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add -n NAME`, `NAME` is a parameter which can be used as `add -n John Doe`.
+* Words in CAPITAL LETTERS are parameters that you need to fill in.
+    
+    e.g. `add -n NAME` means you should type something like `add -n John Doe`.
+* Square brackets [ ] mean something is optional.
 
-* Items in square brackets are optional.<br>
-  e.g `-n NAME [-t TAG]` can be used as `-n John Doe -det friend` or as `-n John Doe`.
+    e.g. -n NAME [-c CONDITION] can be used as `-n John Doe -c High BP` or just `-n John Doe`.
+* Three dots (…​) mean you can include that part as many times as you need.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[-t TAG]…​` can be used as ` ` (i.e. 0 times), `-t friend`, `-t friend -t family` etc.
+    e.g. `[-c CONDITION]…​` allows you to type nothing e.g. `-c` or `-c High BP -c Diabetic -c Asthma`
+* Command parts can be entered in any order.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
+    So `-n John -p 91234567` and `-p 91234567 -n John` both function the same.
+* Extra input won’t break commands like list, help, exit, or clear.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+    e.g. help 123 is treated the same as help. 
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+> **Tip for PDF users:** If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.
+
 </div>
 
 ### Viewing help : `help`
