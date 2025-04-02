@@ -17,7 +17,7 @@ public class AbortCommand extends Command {
         if (model.isDeletePending() && model.isClearPending()) {
             model.clearPendingClear();
             model.clearPendingDeletion();
-            throw new CommandException("Too many pending operations");
+            throw new CommandException("Too many pending operations.");
         }
         if (model.isDeletePending()) {
             Person person = model.getPendingDeletion();

@@ -322,4 +322,27 @@ public class AddCommandTest {
                         -> addCommand.execute(model));
     }
 
+    @Test
+    public void execute_clearPendingFlag_clearsFlagSuccessfully() throws Exception {
+        Person person = new PersonBuilder().build();
+        Model model = new ModelManager();
+        model.setPendingClear();
+
+        AddCommand addCommand = new AddCommand(person);
+        addCommand.execute(model);
+
+        assertFalse(model.isClearPending());
+    }
+
+    @Test
+    public void execute_deletePendingFlag_clearsFlagSuccessfully() throws Exception {
+        Person person = new PersonBuilder().build();
+        Model model = new ModelManager();
+        model.setPendingDeletion(person);
+
+        AddCommand addCommand = new AddCommand(person);
+        addCommand.execute(model);
+
+        assertFalse(model.isDeletePending());
+    }
 }
