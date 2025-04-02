@@ -19,6 +19,10 @@ public class Messages {
     public static final String MESSAGE_NO_SUCH_PERSONS = "No such patients in the list!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_UNCLEAR_DELETE_CONFIRMATION =
+            "A deletion is pending. Please type 'y' to confirm deletion or 'n' to abort deletion.";
+    public static final String MESSAGE_UNCLEAR_CLEAR_CONFIRMATION =
+            "A clear is pending. Please type 'y' to confirm clear or 'n' to abort clear.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

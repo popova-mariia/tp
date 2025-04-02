@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -28,7 +29,7 @@ public class ConfirmCommand extends Command {
             model.clearPendingDeletion();
             return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, Messages.format(person)));
         } else if (model.isClearPending()) {
-            model.setAddressBook(new seedu.address.model.AddressBook());
+            model.setAddressBook(new AddressBook());
             model.clearPendingClear();
             return new CommandResult(MESSAGE_CLEAR_SUCCESS);
         } else {

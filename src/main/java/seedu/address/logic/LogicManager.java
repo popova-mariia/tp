@@ -1,5 +1,8 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.Messages.MESSAGE_UNCLEAR_CLEAR_CONFIRMATION;
+import static seedu.address.logic.Messages.MESSAGE_UNCLEAR_DELETE_CONFIRMATION;
+
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
@@ -48,9 +51,27 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /**
+     * Checks whether a {@code DeleteCommand} or {@code ClearCommand} have pending confirmations.
+     * Helper function to ensure that the correct error message is displayed to the user in GUI.
+     * @param commandText The text being parsed.
+     * @throws ParseException The error message that is displayed to the reader by the UI layer.
+     */
+    private void checkPendingConfirmation(String commandText) throws ParseException {
+        if (commandText != "y" || commandText != "n") {
+            if (model.isDeletePending()) {
+                throw new ParseException(MESSAGE_UNCLEAR_DELETE_CONFIRMATION);
+            }
+            if (model.isClearPending()) {
+                throw new ParseException(MESSAGE_UNCLEAR_CLEAR_CONFIRMATION);
+            }
+        }
+    }
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        checkPendingConfirmation(commandText);
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
@@ -103,5 +124,4 @@ public class LogicManager implements Logic {
     public Optional<List<String>> getLastUsedFindKeywords() {
         return Optional.of(lastUsedFindKeywords);
     }
-
 }
