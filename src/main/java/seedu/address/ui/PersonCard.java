@@ -87,28 +87,16 @@ public class PersonCard extends UiPart<Region> {
 
     private void setHighlightedText(HBox fieldBox, String fullText) {
         fieldBox.getChildren().clear();
-        String lower = fullText.toLowerCase();
 
-        int i = 0;
-        while (i < fullText.length()) {
-            boolean matched = false;
-            for (String keyword : keywords) {
-                String kw = keyword.toLowerCase();
-                if (lower.startsWith(kw, i)) {
-                    Label matchLabel = new Label(fullText.substring(i, i + kw.length()));
-                    matchLabel.getStyleClass().add("highlighted-label");
-                    fieldBox.getChildren().add(matchLabel);
-                    i += kw.length();
-                    matched = true;
-                    break;
-                }
+        String[] words = fullText.split("(?<=\\s)|(?=\\s)"); // keeps spaces
+        for (String word : words) {
+            Label label = new Label(word);
+            if (containsKeyword(word)) {
+                label.getStyleClass().add("highlighted-label");
+            } else {
+                label.getStyleClass().add("unmatched-text");
             }
-            if (!matched) {
-                Label normalLabel = new Label(String.valueOf(fullText.charAt(i)));
-                normalLabel.getStyleClass().add("unmatched-text");
-                fieldBox.getChildren().add(normalLabel);
-                i++;
-            }
+            fieldBox.getChildren().add(label);
         }
     }
 
