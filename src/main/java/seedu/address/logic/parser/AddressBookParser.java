@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,6 +26,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class AddressBookParser {
+
+    private static final Set<String> VALID_COMMAND_WORDS = Set.of(
+            AbortCommand.COMMAND_WORD,
+            AddCommand.COMMAND_WORD,
+            ClearCommand.COMMAND_WORD,
+            ConfirmCommand.COMMAND_WORD,
+            DeleteCommand.COMMAND_WORD,
+            EditCommand.COMMAND_WORD,
+            ExitCommand.COMMAND_WORD,
+            FindCommand.COMMAND_WORD,
+            HelpCommand.COMMAND_WORD,
+            ListCommand.COMMAND_WORD
+    );
 
     /**
      * Used for initial separation of command word and args.
@@ -91,4 +105,15 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
+    /**
+     * Helper method that checks whether a valid command is inputted by the user.
+     * @param input The input typed by the user
+     * @return True if a valid command word is used, false otherwise.
+     */
+    public boolean isRecognizedCommand(String input) {
+        String trimmed = input.trim().split("\\s+")[0];
+        return VALID_COMMAND_WORDS.contains(trimmed);
+    }
+
 }

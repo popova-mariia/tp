@@ -58,15 +58,23 @@ public class LogicManager implements Logic {
      * @throws ParseException The error message that is displayed to the reader by the UI layer.
      */
     private void checkPendingConfirmation(String commandText) throws ParseException {
-        if (commandText != "y" || commandText != "n") {
-            if (model.isDeletePending()) {
-                throw new ParseException(MESSAGE_UNCLEAR_DELETE_CONFIRMATION);
-            }
-            if (model.isClearPending()) {
-                throw new ParseException(MESSAGE_UNCLEAR_CLEAR_CONFIRMATION);
+        if (!commandText.equals("y") && !commandText.equals("n")) {
+            if (addressBookParser.isRecognizedCommand(commandText)) {
+                if (model.isDeletePending() || model.isClearPending()) {
+                    model.clearPendingClear();
+                    model.clearPendingDeletion();
+                }
+            } else {
+                if (model.isDeletePending()) {
+                    throw new ParseException(MESSAGE_UNCLEAR_DELETE_CONFIRMATION);
+                }
+                if (model.isClearPending()) {
+                    throw new ParseException(MESSAGE_UNCLEAR_CLEAR_CONFIRMATION);
+                }
             }
         }
     }
+
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");

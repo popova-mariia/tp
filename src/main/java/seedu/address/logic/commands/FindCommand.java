@@ -40,12 +40,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (model.isClearPending()) {
-            model.clearPendingClear();
-        }
-        if (model.isDeletePending()) {
-            model.clearPendingDeletion();
-        }
+
         model.updateFilteredPersonList(predicate);
         int numPatients = model.getFilteredPersonList().size();
         if (numPatients != 0) {

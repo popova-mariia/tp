@@ -16,12 +16,6 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        if (model.isClearPending()) {
-            model.clearPendingClear();
-        }
-        if (model.isDeletePending()) {
-            model.clearPendingDeletion();
-        }
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }
