@@ -20,35 +20,48 @@ There are also a few helpful buttons for things like getting help, changing the 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+1. Check if Java is installed
+   
+    Make sure your computer has Java 17 or above installed.
+   
+    **Installation:** Please follow the installation instructions for [Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html#GUID-DAF345BA-B3E7-4CF2-B87A-B6662D691840)/[Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html)/[Linux](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-linux-platforms.html) users.
+2. Click [here](https://github.com/AY2425S2-CS2103T-T12-4/tp/releases) to download SilverCare's latest .jar file (this is the app).
+3. Create a folder named ‘SilverCare’ in your Desktop.
+4. Move the downloaded file into the folder.
+5. Open the app
+   * For Windows users, open Command Prompt and enter the following:
+     1. `cd Desktop/SilverCare`
+     
+        OR `cd OneDrive/Desktop/SilverCare` if your Desktop is in OneDrive
+     2. `java -jar silvercare.jar`
+   * For Mac/Linux users, open Terminal and enter the following:
+     1. `cd Desktop/SilverCare`
+     2. `java -jar silvercare.jar`
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+6. Start fresh!
 
-   * `list` : Lists all contacts.
+   When you first open SilverCare, you might see some sample patient data already filled in.
+   To clear this and start with your own records, just type: `clear`
 
-   * `add -n John Doe -p 98765432 -a John street, block 123, #01-01 -g male [-d 2025-10-10] [-t condition]` : Adds a contact named `John Doe` to SilverCare with optional condition and appointment date on 10 Oct 2025.
+7. Need [help](#viewing-help--help)? It’s always nearby
+   
+   You can open a quick help window anytime by:
+   * Typing: help
+   * Pressing F1, or
+   * Clicking the Help button at the top menu bar.
 
-   * `delete 3` : Deletes the 3rd patient shown in the current list.
+The Help window shows example commands to get you started, and even includes a link back to this full user guide, so you can return here anytime if you need more details.
 
-   * `find john` : Searches and lists out all patients with names that contain "john".
+8. Explore more [features](#features) below
+   
+   Scroll down to learn how to add, search for, and manage your patients using simple commands.
 
-   * `remark 1 r/ lives alone` : Adds the remark "lives alone" to the 1st patient in the current list.
+9. You're ready to go! That’s it, SilverCare is set up and ready. Start managing your patient records with ease!
 
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+> For a quick overview, check out our [Command Summary](#command-summary), which lists all the key commands in one place.
 
 --------------------------------------------------------------------------------------------------------------------
 
