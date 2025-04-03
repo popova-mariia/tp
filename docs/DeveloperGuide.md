@@ -177,7 +177,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add -n David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -216,7 +216,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 1. Nurse provides the required patient information: name, phone number, address, and gender.
-2. Nurse may also provide optional information: appointment date, medical condition, and additional notes.
+2. Nurse may also provide optional information: appointment date, medical condition, medicine issued and additional notes.
 3. System validates the data provided.
 4. System checks whether a patient with same identifying details already exists.
 5. System creates a new patient record and assigns it a unique ID.
@@ -365,8 +365,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Nurse requests to delete an existing patient contact.
-2. Nurse provides the patient's unique ID.
-3. System validates the provided patient ID.
+2. Nurse provides the patient's index in list.
+3. System validates the provided patient index.
 4. If valid, System prompts Nurse to confirm the deletion.
 5. Nurse confirms the deletion.
 6. System deletes the corresponding patient record.
@@ -375,16 +375,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. System detects invalid patient ID.
+* 3a. System detects invalid patient index.
     * 3a1. System requests for the correct data.
     * 3a2. Nurse enters new data
     * Steps 3a1-3a2 are repeated until the data entered are correct.
     * Use case resumes from step 4.
 
-* 3b. System does not find a patient with the provided ID.
+* 3b. System does not find a patient with the provided index.
     * 3b1. System informs the Nurse that no matching patient exists.
-    * 3b2. System requests a different patient ID.
-    * 3b3. Nurse provides a new patient ID.
+    * 3b2. System requests a different patient index.
+    * 3b3. Nurse provides a new patient index.
     * Steps 3b1–3b3 are repeated until a matching patient is found.
     * Use case resumes from step 4.
 
@@ -425,13 +425,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 3a1–3a3 are repeated until a valid name is entered.
     * Use case resumes from step 4.
 
-* 3b. Nurse provides invalid name query.
-    * 3b1. System informs the Nurse that the name format is invalid.
-    * 3b2. System requests a valid name.
-    * 3b3. Nurse provides a new search name.
-    * Steps 3b1–3b3 are repeated until a valid name is entered.
-    * Use case resumes from step 4.
-
 * 4a. No matching patient records found.
     * 4a1. System informs the Nurse that no matching records were found.
     * 4a2. System requests a new search input.
@@ -454,26 +447,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. Nurse provides empty name query.
-    * 3a1. System informs the Nurse that the appointment date cannot be empty.
-    * 3a2. System requests a valid date input.
+* 3a. Nurse provides wrongly formatted date query.
+    * 3a1. System informs the Nurse that the date format is wrong.
+    * 3a2. System requests a correctly formatted date input.
     * 3a3. Nurse provides a new date.
-    * Steps 3a1–3a3 are repeated until a valid name is entered.
+    * Steps 3a1–3a3 are repeated until a valid date is entered.
     * Use case resumes from step 4.
 
-* 3b. Nurse provides invalid name query.
-    * 3b1. System informs the Nurse that the name format is invalid.
+* 3b. Nurse provides invalid date query.
+    * 3b1. System informs the Nurse that the date entered does not exist.
     * 3b2. System requests a valid date input.
     * 3b3. Nurse provides a new date.
-    * Steps 3b1–3b3 are repeated until a valid name is entered.
+    * Steps 3b1–3b3 are repeated until a valid date is entered.
     * Use case resumes from step 4.
 
 * 4a. No matching patient records found.
     * 4a1. System informs the Nurse that no matching records were found.
-    * 4a2. System requests a new search input.
-    * 4a3. Nurse provides a new date.
-    * Steps 4a1–4a3 are repeated until a match is found or the search is cancelled.
-    * Use case resumes from step 4 or ends if cancelled.
+    * Use case ends.
 
 **Use case 5: Find upcoming appointments**
 
@@ -500,31 +490,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Nurse requests to edit a patient record
-2. Nurse provides the patient ID and specifies one or more fields to update (e.g., name, phone, address, gender, etc.).
-3. System validates the patient ID and each field to be updated.
+2. Nurse provides the patient index and specifies one or more fields to update (e.g., name, phone, address, gender, etc.).
+3. System validates the patient index and each field to be updated.
 4. System updates the patient record with the new information.
 5. System confirms the successful update.
 6. Use case ends.
 
 **Extensions**
 
-* 3a. Invalid patient ID provided
-    * 3a1. System informs Nurse that the patient ID is invalid or not found.
-    * 3a2. System requests a valid patient ID.
-    * 3a3. Nurse provides a new ID.
-    * Steps 3a1–3a3 repeat until a valid patient ID is provided.
+* 3a. Invalid patient index provided
+    * 3a1. System informs Nurse that the command is invalid or patient index is out of range.
+    * 3a2. System requests a valid patient index.
+    * 3a3. Nurse provides a new index.
+    * Steps 3a1–3a3 repeat until a valid patient index is provided.
     * Use case resumes from step 3.
 
 * 3b. Invalid input for one or more fields
-    * 3b1. System informs the Nurse of each invalid field and the corresponding format or constraint.
+    * 3b1. System informs the Nurse that the command is invalid.
     * 3b2. System requests corrected values for the invalid fields.
     * 3b3. Nurse provides corrected input.
     * Steps 3b1–3b3 repeat until all inputs are valid.
     * Use case resumes from step 4.
 
-* 4a. No changes detected
-    * 4a1. If the new values are the same as the existing ones, System informs Nurse that no updates were made.
-    * Use case ends.
+* 3c. No fields updated
+    * 3c1. System informs Nurse that at least one field has to be edited.
+    * 3a2. System requests at least one field to be updated.
+    * 3a3. Nurse provides a new valid input.
+    * Steps 3a1–3a3 repeat until a valid input is provided.
+    * Use case resumes from step 3.
 
 **Use case 7: Clear all patient records**
 
@@ -628,7 +621,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact Details**: A patient’s phone number, address, and any other means of communication stored within the system.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient Record**: A stored entry containing a patient's personal details, contact information, and relevant medical notes.
-* **Unique Identifier (Patient ID)**: A system-generated number assigned to each patient record to ensure easy identification and management.
+* **Unique Identifier (Patient Index)**: A system-generated number assigned to each patient record to ensure easy identification and management.
 
 
 --------------------------------------------------------------------------------------------------------------------
