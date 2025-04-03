@@ -27,16 +27,16 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("91")); // less than 3 digits
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
-        assertFalse(Phone.isValidPhone("124293842033123")); // too long
+        assertFalse(Phone.isValidPhone("1234567890123456")); // 16 digits (too long)
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 digits
-        assertTrue(Phone.isValidPhone("93121534")); // exactly 8 digits
-        assertTrue(Phone.isValidPhone("1234567")); // valid length within range
+        assertTrue(Phone.isValidPhone("123")); // exactly 3 digits (min)
+        assertTrue(Phone.isValidPhone("12345678")); // 8 digits
+        assertTrue(Phone.isValidPhone("123456789012345")); // exactly 15 digits (max)
     }
 
 
@@ -61,27 +61,24 @@ public class PhoneTest {
     }
 
     @Test
-    public void isValidPhone_exactly3Digits_returnsTrue() {
-        // minimum length
-        assertTrue(Phone.isValidPhone("123"));
+    public void isValidPhone_minLengthEdgeCase_returnsTrue() {
+        assertTrue(Phone.isValidPhone("123")); // 3 digits
     }
 
     @Test
-    public void isValidPhone_exactly8Digits_returnsTrue() {
-        // maximum length
-        assertTrue(Phone.isValidPhone("12345678"));
+    public void isValidPhone_maxLengthEdgeCase_returnsTrue() {
+        assertTrue(Phone.isValidPhone("123456789012345")); // 15 digits
     }
 
     @Test
-    public void isValidPhone_lessThan3Digits_returnsFalse() {
-        // too short
-        assertFalse(Phone.isValidPhone("12"));
+    public void isValidPhone_belowMinLength_returnsFalse() {
+        assertFalse(Phone.isValidPhone("12")); // 2 digits
     }
 
     @Test
-    public void isValidPhone_moreThan8Digits_returnsFalse() {
-        // too long
-        assertFalse(Phone.isValidPhone("123456789"));
+    public void isValidPhone_aboveMaxLength_returnsFalse() {
+        assertFalse(Phone.isValidPhone("1234567890123456")); // 16 digits
     }
+
 
 }
