@@ -763,7 +763,7 @@ testers are expected to do more *exploratory* testing.
   ```sh
   list
   delete 1
-  [y]
+  y
   ```
   **Expected:** A confirmation prompt pops up and successfully deletes patient 1 after inputting [y].
 
@@ -772,7 +772,7 @@ testers are expected to do more *exploratory* testing.
   ```sh
   list
   delete 1
-  [n]
+  n
   ```
   **Expected:** A confirmation prompt pops up and aborts deleting patient 1 after inputting [n].
 
