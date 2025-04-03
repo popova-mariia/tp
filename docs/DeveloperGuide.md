@@ -308,24 +308,34 @@ The following class diagram shows the relationship between key classes involved:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                                    | So that I can…​                                                 |
-|----------|---------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | user                                        | see usage instructions                                          | refer to instructions when I forget how to use the App          |
-| `* * *`  | new user                                    | see a quick-start guide                                         | learn how to use the app effectively from the beginning         |
-| `* * *`  | user                                        | add a new patient’s contact details                             | keep track of their information and reach out when needed       |
-| `* * *`  | home-visit nurse managing multiple patients | update a patient's contact details                              | always have the latest information to reach them                |
-| `* * *`  | user                                        | delete a person                                                 | remove entries that I no longer need                            |
-| `* * *`  | user                                        | see a confirmation message before deleting a patient record     | avoid accidentally removing important data                      |
-| `* * *`  | home-visit nurse managing multiple patients | search for a patient by name and view their details quickly     | find important information efficiently during a visit           |
-| `* * *`  | user                                        | search for a patient using partial names                        | find a patient even if I don’t remember their full name         |
-| `* * *`  | user                                        | have search results highlight matching text                     | quickly identify relevant records                               |
-| `* * *`  | user                                        | list all patients                                               | get an overview of all stored records                           |
-| `* *`    | home-visit nurse with many patients         | sort my patient list by name                                    | locate a person easily                                          |
-| `* *`    | home-visit nurse                            | filter search results by appointment date                       | quickly locate patients I am scheduled to see soon              |
-| `* *`    | user                                        | search for patients by phone number                             | retrieve contact details even if I only have a number available |
-| `* *`    | security-conscious user                     | lock or hide sensitive patient contact details                  | prevent unauthorized individuals from accessing them            |
-| `*`      | busy nurse                                  | categorize patients based on their conditions or priority level | focus on urgent cases first                                     |
-| `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                    |
+| Priority | As a …​                                     | I want to …​                                                    | So that I can…​                                                    |
+|----------|---------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *`  | user                                        | see usage instructions                                          | refer to instructions when I forget how to use the app             |
+| `* * *`  | new user                                    | have a quick-start guide                                        | learn how to use the app with minimal confusion from the beginning |
+| `* * *`  | user                                        | view a help window while using the app                          | access reminders of the commands                                   |
+| `* * *`  | home-visit nurse                            | add a new patient’s contact details                             | keep track of their information and reach out when needed          |
+| `* * *`  | home-vist nurse                             | add a new patient’s full information, including medical details | keep track of the patients I visit                                 |
+| `* * *`  | home-visit nurse managing multiple patients | update an existing patient's information                        | always have accurate and up-to-date records                        |
+| `* * *`  | home-visit nurse                            | add appointment dates for patients                              | know when each patient is scheduled for a visit                    |
+| `* * *`  | home-visit nurse                            | add custom notes or details about a patient                     | remember important context like accessibility needs                |
+| `* * *`  | home-visit nurse                            | store multiple conditions for a patient                         | keep track of their medical history                                |
+| `* * *`  | home-visit nurse                            | add a list of prescribed medications                            | log the patient's current treatment                                |
+| `* * *`  | user                                        | delete a patient                                                | clean up records I no longer need                                  |
+| `* * *`  | user                                        | see a confirmation message before deleting a patient record     | avoid accidentally removing important data                         |
+| `* * *`  | home-visit nurse during visits              | search for a patient by name                                    | find important information quickly during a visit                  |
+| `* * *`  | user                                        | search for a patients using partial names                       | find a patient even if I don’t remember their full name            |
+| `* * *`  | home-visit nurse                            | search for patients by appointment date                         | check who I need to visit on a specific day                        |
+| `* * *`  | home-visit nurse                            | view all upcoming appointments                                  | plan and prepare for upcoming visits                               |
+| `* * *`  | user                                        | have search results highlight matching text                     | quickly identify relevant records                                  |
+| `* * *`  | user                                        | list all patients                                               | get a full overview of who is currently in the system              |
+| `* *`    | home-visit nurse with many patients         | sort my patient list by name                                    | locate a person easily                                             |
+| `* *`    | user                                        | search for patients by phone number                             | retrieve contact details even if I only have a number available    |
+| `* *`    | user                                        | see a warning when I exceed the patient limit                   | know that the app has reached capacity                             |
+| `* *`    | user                                        | get error messages that include example usage                   | quickly learn how to correct errors I made                         |
+| `* *`    | security-conscious user                     | lock or hide sensitive patient contact details                  | prevent unauthorized individuals from accessing them               |
+| `* *`    | new or returning user                       | toggle between light and dark mode                              | choose a display that's comfortable for my eyes                    |
+| `*`      | busy nurse                                  | categorize patients based on their conditions or priority level | focus on urgent cases first                                        |
+| `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                       |
 
 
 *{More to be added}*
