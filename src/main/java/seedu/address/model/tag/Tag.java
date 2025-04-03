@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class Tag {
 
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} \\-]+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} \\-']+";
 
     /**
      * Represents the type of tag.
