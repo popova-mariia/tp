@@ -424,6 +424,10 @@ Documents/SilverCare/data/addressbook.json
 5. **Recurring appointments must be entered individually.** The system does not yet support repeating weekly or monthly appointments. Each date must be added separately.
 6. **Medicine field does not include dosage or frequency.** Only the name of the medicine can be recorded. If needed, dosage and timing details can be added in the notes section manually.
 7. **All medical conditions and notes must be retyped when editing.** You cannot edit a single condition or note—editing one requires re-entering all related information.
+8. **Appointments are not visually marked by urgency.** There is no color-coding to indicate how urgent an appointment is. All appointments appear the same in the interface.
+9. **Patient list is always sorted by appointment date.** Sorting by name, medication, or other preferences is not currently available.
+10. **The command input field is difficult to edit for long entries.** For patients with many details, it can be hard to scroll back and edit earlier parts (like name or address). A suggested workaround is to prepare the command in a text editor before pasting it in.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
