@@ -1,8 +1,12 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,14 +26,25 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_APPT_DATE);
+
+        if (trimmedArgs.equalsIgnoreCase("upcoming")) {
+            return new FindCommand(new UpcomingAppointmentPredicate());
+        }
+
+        if (!(arePrefixesPresent(argMultimap, PREFIX_NAME)
+                || arePrefixesPresent(argMultimap, PREFIX_APPT_DATE))) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (trimmedArgs.equalsIgnoreCase("upcoming")) {
-            return new FindCommand(new UpcomingAppointmentPredicate());
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         String keyword = trimmedArgs.substring(2).trim();
@@ -51,5 +66,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else {
             throw new ParseException("Please specify a valid prefix: '-n ' for name, '-d ' for appointment date.");
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
