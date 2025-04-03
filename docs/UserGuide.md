@@ -283,7 +283,8 @@ Before the deletion happens, SilverCare will show the patient’s details and as
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Important Notes:**
 
-* If you run another command (like list, help, etc.) during the prompt, the deletion will be automatically cancelled.
+* During deletion, if y, n or a valid command is not passed, the user will be prompted to input a valid command until the app gets a clear answer.
+* If you run another command (like list, help, etc.) during the prompt, the deletion will automatically be cancelled.
 
 </div>
 
