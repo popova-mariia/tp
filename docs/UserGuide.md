@@ -157,6 +157,7 @@ Use this command to add a new patient to SilverCare.
   </ul>
 </div>
 
+
 <div class="alert alert-warning">
   <strong>⚠️ Important Notes:</strong>
   <ul>
@@ -353,6 +354,7 @@ If you're an advanced user, you can find and edit SilverCare's data directly:
 The data is stored in JSON format, which you can open with any text editor.
 
 
+
 <div class="alert alert-warning">
   <strong>⚠️ Important Notes:</strong>
   <ul>
@@ -473,11 +475,11 @@ Each flag is followed by the actual input (e.g., `-n John Doe`).
 
 **Command Prompt**  
 - A text-based interface on Windows where you type commands to run apps or perform actions.  
-🪟 **Windows users:**
+**Windows users:**
 - Press `Windows + R`, type `cmd`, then press `Enter`
 - Or, search for **Command Prompt** in the Start menu  
   🧑‍💻 You’ll need to use this to navigate to your SilverCare folder and run the app.
 
 **Terminal**  
 - A general term for text-based command input tools on macOS/Linux.  
-- 🍎 **macOS/Linux users:** Search for **Terminal** using **Spotlight** (press `Cmd + Space`, then type `Terminal`) or find it in the **Applications > Utilities** folder.
+- **macOS/Linux users:** Search for **Terminal** using **Spotlight** (press `Cmd + Space`, then type `Terminal`) or find it in the **Applications > Utilities** folder.
