@@ -943,3 +943,10 @@ Team size: 5
    **Planned Enhancement:** Allow users to attach an image file to each patient profile for clearer visual identification.
 
    **Sample Input:** `add -n John -img /path/to/john_photo.jpg`
+10. **Improve input validation for name-based search**
+
+    **Current Flaw:** The find -n command accepts any input, including numbers or symbols. When the input is invalid, the system still returns “No such patients in the list” instead of indicating that the search was not meaningful.
+
+    **Planned Enhancement:** Detect and reject clearly invalid name inputs such as empty strings, purely non-alphabetic characters, or excessively short queries. Provide a helpful message to guide users to enter a valid name.
+
+    **Sample Output:** Search term is invalid. Please enter a proper name.
