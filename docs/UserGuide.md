@@ -159,6 +159,7 @@ Use this command to add a new patient to SilverCare.
 
 * You can store up to 30 patients in SilverCare. Adding beyond this limit will not be allowed.
 * Phone numbers must be unique; trying to add a patient with an existing number will result in an error.
+* Phone numbers are only permitted to be within the range of 3-15 digits.
 
 </div>
 
@@ -344,6 +345,22 @@ The data is stored in JSON format, which you can open with any text editor.
 Be sure to follow the correct JSON structure when editing this file.
 
 // format to follow in file
+```
+"name" : "John Doe",
+"phone" : "98765432",
+"address" : "311, Clementi Ave 2, #02-25",
+"gender" : "Male",
+"medicine" : "paracetamol",
+"appointmentDate" : "2025-01-17 16:30",
+"conditionTags" : [ {
+"tagName" : "dementia",
+"tagType" : "CONDITION"
+} ],
+"detailTags" : [ {
+"tagName" : "lives alone",
+"tagType" : "DETAIL"
+} ]
+```
 
 A small mistake (like a missing comma or quotation mark) can cause the app to stop working properly.
 </div>
