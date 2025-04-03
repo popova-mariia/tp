@@ -321,28 +321,4 @@ public class AddCommandTest {
                 "Cannot add more persons. Maximum person limit has been reached.", ()
                         -> addCommand.execute(model));
     }
-
-    @Test
-    public void execute_clearPendingFlag_clearsFlagSuccessfully() throws Exception {
-        Person person = new PersonBuilder().build();
-        Model model = new ModelManager();
-        model.setPendingClear();
-
-        AddCommand addCommand = new AddCommand(person);
-        addCommand.execute(model);
-
-        assertFalse(model.isClearPending());
-    }
-
-    @Test
-    public void execute_deletePendingFlag_clearsFlagSuccessfully() throws Exception {
-        Person person = new PersonBuilder().build();
-        Model model = new ModelManager();
-        model.setPendingDeletion(person);
-
-        AddCommand addCommand = new AddCommand(person);
-        addCommand.execute(model);
-
-        assertFalse(model.isDeletePending());
-    }
 }

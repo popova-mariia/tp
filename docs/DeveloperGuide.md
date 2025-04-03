@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * System informs Nurse that the deletion has been cancelled.
     * Use case ends.
 
-* 4b. Nurse types unrecognised, non-command input for confirmation.
+* 4b. Nurse types unrecognised, non-command input for confirmation of delete.
   * 4b1. System re-prompts Nurse to confirm deletion (expects yes or no).
   * 4b2. Steps 4 continues until a valid response is provided.
   * Use case resumes from 5 (if yes) or 4a (if no).

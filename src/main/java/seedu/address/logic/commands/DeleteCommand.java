@@ -35,10 +35,6 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        if (model.isClearPending()) {
-            model.clearPendingClear();
-        }
-
         if (!model.hasPerson(personToDelete)) {
             throw new CommandException("Person is not in the address book.");
         }

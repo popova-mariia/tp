@@ -146,6 +146,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //====================================Delete and clear commands ==================================================
     public void setPendingDeletion(Person person) {
         requireNonNull(person);
         this.pendingDeletion = person;

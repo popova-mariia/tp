@@ -85,13 +85,6 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.isClearPending()) {
-            model.clearPendingClear();
-        }
-        if (model.isDeletePending()) {
-            model.clearPendingDeletion();
-        }
-
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
