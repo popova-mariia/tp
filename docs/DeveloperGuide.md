@@ -331,24 +331,36 @@ The following class diagram shows the relationship between key classes involved:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                                    | So that I can…​                                                 |
-|----------|---------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | user                                        | see usage instructions                                          | refer to instructions when I forget how to use the App          |
-| `* * *`  | new user                                    | see a quick-start guide                                         | learn how to use the app effectively from the beginning         |
-| `* * *`  | user                                        | add a new patient’s contact details                             | keep track of their information and reach out when needed       |
-| `* * *`  | home-visit nurse managing multiple patients | update a patient's contact details                              | always have the latest information to reach them                |
-| `* * *`  | user                                        | delete a person                                                 | remove entries that I no longer need                            |
-| `* * *`  | user                                        | see a confirmation message before deleting a patient record     | avoid accidentally removing important data                      |
-| `* * *`  | home-visit nurse managing multiple patients | search for a patient by name and view their details quickly     | find important information efficiently during a visit           |
-| `* * *`  | user                                        | search for a patient using partial names                        | find a patient even if I don’t remember their full name         |
-| `* * *`  | user                                        | have search results highlight matching text                     | quickly identify relevant records                               |
-| `* * *`  | user                                        | list all patients                                               | get an overview of all stored records                           |
-| `* *`    | home-visit nurse with many patients         | sort my patient list by name                                    | locate a person easily                                          |
-| `* *`    | home-visit nurse                            | filter search results by appointment date                       | quickly locate patients I am scheduled to see soon              |
-| `* *`    | user                                        | search for patients by phone number                             | retrieve contact details even if I only have a number available |
-| `* *`    | security-conscious user                     | lock or hide sensitive patient contact details                  | prevent unauthorized individuals from accessing them            |
-| `*`      | busy nurse                                  | categorize patients based on their conditions or priority level | focus on urgent cases first                                     |
-| `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                    |
+| Priority | As a …​                                     | I want to …​                                                    | So that I can…​                                                    |
+|----------|---------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *`  | user                                        | see usage instructions                                          | refer to instructions when I forget how to use the app             |
+| `* * *`  | new user                                    | have a quick-start guide                                        | learn how to use the app with minimal confusion from the beginning |
+| `* * *`  | user                                        | view a help window while using the app                          | access reminders of the commands                                   |
+| `* * *`  | home-visit nurse                            | add a new patient’s contact details                             | keep track of their information and reach out when needed          |
+| `* * *`  | home-vist nurse                             | add a new patient’s full information, including medical details | keep track of the patients I visit                                 |
+| `* * *`  | home-visit nurse managing multiple patients | update an existing patient's information                        | always have accurate and up-to-date records                        |
+| `* * *`  | home-visit nurse                            | add appointment dates for patients                              | know when each patient is scheduled for a visit                    |
+| `* * *`  | home-visit nurse                            | add custom notes or details about a patient                     | remember important context like accessibility needs                |
+| `* * *`  | home-visit nurse                            | store multiple conditions for a patient                         | keep track of their medical history                                |
+| `* * *`  | home-visit nurse                            | add a list of prescribed medications                            | log the patient's current treatment                                |
+| `* * *`  | user                                        | delete a patient                                                | clean up records I no longer need                                  |
+| `* * *`  | user                                        | see a confirmation message before deleting a patient record     | avoid accidentally removing important data                         |
+| `* * *`  | home-visit nurse during visits              | search for a patient by name                                    | find important information quickly during a visit                  |
+| `* * *`  | user                                        | search for a patients using partial names                       | find a patient even if I don’t remember their full name            |
+| `* * *`  | home-visit nurse                            | search for patients by appointment date                         | check who I need to visit on a specific day                        |
+| `* * *`  | home-visit nurse                            | view all upcoming appointments                                  | plan and prepare for upcoming visits                               |
+| `* * *`  | user                                        | have search results highlight matching text                     | quickly identify relevant records                                  |
+| `* * *`  | user                                        | list all patients                                               | get a full overview of who is currently in the system              |
+| `* * *`  | user                                        | clear all my patient records                                    | reset and start with a clean slate                                 |
+| `* * *`  | user                                        | see a confirmation message before clearing all patient records  | avoid accidentally removing important data                         |
+| `* *`    | home-visit nurse with many patients         | sort my patient list by name                                    | locate a person easily                                             |
+| `* *`    | user                                        | search for patients by phone number                             | retrieve contact details even if I only have a number available    |
+| `* *`    | user                                        | see a warning when I exceed the patient limit                   | know that the app has reached capacity                             |
+| `* *`    | user                                        | get error messages that include example usage                   | quickly learn how to correct errors I made                         |
+| `* *`    | security-conscious user                     | lock or hide sensitive patient contact details                  | prevent unauthorized individuals from accessing them               |
+| `* *`    | user                                        | toggle between light and dark mode                              | choose a display that's comfortable for my eyes                    |
+| `*`      | busy nurse                                  | categorize patients based on their conditions or priority level | focus on urgent cases first                                        |
+| `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                       |
 
 
 *{More to be added}*
@@ -673,6 +685,7 @@ testers are expected to do more *exploratory* testing.
     4. **Expected:** The GUI appears with a set of sample patient records.
 
 
+
 2. **Shutdown**
     1. Close the application using the exit command:
        ```sh
@@ -681,6 +694,7 @@ testers are expected to do more *exploratory* testing.
     2. **Expected:** The application closes successfully.
 
 ### Managing Patients
+
 
 ### Adding a Patient
 - **Prerequisites:**
@@ -693,6 +707,7 @@ testers are expected to do more *exploratory* testing.
   add -n John Doe -p 91234567 -a 123 Clementi Ave 34 -g Male
   ```
   **Expected:** John Doe appears in the patient list with correct details.
+
 
 
 - **Test case 2 (With optional fields):**
@@ -829,10 +844,105 @@ Ensure that all covered features work as intended while considering possible edg
 
 For full command details, refer to the [User Guide](UserGuide.md).
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
+The development of **SilverCare** involved adapting and extending the AddressBook-Level3 codebase to better suit the needs of home-visit nurses.
+The team focused on improving usability, expanding patient-related functionality, and ensuring the application remained robust and maintainable.
+
+**Key development efforts included:**
+
+* Enhancing core commands (`add`, `edit`, `find`, etc.) to support patient-specific data such as appointment dates, conditions, and medication
+
+* Refactoring the model and storage structure to accommodate new fields and tag types
+
+* Updating and writing unit tests to ensure system correctness after changes
+
+* Streamlining the user interface and user guide to better support a non-technical audience
+
+The team maintained regular weekly check-ins to coordinate tasks, discuss challenges, and review progress.
+All members contributed equally across design, implementation, and testing phases, ensuring a balanced and collaborative workflow.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Disallow adding of past appointment dates**
+
+   **Current Flaw:** The application allows users to add appointments in the past, which is unrealistic in most use cases.
+
+   **Planned Enhancement:** We will reject commands that attempt to schedule appointments for dates earlier than the current date.
+
+   **Sample Output:** `Appointment date must be today or later.`
+
+2. **Warn users of overlapping appointment dates**
+
+   **Current Flaw:** Users can accidentally schedule multiple appointments for the same time without any warning.
+
+   **Planned Enhancement:** The system will display a warning if a new appointment overlaps with an existing one for the same patient.
+
+   **Sample Output:** `Warning: Appointment overlaps with an existing one on 2025-07-20.`
+
+3. **Allow adding recurring appointment dates**
+
+   **Current Flaw:** Users must manually input each recurring appointment, which is inefficient.
+
+   **Planned Enhancement:** Support a `-r weekly` or `-r monthly` flag to automatically add recurring appointments.
+
+   **Sample Input:** `add -n John -d 2025-07-20 -r weekly -t 5` (creates 5 weekly recurring appointments)
+
+4. **Make medicine field more detailed**
+
+   **Current Flaw:** Only medicine names are captured, with no information on dosage or frequency.
+
+   **Planned Enhancement:** Allow inputs like `"Paracetamol (500mg, twice a day)"` in the medicine field.
+
+   **Sample Input:** `add ... -med Paracetamol (500mg, twice a day)`
+
+5. **Add find-and-replace functionality for editing tags (Conditions/Details)**
+
+   **Current Flaw:** Users must retype all tags when editing a single condition or detail.
+
+   **Planned Enhancement:** Support syntax like `edit -c Migraine->Chronic Migraine` to update one tag.
+
+   **Sample Input:** `edit 1 -c Sleep Apnea->Mild Sleep Apnea -det Fall Prone->Bedridden`
+
+6. **Color-code urgent appointments in the UI**
+
+   **Current Flaw:** All appointments look the same regardless of urgency.
+
+   **Planned Enhancement:** Use colored backgrounds (e.g. red, orange, yellow) in appointment cards to indicate urgency.
+
+   **Sample UI:**
+    * Red background → urgent
+    * Orange background → moderate urgency
+    * Yellow background → low urgency
+
+7. **Allow users to choose sorting method**
+
+   **Current Flaw:** Appointments are sorted by date only, and users cannot change this.
+
+   **Planned Enhancement:** Provide a command like `sort name`, `sort medicine`, or `sort date`.
+
+   **Sample Input:** `sort name`
+
+   **Sample Output:** Sorted contact list by name (A-Z)
+
+8. **Change command input field from single line to text box**
+
+   **Current Flaw:** Long input commands are hard to navigate and edit due to the limited width of the input field.
+
+   **Planned Enhancement:** Replace the single-line input with a multi-line text box to improve visibility and ease of editing.
+
+   **Sample UI:** A resizable input box that allows scrolling and full command visibility.
+
+9. **Allow uploading of patient images**
+
+   **Current Flaw:** Users rely solely on names to identify patients, which may lead to errors.
+
+   **Planned Enhancement:** Allow users to attach an image file to each patient profile for clearer visual identification.
+
+   **Sample Input:** `add -n John -img /path/to/john_photo.jpg`
