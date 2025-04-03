@@ -97,7 +97,7 @@ Before jumping into the features, here are a few simple tips on how commands wor
 
 > **Tip for PDF users:** If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.
 >
-> Also, be aware that some symbols (such as hyphens: `-`) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
+> Additionally, be aware that some symbols (such as hyphens: `-`) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
 
 </div>
 
