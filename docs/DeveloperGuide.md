@@ -703,6 +703,21 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
+The development of **SilverCare** involved adapting and extending the AddressBook-Level3 codebase to better suit the needs of home-visit nurses.
+The team focused on improving usability, expanding patient-related functionality, and ensuring the application remained robust and maintainable.
+
+**Key development efforts included:**
+
+* Enhancing core commands (`add`, `edit`, `find`, etc.) to support patient-specific data such as appointment dates, conditions, and medication
+
+* Refactoring the model and storage structure to accommodate new fields and tag types
+
+* Updating and writing unit tests to ensure system correctness after changes
+
+* Streamlining the user interface and user guide to better support a non-technical audience
+
+The team maintained regular weekly check-ins to coordinate tasks, discuss challenges, and review progress.
+All members contributed equally across design, implementation, and testing phases, ensuring a balanced and collaborative workflow.
 
 --------------------------------------------------------------------------------------------------------------------
 
