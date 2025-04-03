@@ -363,8 +363,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                       |
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `SilverCare` and the **Actor** is the `nurse`, unless specified otherwise)
@@ -631,20 +629,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System terminates the application.
 4. Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 20 entries without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. The system should efficiently handle at least 30 patient records, with all operations (e.g., search, add, delete) completing within 1 second on typical hardware.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be able to search patient records within 2 seconds.
 5. The interface should be accessible and navigable by nurses with basic training within 1 hour.
    The app should allow viewing patient details even without an internet connection.
 6. The system’s user interface (UI) and documentation must be clear, comprehensive, and understandable for nurses and healthcare professionals without advanced IT skills.
-7. The app is not required to connect to the hospital’s database
-
-*{More to be added}*
+7. The app is not required to connect to the hospital’s database.
+8. The application must function fully offline, with all patient details accessible without an internet connection.
+9. The app is not required to handle phone calls to the contact numbers of entries.
+10. The application should gracefully handle invalid inputs and unexpected errors, providing clear error messages without crashing.
 
 ### Glossary
 
