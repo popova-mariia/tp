@@ -414,3 +414,22 @@ Action | Format, Examples
 **List** | `list` (Sorted by upcoming appointments first. Those without dates appear in order added.)
 **Help** | `help` or click the Help button in the menu bar
 **Toggle Theme** | **(Button only)** Click the Toggle Theme button under the View menu (top-left) to switch between light and dark modes
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+**Flag**  
+The part of a command that tells the app what type of information is coming next.  
+Each flag is followed by the actual input (e.g., `-n John Doe`).
+
+**Command Prompt**  
+A text-based interface on Windows where you type commands to run apps or perform actions.  
+🪟 **Windows users:**
+- Press `Windows + R`, type `cmd`, then press `Enter`
+- Or, search for **Command Prompt** in the Start menu  
+  🧑‍💻 You’ll need to use this to navigate to your SilverCare folder and run the app.
+
+**Terminal**  
+A general term for text-based command input tools on macOS/Linux.  
+🍎 **macOS/Linux users:** Search for **Terminal** using **Spotlight** (press `Cmd + Space`, then type `Terminal`) or find it in the **Applications > Utilities** folder.
