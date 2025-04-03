@@ -9,8 +9,31 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+We would like to humbly acknowledge the following for the success of our project:
+* The SE-EDU team for creating and maintaining the AddressBook-Level3 project.
+* Our course instructors and teaching assistants whose patient guidance and feedback were instrumental throughout the development journey.
+* Our peers and collaborators for their support, constructive code reviews, and insightful discussions. 
+* The open-source Java and JavaFX communities for providing comprehensive documentation and development tools.
+* The developers and maintainers of essential libraries and frameworks used in this project, including Jackson for JSON processing and JUnit for testing.
 
+### **Java Dependencies**
+
+* **JavaFX** - for Graphical User Interface (GUI) rendering 
+* **Jackson** - for JSON serialization and deserialization
+* **JUnit 5** - for JUnit testing
+* **JaCoCo** - for generating test coverage reports 
+* **Gradle Shadow Plugin** - for creating executable JAR files with dependencies
+* **Checkstyle** - for enforcing coding standards 
+
+### **Documentation Tools**
+
+* **Jeckyll** - for authoring and building the project website
+* **PlantUML** - for creating UML diagrams used in the Development Guide
+
+### **Badges**
+
+* **CodeCov** - for providing code coverage badge
+* **GitHub Actions** - for providing the Java CI badge
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
