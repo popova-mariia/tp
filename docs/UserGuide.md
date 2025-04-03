@@ -397,7 +397,16 @@ Documents/SilverCare/data/addressbook.json
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Appointments can be scheduled in the past.** The system does not prevent adding past dates for appointments. Please double-check appointment dates when entering them to avoid confusion.
+4. **No warning is shown for overlapping appointments.** The system allows multiple appointments at the same time without any alerts. You may need to check manually to prevent double-bookings.
+5. **Recurring appointments must be entered individually.** The system does not yet support repeating weekly or monthly appointments. Each date must be added separately.
+6. **Medicine field does not include dosage or frequency.** Only the name of the medicine can be recorded. If needed, dosage and timing details can be added in the notes section manually.
+7. **All medical conditions and notes must be retyped when editing.** You cannot edit a single condition or note—editing one requires re-entering all related information.
+8. **Appointments are not visually marked by urgency.** There is no color-coding to indicate how urgent an appointment is. All appointments appear the same in the interface.
+9. **Patient list is always sorted by appointment date.** Sorting by name, medication, or other preferences is not currently available.
+10. **The command input field is difficult to edit for long entries.** For patients with many details, it can be hard to scroll back and edit earlier parts (like name or address). A suggested workaround is to prepare the command in a text editor before pasting it in.
 
+Photos cannot be added to patient profiles. There is no option to upload images for patients at this time. Patient identification relies on text details such as name and address.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
