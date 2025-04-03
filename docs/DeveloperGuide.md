@@ -114,7 +114,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking execution of delete command API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -123,11 +123,28 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `LogicManager` is called upon to execute a command (e.g. `delete 1`), it passes the input to the `AddressBookParser`.
+
+2. The `AddressBookParser` identifies the command and, if necessary, creates a specific parser (e.g. `DeleteCommandParser`) to parse the input.
+
+3. This results in a `Command` object (e.g. a `DeleteCommand`) which is returned and then executed by `LogicManager`.
+
+4. The command interacts with the `Model` during execution — for example, it may call `setPendingDeletion(person)` to store the target person while waiting for user confirmation.
+
+5. The result of this execution is wrapped in a `CommandResult` object, which is returned from `Logic`.
+
+---
+
+6. When the user types `y` to confirm, the input is passed again to `LogicManager`, which treats it as a **new command**.
+
+7. The `AddressBookParser` parses this as a confirmation and directly returns a `ConfirmCommand`.
+   > 📌 *Note:* `AddressBookParser` does **not** create a specific parser for confirm commands, as they are simple and handled directly.
+
+8. `LogicManager` executes the `ConfirmCommand`, which:
+    - Retrieves the person marked for deletion via `getPendingDeletion()`
+    - Performs the deletion using `deletePerson(person)`
+
+9. A new `CommandResult` is returned, indicating that the deletion was successful.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
