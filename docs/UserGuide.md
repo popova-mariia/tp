@@ -304,8 +304,9 @@ Before the deletion happens, SilverCare will show the patient’s details and as
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Important Notes:**
 
-* During deletion, if y, n or a valid command is not passed, the user will be prompted to input a valid command until the app gets a clear answer.
-* If you run another command (like list, help, etc.) during the prompt, the deletion will automatically be cancelled.
+* If you enter an unrecognized input like `hello` or `dslkfjdslf` instead of `y` or `n`, the app will keep prompting until a clear answer is given.
+* If you run a valid command (like `list`, `help`, etc.) during the prompt, the deletion will automatically be cancelled.
+* Even if you type an invalid or incomplete command (like `add`), the app still treats it as a command and cancels the deletion.
 
 </div>
 
