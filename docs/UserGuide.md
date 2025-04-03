@@ -56,7 +56,7 @@ There are also a few helpful buttons for things like getting help, changing the 
    You can open a quick help window anytime by:
    * Typing: help
    * Pressing F1, or
-   * Clicking the Help button at the top menu bar.
+   * Clicking the Help button, followed by Help F1 button, at the top menu bar.
 
     The Help window shows example commands to get you started, and even includes a link back to this full user guide, so you can return here anytime if you need more details.
 
@@ -95,6 +95,8 @@ Before jumping into the features, here are a few simple tips on how commands wor
     **e.g.** `help 123` is treated the same as `help`. 
 
 > **Tip for PDF users:** If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.
+>
+> Also, be aware that some symbols (such as hyphens: `-`) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
 
 </div>
 
