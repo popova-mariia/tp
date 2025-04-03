@@ -17,17 +17,20 @@ There are also a few helpful buttons for things like getting help, changing the 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Check if Java is installed
    
-    Make sure your computer has Java 17 or above installed.
+    * Make sure your computer has Java 17 or above installed.
    
-    **Installation:** Please follow the installation instructions for [Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html#GUID-DAF345BA-B3E7-4CF2-B87A-B6662D691840)/[Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html)/[Linux](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-linux-platforms.html) users.
+    * **Installation:** Please follow the installation instructions for [Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html#GUID-DAF345BA-B3E7-4CF2-B87A-B6662D691840)/[Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html)/[Linux](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-linux-platforms.html) users.
+
 2. Click [here](https://github.com/AY2425S2-CS2103T-T12-4/tp/releases) to download SilverCare's latest .jar file (this is the app).
+
 3. Create a folder named ‘SilverCare’ in your Desktop.
+
 4. Move the downloaded file into the folder.
+
 5. Open the app
    * For Windows users, open Command Prompt and enter the following:
      1. `cd Desktop/SilverCare`
@@ -39,12 +42,15 @@ There are also a few helpful buttons for things like getting help, changing the 
      2. `java -jar silvercare.jar`
 
 
-   ![Ui](images/Ui.png)
+![Ui](images/Ui.png)
 
 6. Start fresh!
 
    When you first open SilverCare, you might see some sample patient data already filled in.
-   To clear this and start with your own records, just type: `clear`
+   To clear this and start with your own records just follow these simple steps:
+
+   * Type `clear` and press enter
+   * Follow the prompt and type `y` and press enter to clear the sample data!
 
 7. Need [help](#viewing-help--help)? It’s always nearby
    
@@ -73,15 +79,15 @@ The Help window shows example commands to get you started, and even includes a l
 
 Before jumping into the features, here are a few simple tips on how commands work in SilverCare:
 
-* Words in CAPITAL LETTERS are parameters that you need to fill in.
+* Words in **CAPITAL LETTERS** are parameters that you need to fill in.
     
-    e.g. `add -n NAME` means you should type something like `add -n John Doe`.
+    **e.g.** `add -n NAME` means you should type something like `add -n John Doe`.
 * Square brackets [ ] mean something is optional.
 
-    e.g. -n NAME [-c CONDITION] can be used as `-n John Doe -c High BP` or just `-n John Doe`.
+    **e.g.** -n NAME [-c CONDITION] can be used as `-n John Doe -c High BP` or just `-n John Doe`.
 * Three dots (…​) mean you can include that part as many times as you need.
 
-    e.g. `[-c CONDITION]…​` allows you to type nothing e.g. `-c` or `-c High BP -c Diabetic -c Asthma`
+    **e.g.** `[-c CONDITION]…​` allows you to type nothing e.g. `-c` or `-c High BP -c Diabetic -c Asthma`
 * Command parts can be entered in any order.
 
     So `-n John -p 91234567` and `-p 91234567 -n John` both function the same.
@@ -99,11 +105,12 @@ Typing `help` opens a small window that gives you a quick overview of basic comm
 
 ![help message](images/helpMessage.png)
 
-**Need more info?**
+##### **Need more info?**
 
 The Help window also has a “View full User Guide” button that links back to this page, so you can always come back here anytime you need more detailed instructions.
 
-**How to open the Help window:**
+
+##### **How to open the Help window:**
 * Type: help
 * Press F1 on your keyboard
 * Or click the Help button in the top menu bar
@@ -114,26 +121,30 @@ The Help window also has a “View full User Guide” button that links back to 
 
 Use this command to add a new patient to SilverCare.
 
-**Command Format:** `add -n NAME -p PHONE -a ADDRESS -g GENDER [-d APPOINTMENT DATE] [-c CONDITION]…​ [-det DETAIL]…​ [-med MEDICINE]`
+**Command Format:**
+`add -n NAME -p PHONE -a ADDRESS -g GENDER [-d APPOINTMENT DATE] [-c CONDITION]…​ [-det DETAIL]…​ [-med MEDICINE]`
 
 ##### Field options:
 
-Required Fields:
+**Required Fields:**
 * -n NAME: Patient’s full name (e.g. John Doe)
 * -p PHONE: Contact number (e.g., 91234567)
 * -a ADDRESS: Home address (e.g., 45 Bukit Timah Rd)
 * -g GENDER: Gender (e.g. male, female, M, F)
 
 
-Optional Fields:
+**Optional Fields:**
 * -d APPOINTMENT DATE: Appointment date
 
-    Formats accepted: yyyy-MM-dd or yyyy-MM-dd HH:mm (e.g. 2025-04-10, 2025-04-10 14:30)
+    **Formats accepted**: `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` (e.g. `2025-04-10`, `2025-04-10 14:30`)
 * -c CONDITION: Medical condition(s) (e.g., High BP)
 
     You may include multiple by repeating -c
+
 * -det DETAIL: Additional notes or details (e.g. lives alone)
+
   * You may include multiple by repeating -det
+  
 * -med MEDICINE: Prescribed medicines (e.g. Panadol, Antibiotics)
 
 
@@ -206,6 +217,9 @@ Use this command to update the details of an existing patient.
 
 Use the find command to search for patients by name, appointment date, or to view upcoming appointments. This helps you quickly locate the right records, especially when your patient list grows.
 
+<div markdown="span" class="alert alert-primary">:information_source: **Highlight Feature:**
+Matches found in **names** and **appointment dates** will be highlighted in the results for better visibility!
+</div>
 
 1. Find by **Name**: `find -n NAME`
    
@@ -216,6 +230,8 @@ Use the find command to search for patients by name, appointment date, or to vie
    * Partial matches allowed: Typing Ann will match Anna, Annabelle, etc.
    * Search is flexible: Keywords can be in any order.
    * At least one match required: Results will include any patient whose name matches any of the keywords.
+   * Matching name part will be **highlighted** in the results
+
 
    **Examples:**
    
@@ -230,11 +246,14 @@ Use the find command to search for patients by name, appointment date, or to vie
 2. Find by **Appointment Date**: `find -d APPOINTMENT DATE`
 
    Searches for patients who have an appointment on a specific date.
+
    **Command Format:** `find -d YYYY-MM-DD [HH:mm]`
    * Date must be in the correct format, with HH:mm being optional
    * Date must be a valid date
    * Results will include all patients with matching appointment dates.
+   * Matching dates will be **highlighted** in the results
    
+
    **Example:** `find -d 2026-12-21`
 
 3. Find **Upcoming Appointments**: `find upcoming`
@@ -244,6 +263,8 @@ Use the find command to search for patients by name, appointment date, or to vie
    **Command Format:** `find upcoming`
    * Automatically filters for future appointments.
    * Sorted by the nearest upcoming date first.
+   * Does not include highlighting in the results.
+
    > If there are no upcoming appointments, the system will let you know.
 
 
