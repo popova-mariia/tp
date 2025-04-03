@@ -672,45 +672,178 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial Launch**
+    1. Download the JAR file and copy it into an empty folder.
+    2. Open your **Command Prompt** (Windows) or **Terminal** (Mac/Linux) and navigate to the folder with the JAR file.
+       ```sh
+       cd path/to/file
+       ```
+    3. Run the following command:
+       ```sh
+       java -jar silvercare.jar
+       ```
+    4. **Expected:** The GUI appears with a set of sample patient records.
 
-   1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-2. Saving window preferences
+2. **Shutdown**
+    1. Close the application using the exit command:
+       ```sh
+       exit
+       ```
+    2. **Expected:** The application closes successfully.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Managing Patients
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a Patient
+- **Prerequisites:**
+  - Adding a patient must be done with all compulsory fields (name, phone, address, gender).
+  - Command format for each field should follow as stated in [User Guide](UserGuide.md#field-options)
 
-### Deleting a person
+    
+- **Test case 1 (With compulosry fields):**
+  ```sh
+  add -n John Doe -p 91234567 -a 123 Clementi Ave 34 -g Male
+  ```
+  **Expected:** John Doe appears in the patient list with correct details.
 
-1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+- **Test case 2 (With optional fields):**
+  ```sh
+  add -n Johnny -p 92345678 -a 123 Clementi Ave 34 -g Male -d 2025-04-05 -c High BP -det lives alone -med Panadol
+  ```
+  **Expected:** Johnny appears in the patient list with correct details.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+### Editing a Patient
+- **Prerequisites:**
+    - Index given must be positive (1,2,3...) and not out of range of list of patients.
+    - Command format for each field should follow as stated in [User Guide](UserGuide.md#field-options)
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
+- **Test case 1 (Edits name of patient at index 1):**
+  ```sh
+  list
+  edit 1 -n Bobby
+  ```
+  **Expected:** The name of the first patient index updates correctly to Bobby.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-2. _{ more test cases …​ }_
+- **Test case 2 (Edits name and phone number of patient at index 1):**
+  ```sh
+  list
+  edit 1 -n Bobby -p 91283131
+  ```
+  **Expected:** The name and phone number of the first patient index updates correctly to Bobby and 91283131 respectively.
+
+
+- **Test case 3 (Edits condition of patient at index 2 to the 3 new conditions stated):**
+  ```sh
+  list
+  edit 2 -c Dementia -c Asthma -c Diabetic
+  ```
+  **Expected:** The condition of the second patient index updates correctly to the three stated as above.
+
+
+- **Test case 4 (Invalid Command):**
+  ```sh
+  edit hi
+  ```
+  **Expected:** Error message pops up due to incorrect formatting.
+
+### Deleting a Patient
+- **Prerequisites:** 
+  - Index given must be positive (1,2,3...) and not out of range of list of patients.
+
+
+- **Test case 1 (Successfully deletes patient at index 1):**
+  ```sh
+  list
+  delete 1
+  y
+  ```
+  **Expected:** A confirmation prompt pops up and successfully deletes patient 1 after inputting [y].
+
+
+- **Test case 2 (Abort deletion of patient at index 1):**
+  ```sh
+  list
+  delete 1
+  n
+  ```
+  **Expected:** A confirmation prompt pops up and aborts deleting patient 1 after inputting [n].
+
+
+- **Test case 3 (Invalid command):**
+  ```sh
+  list
+  delete HI
+  ```
+  **Expected:** Error message pops up due to incorrect formatting.
+
+
+---
+
+## Searching and Filtering
+- **Prerequisites:**
+    - Index given must be positive (1,2,3...) and not out of range of list of patients.
+    - Command format should follow as stated in [User Guide](UserGuide.md#locating-persons-by-name-find)
+
+
+- **Test case 1 (Find by name):**
+  ```sh
+  list 
+  find -n John
+  ```
+  **Expected:** Only matching patients containing name "John" are shown.
+
+
+- **Test case 2 (Find by date):**
+  ```sh
+  list
+  find -d 2025-04-12
+  ```
+  **Expected:** Only matching patients with appointment date of "2025-04-12" are shown.
+
+
+- **Test case 3 (Find upcoming appointments):**
+  ```sh
+  list
+  find upcoming
+  ```
+  **Expected:** Only matching patients with appointment dates after current system timing are shown.
+
+---
+
+## Data Handling
+
+### Saving Data
+- **Expected:** Changes persist after restarting the application.
+
+### Handling Missing/Corrupted Files
+- **To simulate:** Delete or corrupt the data file before launching the app.
+- **Expected:** The application should recover gracefully and provide an error message or reset data appropriately.
+
+---
+
+## Edge Cases
+
+### Invalid Inputs:
+- Enter an invalid phone number (`-p abcd1234`).
+- Delete a non-existent patient.  
+  **Expected:** Proper error messages.
+
+
+
+Testers should verify that expected results match actual outcomes and report any inconsistencies as bugs. 
+
+Ensure that all covered features work as intended while considering possible edge cases. 
+
+For full command details, refer to the [User Guide](UserGuide.md).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
