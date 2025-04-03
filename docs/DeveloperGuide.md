@@ -328,12 +328,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | home-visit nurse                            | view all upcoming appointments                                  | plan and prepare for upcoming visits                               |
 | `* * *`  | user                                        | have search results highlight matching text                     | quickly identify relevant records                                  |
 | `* * *`  | user                                        | list all patients                                               | get a full overview of who is currently in the system              |
+| `* * *`  | user                                        | clear all my patient records                                    | reset and start with a clean slate                                 |
+| `* * *`  | user                                        | see a confirmation message before clearing all patient records  | avoid accidentally removing important data                         |
 | `* *`    | home-visit nurse with many patients         | sort my patient list by name                                    | locate a person easily                                             |
 | `* *`    | user                                        | search for patients by phone number                             | retrieve contact details even if I only have a number available    |
 | `* *`    | user                                        | see a warning when I exceed the patient limit                   | know that the app has reached capacity                             |
 | `* *`    | user                                        | get error messages that include example usage                   | quickly learn how to correct errors I made                         |
 | `* *`    | security-conscious user                     | lock or hide sensitive patient contact details                  | prevent unauthorized individuals from accessing them               |
-| `* *`    | new or returning user                       | toggle between light and dark mode                              | choose a display that's comfortable for my eyes                    |
+| `* *`    | user                                        | toggle between light and dark mode                              | choose a display that's comfortable for my eyes                    |
 | `*`      | busy nurse                                  | categorize patients based on their conditions or priority level | focus on urgent cases first                                        |
 | `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                       |
 
