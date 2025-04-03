@@ -12,10 +12,18 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
+Enum TagType <<enumeration>> {
+    CONDITION
+    DETAIL
+}
+
 Person -up-> "*" Tag
+Tag ..> TagType
 
 Person *--> Name
 Person *--> Phone
-Person *--> Email
 Person *--> Address
+Person *--> Gender
+Person *--> AppointmentDate
+Person *--> Medicine
 @enduml
