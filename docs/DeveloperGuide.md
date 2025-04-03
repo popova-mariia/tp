@@ -664,16 +664,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -681,16 +681,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -698,7 +698,7 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -722,3 +722,82 @@ All members contributed equally across design, implementation, and testing phase
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Disallow adding of past appointment dates**
+
+   **Current Flaw:** The application allows users to add appointments in the past, which is unrealistic in most use cases.
+
+   **Planned Enhancement:** We will reject commands that attempt to schedule appointments for dates earlier than the current date.
+
+   **Sample Output:** `Appointment date must be today or later.`
+
+2. **Warn users of overlapping appointment dates**
+
+   **Current Flaw:** Users can accidentally schedule multiple appointments for the same time without any warning.
+
+   **Planned Enhancement:** The system will display a warning if a new appointment overlaps with an existing one for the same patient.
+
+   **Sample Output:** `Warning: Appointment overlaps with an existing one on 2025-07-20.`
+
+3. **Allow adding recurring appointment dates**
+
+   **Current Flaw:** Users must manually input each recurring appointment, which is inefficient.
+
+   **Planned Enhancement:** Support a `-r weekly` or `-r monthly` flag to automatically add recurring appointments.
+
+   **Sample Input:** `add -n John -d 2025-07-20 -r weekly -t 5` (creates 5 weekly recurring appointments)
+
+4. **Make medicine field more detailed**
+
+   **Current Flaw:** Only medicine names are captured, with no information on dosage or frequency.
+
+   **Planned Enhancement:** Allow inputs like `"Paracetamol (500mg, twice a day)"` in the medicine field.
+
+   **Sample Input:** `add ... -med Paracetamol (500mg, twice a day)`
+
+5. **Add find-and-replace functionality for editing tags (Conditions/Details)**
+
+   **Current Flaw:** Users must retype all tags when editing a single condition or detail.
+
+   **Planned Enhancement:** Support syntax like `edit -c Migraine->Chronic Migraine` to update one tag.
+
+   **Sample Input:** `edit 1 -c Sleep Apnea->Mild Sleep Apnea -det Fall Prone->Bedridden`
+
+6. **Color-code urgent appointments in the UI**
+
+   **Current Flaw:** All appointments look the same regardless of urgency.
+
+   **Planned Enhancement:** Use colored backgrounds (e.g. red, orange, yellow) in appointment cards to indicate urgency.
+
+   **Sample UI:**
+    * Red background → urgent
+    * Orange background → moderate urgency
+    * Yellow background → low urgency
+
+7. **Allow users to choose sorting method**
+
+   **Current Flaw:** Appointments are sorted by date only, and users cannot change this.
+
+   **Planned Enhancement:** Provide a command like `sort name`, `sort medicine`, or `sort date`.
+
+   **Sample Input:** `sort name`
+
+   **Sample Output:** Sorted contact list by name (A-Z)
+
+8. **Change command input field from single line to text box**
+
+   **Current Flaw:** Long input commands are hard to navigate and edit due to the limited width of the input field.
+
+   **Planned Enhancement:** Replace the single-line input with a multi-line text box to improve visibility and ease of editing.
+
+   **Sample UI:** A resizable input box that allows scrolling and full command visibility.
+
+9. **Allow uploading of patient images**
+
+   **Current Flaw:** Users rely solely on names to identify patients, which may lead to errors.
+
+   **Planned Enhancement:** Allow users to attach an image file to each patient profile for clearer visual identification.
+
+   **Sample Input:** `add -n John -img /path/to/john_photo.jpg`
