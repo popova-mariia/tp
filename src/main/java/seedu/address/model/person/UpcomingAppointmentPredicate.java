@@ -23,9 +23,10 @@ public class UpcomingAppointmentPredicate implements Predicate<Person> {
                 LocalDateTime appointmentDateTime = LocalDateTime.parse(appointmentValue, DATE_TIME_FORMAT);
                 return appointmentDateTime.isAfter(LocalDateTime.now());
             } else {
-                // If only date is provided, treat the time as 00:00
+                // If only date is provided, treat the time as 23:59
                 LocalDate appointmentDate = LocalDate.parse(appointmentValue, DATE_FORMAT);
-                return appointmentDate.atStartOfDay().isAfter(LocalDateTime.now());
+                LocalDateTime endOfDay = appointmentDate.atTime(23, 59);
+                return endOfDay.isAfter(LocalDateTime.now());
             }
         } catch (Exception e) {
             return false;
