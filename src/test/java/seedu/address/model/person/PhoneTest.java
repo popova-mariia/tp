@@ -62,22 +62,26 @@ public class PhoneTest {
 
     @Test
     public void isValidPhone_exactly3Digits_returnsTrue() {
-        assertTrue(Phone.isValidPhone("123")); // minimum length
+        // minimum length
+        assertTrue(Phone.isValidPhone("123"));
     }
 
     @Test
     public void isValidPhone_exactly8Digits_returnsTrue() {
-        assertTrue(Phone.isValidPhone("12345678")); // maximum length
+        // maximum length
+        assertTrue(Phone.isValidPhone("12345678"));
     }
 
     @Test
     public void isValidPhone_lessThan3Digits_returnsFalse() {
-        assertFalse(Phone.isValidPhone("12")); // too short
+        // too short
+        assertFalse(Phone.isValidPhone("12"));
     }
 
     @Test
     public void isValidPhone_moreThan8Digits_returnsFalse() {
-        assertFalse(Phone.isValidPhone("123456789")); // too long
+        // too long
+        assertFalse(Phone.isValidPhone("123456789"));
     }
 
 }
