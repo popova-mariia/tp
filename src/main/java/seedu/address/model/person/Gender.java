@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should either be 'Male' or 'Female', and it should not be blank";
+            "Gender should either be 'Male', 'M', 'Female' or 'F' and it should not be blank";
 
     /**
      * The gender must be either "M", "F", "male", or "female", case-insensitive.
