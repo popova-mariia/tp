@@ -93,6 +93,7 @@ Before jumping into the features, here are a few simple tips on how commands wor
 * Extra input won’t break commands like `list`, `help`, `exit`, or `clear`.
 
     **e.g.** `help 123` is treated the same as `help`. 
+* All SilverCare commands are case-sensitive. Please use the lowercase command words exactly as shown in this guide.
 
 > **Tip for PDF users:** If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.
 >
@@ -106,12 +107,12 @@ Typing `help` opens a small window that gives you a quick overview of basic comm
 
 ![help message](images/helpMessage.png)
 
-##### **Need more info?**
+##### Need more info?
 
 The Help window also has a **“View full User Guide”** button that links back to this page, so you can always come back here anytime you need more detailed instructions.
 
 
-##### **How to open the Help window:**
+##### How to open the Help window:
 * **Type**: help
 * **Press F1** on your keyboard
 * Or **click the Help button** in the top menu bar
@@ -156,6 +157,8 @@ Use this command to add a new patient to SilverCare.
   <ul>
     <li>List all medicines as one string, separated by commas. (No need to repeat <code>-med</code> for each item.)</li>
     <li>A person can have any number of conditions and details (including 0).</li>
+    <li>Exact duplicates in <code>-c</code> and <code>-det</code> will be treated as one entry. For example, entering <code>-c diabetes -c diabetes</code> adds only one condition.</li>
+    <li>However, <code>-c High BP</code> and <code>-c high bp</code> are considered different due to case sensitivity, and both will be added.</li>
   </ul>
 </div>
 
@@ -164,7 +167,7 @@ Use this command to add a new patient to SilverCare.
   <strong>⚠️ Important Notes:</strong>
   <ul>
     <li>You can store up to <strong>30 patients</strong> in SilverCare. Adding beyond this limit will not be allowed.</li>
-    <li><strong>Phone numbers must be unique;</strong> trying to add a patient with an existing number will result in an error.</li>
+    <li>Patients with the same <strong>name and phone number</strong> are treated as duplicates and trying to add them will result in an error.</li>
   </ul>
 </div>
 
@@ -224,7 +227,7 @@ Use this command to update the details of an existing patient.
 * `edit 3 -det Follow-up in 2 weeks -det NKA -med Ibuprofen, Cetirizine` e.g. replaces all existing details with two new ones and updates medication info.
 
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
 Use the find command to search for patients by name, appointment date, or to view upcoming appointments. This helps you quickly **locate the right records**, especially when your patient list grows.
 
@@ -233,26 +236,22 @@ Use the find command to search for patients by name, appointment date, or to vie
   Matches found in <strong>names</strong> and <strong>appointment dates</strong> will be highlighted in the results for better visibility!
 </div>
 
-1. Find by **Name**: 
+#### 1. Find by **Name**: 
 
     `find -n NAME` searches for patients whose **names** include the keyword you type.
    
    **Command Format:** `find -n KEYWORD [MORE_KEYWORDS]`
-   * **Case-insensitive:** john matches John, JOHN, or johnny.
+   * **Case-insensitive:** john matches john, John or JOHN.
    * **Partial matches allowed:** typing Ann will match Anna, Annabelle, etc.
-   * **Search is flexible:** keywords can be in any order.
-   * **At least one match required:** results will include any patient whose name matches any of the keywords.
    * Matching name part will be **highlighted** in the results
 
    **Examples:**
    
-    `find -n John`  e.g. returns John Lim.
+    `find -n John`  e.g. returns John Doe and John Lim.
 
-    `find -n grace tan` e.g. returns Grace Teo and Alice Tan
+![find john](images/findJohn.png)
 
-    ![result for find grace tan](images/findGraceTanResult.png)
-
-2. Find by **Appointment Date**: 
+#### Find by **Appointment Date**: 
 
     `find -d APPOINTMENT DATE` searches for patients who have an appointment on a **specific date**.
 
@@ -264,7 +263,7 @@ Use the find command to search for patients by name, appointment date, or to vie
 
       **Example:** `find -d 2026-12-21`
 
-3. Find **Upcoming Appointments**: 
+#### 3. Find **Upcoming Appointments**: 
 
     `find upcoming` shows all patients with appointment dates that are after today’s date.
    
@@ -363,9 +362,38 @@ The data is stored in JSON format, which you can open with any text editor.
     <li>Be sure to follow the correct JSON structure when editing this file.</li>
     <li>A small mistake (like a missing comma or quotation mark) can cause the app to stop working properly.</li>
     <li>If you're unsure, it's best to make changes through the app itself using commands.</li>
+    <li><strong>If the file is not formatted correctly, SilverCare will fail to load your data and open with a blank address book instead.</strong></li>
   </ul>
 </div>
 
+<p><strong>Sample JSON Structure (Do not modify unless you understand the format):</strong></p>
+
+<pre><code class="language-json">
+{
+  "persons": [
+    {
+      "name": "John Doe",
+      "phone": "98765432",
+      "address": "311, Clementi Ave 2, #02-25",
+      "gender": "Male",
+      "medicine": "paracetamol",
+      "appointmentDate": "2025-01-17 16:30",
+      "conditionTags": [
+        {
+          "tagName": "dementia",
+          "tagType": "CONDITION"
+        }
+      ],
+      "detailTags": [
+        {
+          "tagName": "lives alone",
+          "tagType": "DETAIL"
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
 
 ### Switch Themes: Toggle Theme
 SilverCare supports both **light** and **dark** modes.
@@ -431,9 +459,6 @@ You can switch between them anytime:
     > If your .jar file is in Documents/SilverCare, your data file will be at:
     Documents/SilverCare/data/addressbook.json
 
-**Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SilverCare home folder.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -445,10 +470,6 @@ You can switch between them anytime:
 5. **Recurring appointments must be entered individually.** The system does not yet support repeating weekly or monthly appointments. Each date must be added separately.
 6. **Medicine field does not include dosage or frequency.** Only the name of the medicine can be recorded. If needed, dosage and timing details can be added in the notes section manually.
 7. **All medical conditions and notes must be retyped when editing.** You cannot edit a single condition or note—editing one requires re-entering all related information.
-8. **Appointments are not visually marked by urgency.** There is no color-coding to indicate how urgent an appointment is. All appointments appear the same in the interface.
-9. **Patient list is always sorted by appointment date.** Sorting by name, medication, or other preferences is not currently available.
-10. **The command input field is difficult to edit for long entries.** For patients with many details, it can be hard to scroll back and edit earlier parts (like name or address). A suggested workaround is to prepare the command in a text editor before pasting it in.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -480,7 +501,7 @@ Each flag is followed by the actual input (e.g., `-n John Doe`).
 **Windows users:**
 - Press `Windows + R`, type `cmd`, then press `Enter`
 - Or, search for **Command Prompt** in the Start menu  
-  🧑‍💻 You’ll need to use this to navigate to your SilverCare folder and run the app.
+  You’ll need to use this to navigate to your SilverCare folder and run the app.
 
 **Terminal**  
 - A general term for text-based command input tools on macOS/Linux.  
