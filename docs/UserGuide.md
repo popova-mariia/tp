@@ -130,26 +130,54 @@ Use this command to add a new patient to SilverCare.
 ##### Field options:
 
 **Required Fields:**
-* **-n NAME:** Patient’s full name (e.g. John Doe)
-* **-p PHONE:** Contact number (e.g. 91234567)
+* **-n NAME:** Patient’s full name
+  
+  Accepts alphanumeric characters, spaces, and common special characters:
+
+  `, @ / ' . -`
+  
+  Example: `-n John O'Connor`, `-n Tan Mei-Ling`
+* **-p PHONE:** Contact number
+  
+  Must be numeric and between 3 to 15 digits
+  
+  Example: `-p 91234567`, `-p 62345678`
 * **-a ADDRESS:** Home address (e.g. 45 Bukit Timah Rd)
-* **-g GENDER:** Gender (e.g. male, female, M, F)
+* **-g GENDER:** Gender
+
+  Accepted values: male, female, m, f, M, F
+
+  Example: `-g male`, `-g F`
 
 
 **Optional Fields:**
 * **-d APPOINTMENT DATE:** Appointment date
 
-    **Formats accepted**: `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` (e.g. `2025-04-10`, `2025-04-10 14:30`)
+    **Formats accepted**: `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` 
+    
+    Example: `-d 2025-04-10`, `-d 2025-04-10 14:30`)
 
-* **-c CONDITION:** Medical condition(s) (e.g., High BP)
+* **-c CONDITION:** Medical condition(s)
 
-    You may include multiple conditions by repeating `-c`.
+    Accepts alphanumeric input with spaces, apostrophes ('), and hyphens (-)
+
+    Example: `-c High BP`, `-c Crohn's Disease`
+    
+    * You may include multiple conditions by repeating `-c`.
 
 * **-det DETAIL:** Additional notes or details (e.g. lives alone)
 
-  * You may include multiple details by repeating `-det`.
+    Follows the same format rules as conditions
 
-* **-med MEDICINE:** Prescribed medicines (e.g. Panadol, Antibiotics)
+    Example: `-det lives alone`, `-det requires translator`
+
+    * You may include multiple details by repeating `-det`.
+
+* **-med MEDICINE:** Prescribed medicines
+
+  Multiple items must be comma-separated in a single `-med` field.
+  
+  Example: `-med Panadol, Omeprazole`
 
 
 <div class="alert alert-primary">
