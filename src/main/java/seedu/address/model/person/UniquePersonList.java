@@ -81,6 +81,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        sortList();
     }
 
     /**
