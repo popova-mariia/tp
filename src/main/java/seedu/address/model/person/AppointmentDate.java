@@ -5,9 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents an Appointment's date and optional time.
@@ -23,8 +23,10 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
     public static final String VALIDATION_REGEX =
             "^\\d{4}-\\d{2}-\\d{2}( \\d{2}:\\d{2})?$";
 
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+            .withResolverStyle(ResolverStyle.STRICT);
+    private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final String value;
 
@@ -68,11 +70,9 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
     public static boolean isValidAppointmentDate(String test) {
         try {
             if (test.contains(" ")) {
-                String[] parts = test.split(" ");
-                LocalDate date = LocalDate.parse(parts[0], DATE_FORMAT);
-                LocalTime time = LocalTime.parse(parts[1], TIME_FORMAT);
+                LocalDate.parse(test, DATE_TIME_FORMAT);
             } else {
-                LocalDate date = LocalDate.parse(test, DATE_FORMAT);
+                LocalDate.parse(test, DATE_FORMAT);
             }
             return true;
         } catch (DateTimeParseException e) {
@@ -92,10 +92,8 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
     private static String normaliseDate(String input) {
         try {
             if (input.trim().contains(" ")) {
-                LocalDate datePart = LocalDate.parse(input.substring(0, 10), DATE_FORMAT);
-                LocalTime timePart = LocalTime.parse(input.substring(11),
-                        TIME_FORMAT);
-                return datePart.format(DATE_FORMAT) + " " + timePart.format(TIME_FORMAT);
+                LocalDateTime dateTime = LocalDateTime.parse(input, DATE_TIME_FORMAT);
+                return dateTime.format(DATE_TIME_FORMAT);
             } else {
                 LocalDate date = LocalDate.parse(input, DATE_FORMAT);
                 return date.format(DATE_FORMAT);
