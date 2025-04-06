@@ -236,6 +236,13 @@ Use the find command to search for patients by name, appointment date, or to vie
   Matches found in <strong>names</strong> and <strong>appointment dates</strong> will be highlighted in the results for better visibility!
 </div>
 
+
+<div class="alert alert-warning"> 
+  <strong>⚠️ Important:</strong> 
+  Do not mix prefixes in a single `find` command. Each `find` variation must be used separately. For example, <code>find -n John -d 2025-04-02</code> is invalid. 
+  Use one prefix at a time: <br> <code>find -n John</code> or <code>find -d 2025-04-02</code>
+</div>
+
 #### 1. Find by **Name**: 
 
     `find -n NAME` searches for patients whose **names** include the keyword you type.
