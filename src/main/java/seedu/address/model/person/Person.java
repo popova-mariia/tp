@@ -98,7 +98,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.equals(this);
+                && this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone);
     }
 
     /**
@@ -117,11 +118,14 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return phone.equals(otherPerson.phone)
-                || (name.equals(otherPerson.name)
+        return name.equals(otherPerson.name)
+                && phone.equals(otherPerson.phone)
                 && address.equals(otherPerson.address)
                 && gender.equals(otherPerson.gender)
-                && phone.equals(otherPerson.phone));
+                && appointmentDate.equals(otherPerson.appointmentDate)
+                && medicine.equals(otherPerson.medicine)
+                && conditionTags.equals(otherPerson.conditionTags)
+                && detailTags.equals(otherPerson.detailTags);
     }
 
     @Override
