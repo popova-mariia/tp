@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names can include 1 to 50 characters of alphanumerics, spaces, '-', '.', '@' and apostrophes.";
+            "Names start with alphanumerics, are 1-50 characters and may have spaces, '-', '.', '@' and apostrophes.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}/@.'\\- ]{1,50}";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}/@.'\\- ]{0,49}";
 
     public final String fullName;
 
