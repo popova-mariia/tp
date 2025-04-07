@@ -666,6 +666,53 @@ The `edit` feature allows users to modify the details of an existing patient in 
   Future fields (e.g., adding emergency contacts, allergies) can be incorporated easily into the edit mechanism by expanding `EditPersonDescriptor` and adjusting parsing logic.
 
 
+### List Patients
+
+The `list` feature allows users to reset the patient view to display **all currently stored patients**.  
+This is particularly useful after performing a search, filter, or any operation that narrows down the patient list.
+
+#### Overview
+
+* **Command format:** `list`
+
+* **Behavior:**
+    * Displays all patients currently stored in SilverCare.
+    * If the list was previously filtered (e.g., after a `find` command), the view resets to show the full list.
+    * The patients are shown **sorted by appointment date** (earliest first), as per the address book's standard ordering.
+    * No parameters are needed — simply typing `list` is sufficient.
+
+#### Key Classes & Logic
+
+1. `ListCommand`
+    * Implements the `Command` interface.
+    * When executed, it calls `model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
+    * This resets the filtered list to include all persons from the address book.
+    * Returns a `CommandResult` with a simple success message ("Listed all persons").
+
+2. `ModelManager`
+    * Holds the `updateFilteredPersonList()` method.
+    * When `PREDICATE_SHOW_ALL_PERSONS` is passed in, it resets the internal filtered list to include **all persons**.
+
+3. `PersonCard`
+    * The UI automatically updates to display all persons.
+    * Patients are shown with their respective details (name, phone, address, appointment date, conditions, etc.).
+    * Patients remain **sorted by appointment date** after listing — because the internal list is always maintained sorted whenever patients are added or edited.
+
+#### Design Considerations
+
+* **Simplicity:**  
+  No arguments are required — a simple `list` command brings back the full patient list immediately.
+
+* **Fault Tolerance:**  
+  No errors occur if `list` is used when already viewing all patients — the operation is harmless and simply reaffirms the full list.
+
+* **Consistency:**  
+  Patients are consistently displayed **sorted by upcoming appointment date** to help nurses easily prioritize visits.
+
+* **Extensibility:**  
+  Future versions could extend the `list` command with optional flags (e.g., `list archived`) to display archived patients separately without affecting the current structure.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
