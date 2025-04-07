@@ -214,22 +214,30 @@ This feature supports home-visit nurses and healthcare workers in efficiently ma
 * **Behavior:**
     * Adds a new patient entry into SilverCare’s records if the command is valid.
     * Adding beyond the maximum patient limit (30 patients) is disallowed.
-    * Duplicate checking is performed based on custom logic (detailed below).
+    * Duplicate checking is performed based on custom logic.
 
 
-#### Duplicate Checking Logic
-
-SilverCare uses a **custom duplicate definition** suited for elderly care contexts:
-
-* Two persons are treated as **duplicates** **only if both**:
-    * Their **names are identical**, and
-    * Their **phone numbers are identical**.
-
-* Otherwise, they are treated as **different individuals**, even if:
-    * They share the same phone number but have different names (e.g. shared phones).
-    * They share the same name but have different phone numbers.
-
-This design acknowledges that in settings like old age homes or multi-residence households, different patients may share contact numbers or addresses.
+<div class="alert alert-primary">
+  <strong>📋 Duplicate Checking Logic:</strong><br><br>
+  SilverCare uses a <strong>custom duplicate definition</strong> suited for elderly care contexts:<br><br>
+  <ul>
+    <li>Two patients are treated as <strong>duplicates only if both</strong>:
+      <ul>
+        <li>Their <strong>names</strong> are identical, and</li>
+        <li>Their <strong>phone numbers</strong> are identical.</li>
+      </ul>
+    </li>
+    <br>
+    <li>Otherwise, they are treated as <strong>different individuals</strong>, even if:
+      <ul>
+        <li>They share the same phone number but have different names (e.g., shared phones).</li>
+        <li>They share the same name but have different phone numbers.</li>
+      </ul>
+    </li>
+  </ul>
+  <br>
+  This design acknowledges that in settings like old age homes or multi-residence households, different patients may share contact numbers or addresses.
+</div>
 
 
 #### Key Classes & Logic
@@ -272,11 +280,6 @@ This design acknowledges that in settings like old age homes or multi-residence 
     * Ensures simplicity in validation and consistency in stored data.
     * Avoids ambiguity across international formats if country codes are added separately in the future.
 
-* **Patient-Focused Data Entry:**
-    * SilverCare is designed to manage elderly patients, not caregivers or next-of-kin.
-    * If the contact number provided belongs to a caregiver or family member instead of the patient, it is recommended to clearly mention this information using the `-det` (detail tag) field.
-    * This helps users maintain clarity when viewing patient records, but it is **not strictly enforced** by the system.
-
 * **Fault Tolerance:**
     * If mandatory fields are missing, field formats are invalid (e.g., wrong phone number, invalid date), or constraints are violated (e.g., exceeding name length), the `add` command fails safely.
     * Clear error messages guide the user to correct the input without crashing the system.
@@ -286,6 +289,14 @@ This design acknowledges that in settings like old age homes or multi-residence 
 
 * **Consistency:**
     * All new patients are validated, parsed, and added through a consistent, centralized flow, ensuring system-wide data integrity.
+
+<div class="alert alert-primary">
+  <strong>💡 Patient-Focused Data Entry:</strong><br><br>
+  SilverCare is designed to manage <strong>elderly patients</strong>, not caregivers or next-of-kin.<br><br>
+  If the contact number provided belongs to a caregiver or family member instead of the patient, it is recommended to clearly mention this information using the <code>-det</code> (detail tag) field.<br><br>
+  This helps users maintain clarity when viewing patient records, but it is <strong>not strictly enforced</strong> by the system.
+</div>
+
 
 
 ### Delete Patient or Clear List
@@ -301,13 +312,16 @@ This two-step process helps prevent accidental data loss.
 * **Confirmation format:** `y` – Confirms and proceeds with the pending delete or clear operation.
 * **Abort format:** `n` – Cancels the pending delete or clear operation.
 
-Important behavior notes:
-* The deletion or clearing does **not** happen immediately upon `delete` or `clear`.
-* The system enters a **pending** state, waiting for explicit user confirmation.
-* If the user types a recognized new command (other than `y` or `n`), the pending operation is **abandoned** automatically.
-* If the user types an unrecognized input while a pending operation exists, the system **prompts the user again** for a clear yes (`y`) or no (`n`).
+<div class="alert alert-warning">
+  <strong>⚠️ Important Behavior Notes:</strong>
+  <ul>
+    <li>The deletion or clearing does <strong>not</strong> happen immediately upon <code>delete</code> or <code>clear</code>.</li>
+    <li>The system enters a <strong>pending</strong> state, waiting for explicit user confirmation.</li>
+    <li>If the user types a recognized new command (other than <code>y</code> or <code>n</code>), the pending operation is <strong>abandoned</strong> automatically.</li>
+    <li>If the user types an unrecognized input while a pending operation exists, the system <strong>prompts the user again</strong> for a clear yes (<code>y</code>) or no (<code>n</code>).</li>
+  </ul>
+</div>
 
----
 
 #### Key Classes & Logic
 
@@ -371,22 +385,31 @@ The `find` command allows users to search and filter patients by their name. Thi
 * Multiple keywords can be provided and are space-separated.
 
 
-* **Example usage:**
-  ```
-  find -n John
-  find -n Alice Bob
-  ```
+* **Example usage:** `find -n John` / `find -n Alice Bob`
+
 
 #### **Behavior**
 
 * Matches patients whose names contain **all** of the specified keywords.
 * Matching is **case-insensitive** and allows for **partial matches**.
-* **All provided keywords must be found in the same patient's name** for a match to occur.
-    - Example: If the user searches `find -n Alice Bob`:
-        - "Alice Tan" matches "Alice" but not "Bob".
-        - "Bob Lee" matches "Bob" but not "Alice".
-        - **Result:** No patient will be displayed because neither patient matches both keywords simultaneously.
 * If no patients match the keywords, an appropriate message is displayed to the user.
+
+
+<div class="alert alert-warning">
+  <strong>⚠️ Important Behavior Note:</strong><br><br>
+  <ul>
+    <li><strong>All provided keywords must be found in the same patient's name</strong> for a match to occur.</li>
+    <br>
+    <li>Example: If the user searches <code>find -n Alice Bob</code>:
+      <ul>
+        <li>"Alice Tan" matches "Alice" but not "Bob".</li>
+        <li>"Bob Lee" matches "Bob" but not "Alice".</li>
+        <li><strong>Result:</strong> No patient will be displayed because neither patient matches both keywords simultaneously.</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
 
 #### Highlighting Matches
 
@@ -448,7 +471,7 @@ This improves usability by helping users quickly spot the relevant matches in th
 
 ### Find Patients by Appointment Date
 
-The `find` feature allows users to search for patients who have a specific appointment date scheduled.  
+This `find` feature allows users to search for patients who have a specific appointment date scheduled.  
 This functionality is helpful when nurses want to quickly check who they are scheduled to visit on a particular day.
 
 #### Overview
