@@ -27,16 +27,18 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("91")); // less than 3 digits
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("1234567890123456")); // 16 digits (too long)
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("123")); // exactly 3 digits (min)
+        assertTrue(Phone.isValidPhone("12345678")); // 8 digits
+        assertTrue(Phone.isValidPhone("123456789012345")); // exactly 15 digits (max)
     }
+
 
     @Test
     public void equals() {
@@ -57,4 +59,26 @@ public class PhoneTest {
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
     }
+
+    @Test
+    public void isValidPhone_minLengthEdgeCase_returnsTrue() {
+        assertTrue(Phone.isValidPhone("123")); // 3 digits
+    }
+
+    @Test
+    public void isValidPhone_maxLengthEdgeCase_returnsTrue() {
+        assertTrue(Phone.isValidPhone("123456789012345")); // 15 digits
+    }
+
+    @Test
+    public void isValidPhone_belowMinLength_returnsFalse() {
+        assertFalse(Phone.isValidPhone("12")); // 2 digits
+    }
+
+    @Test
+    public void isValidPhone_aboveMaxLength_returnsFalse() {
+        assertFalse(Phone.isValidPhone("1234567890123456")); // 16 digits
+    }
+
+
 }

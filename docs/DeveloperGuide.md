@@ -114,7 +114,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking execution of delete command API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -123,11 +123,28 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `LogicManager` is called upon to execute a command (e.g. `delete 1`), it passes the input to the `AddressBookParser`.
+
+2. The `AddressBookParser` identifies the command and, if necessary, creates a specific parser (e.g. `DeleteCommandParser`) to parse the input.
+
+3. This results in a `Command` object (e.g. a `DeleteCommand`) which is returned and then executed by `LogicManager`.
+
+4. The command interacts with the `Model` during execution — for example, it may call `setPendingDeletion(person)` to store the target person while waiting for user confirmation.
+
+5. The result of this execution is wrapped in a `CommandResult` object, which is returned from `Logic`.
+
+---
+
+6. When the user types `y` to confirm, the input is passed again to `LogicManager`, which treats it as a **new command**.
+
+7. The `AddressBookParser` parses this as a confirmation and directly returns a `ConfirmCommand`.
+   > 📌 *Note:* `AddressBookParser` does **not** create a specific parser for confirm commands, as they are simple and handled directly.
+
+8. `LogicManager` executes the `ConfirmCommand`, which:
+    - Retrieves the person marked for deletion via `getPendingDeletion()`
+    - Performs the deletion using `deletePerson(person)`
+
+9. A new `CommandResult` is returned, indicating that the deletion was successful.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -320,12 +337,15 @@ The following class diagram shows the relationship between key classes involved:
 
 **Target user profile**:
 
-* nurses who do home visits for elderly patients
-* has a need to manage a significant number of contacts
-* is reasonably comfortable using CLI apps
+* Nurses who do home visits for elderly patients
+* Needs to manage a significant number of contacts
+* Is reasonably comfortable using CLI-based apps
 
 **Value proposition**: The app will help nurses caring for elderly patients manage contact details of their home-visit patients within one platform.
 
+<blockquote style="color: #333333;">
+Note: At present, SilverCare is designed to manage patient contacts only. It does not support storing information for family members, guardians, or emergency contacts. This decision was made intentionally to keep the app focused and avoid ambiguity during patient record management.
+</blockquote>
 
 ### User stories
 
@@ -362,8 +382,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy nurse                                  | categorize patients based on their conditions or priority level | focus on urgent cases first                                        |
 | `*`      | home-visit nurse with many patients         | filter my patient list by location                              | optimize my travel schedule for house visits                       |
 
-
-*{More to be added}*
 
 ### Use cases
 
@@ -631,20 +649,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System terminates the application.
 4. Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 20 entries without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. The system should efficiently handle at least 30 patient records, with all operations (e.g., search, add, delete) completing within 1 second on typical hardware.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be able to search patient records within 2 seconds.
 5. The interface should be accessible and navigable by nurses with basic training within 1 hour.
    The app should allow viewing patient details even without an internet connection.
 6. The system’s user interface (UI) and documentation must be clear, comprehensive, and understandable for nurses and healthcare professionals without advanced IT skills.
-7. The app is not required to connect to the hospital’s database
-
-*{More to be added}*
+7. The app is not required to connect to the hospital’s database.
+8. The application must function fully offline, with all patient details accessible without an internet connection.
+9. The app is not required to handle phone calls to the contact numbers of entries.
+10. The application should gracefully handle invalid inputs and unexpected errors, providing clear error messages without crashing.
 
 ### Glossary
 
@@ -869,80 +886,74 @@ All members contributed equally across design, implementation, and testing phase
 ## **Appendix: Planned Enhancements**
 
 Team size: 5
+### 1. Disallow adding past appointment dates
+**Current Limitation:** The system currently allows users to add appointment dates that have already passed.
 
-1. **Disallow adding of past appointment dates**
+**Planned Enhancement:** Restrict users from entering past dates for new or edited appointments.
 
-   **Current Flaw:** The application allows users to add appointments in the past, which is unrealistic in most use cases.
+**Sample Output:**
+`Appointment date must be today or later.`
 
-   **Planned Enhancement:** We will reject commands that attempt to schedule appointments for dates earlier than the current date.
+### 2. Make the medicine field more structured and repeatable
+**Current Limitation:**
+The medicine field is currently a single long string, which accepts comma-separated medicine names but offers no structure or repeatability.
+Users cannot add medicine entries separately or include details like dosage and frequency.
 
-   **Sample Output:** `Appointment date must be today or later.`
+**Planned Enhancement:**
+Allow the `-med` field to be repeatable and support structured input for each entry (e.g. name, dosage, frequency).
+This makes it easier to store, update, and display individual medication records.
 
-2. **Warn users of overlapping appointment dates**
+**Sample Input (future):**
+`-med Paracetamol (500mg, twice a day) -med Omeprazole (20mg, once daily)`
 
-   **Current Flaw:** Users can accidentally schedule multiple appointments for the same time without any warning.
+### 3. Improve input validation for name-based search
+**Current Limitation:**
+The `find -n` command accepts any non-empty input and defaults to “no patients found.”
 
-   **Planned Enhancement:** The system will display a warning if a new appointment overlaps with an existing one for the same patient.
+**Planned Enhancement:**
+Detect clearly invalid inputs (e.g. empty, all-symbol, extremely short) and display a more meaningful error message.
 
-   **Sample Output:** `Warning: Appointment overlaps with an existing one on 2025-07-20.`
+**Sample Output:** `Search term is invalid. Please enter a proper name.`
 
-3. **Allow adding recurring appointment dates**
+### 4. Allow appointment date to be cleared using the edit command
+**Current Limitation:**
+Unlike `-c` and `-det`, providing an empty `-d` does not clear an existing appointment date.
 
-   **Current Flaw:** Users must manually input each recurring appointment, which is inefficient.
+**Planned Enhancement:**
+Support clearing the appointment date by accepting `-d` with no argument during edit.
 
-   **Planned Enhancement:** Support a `-r weekly` or `-r monthly` flag to automatically add recurring appointments.
+**Sample Input:** `edit 1 -d  `
 
-   **Sample Input:** `add -n John -d 2025-07-20 -r weekly -t 5` (creates 5 weekly recurring appointments)
+### 5. Add find-and-replace functionality for editing tags
+**Current Limitation:**
+Editing a single condition or detail tag requires re-entering all tags, as the current logic replaces the entire existing list.
 
-4. **Make medicine field more detailed**
+**Planned Enhancement:**
+Introduce a `find-and-replace` syntax to update a specific tag in-place.
 
-   **Current Flaw:** Only medicine names are captured, with no information on dosage or frequency.
+**Sample Input:**
+`edit 2 -c Migraine->Chronic Migraine -det Lives Alone->Requires Assistance`
 
-   **Planned Enhancement:** Allow inputs like `"Paracetamol (500mg, twice a day)"` in the medicine field.
+### 6. Warn users about overlapping appointments
+**Current Limitation:**
+There is no indication if multiple appointments are scheduled for the same date and time.
 
-   **Sample Input:** `add ... -med Paracetamol (500mg, twice a day)`
+**Planned Enhancement:**
+Detect and warn the user when a newly entered appointment overlaps with an existing one for the same patient.
 
-5. **Add find-and-replace functionality for editing tags (Conditions/Details)**
+**Sample Output:**
+`Warning: This appointment overlaps with another on 2025-07-20 at 14:00.`
 
-   **Current Flaw:** Users must retype all tags when editing a single condition or detail.
+### 7. Fix highlight issue in multi-word name searches
+**Current Limitation:**
+When using `find -n` with multi-word input (e.g. John Lim), matches are returned but highlighted text only works for single words.
 
-   **Planned Enhancement:** Support syntax like `edit -c Migraine->Chronic Migraine` to update one tag.
+**Planned Enhancement:**
+Improve result rendering to highlight all matched words in multi-keyword searches.
 
-   **Sample Input:** `edit 1 -c Sleep Apnea->Mild Sleep Apnea -det Fall Prone->Bedridden`
+### 8. Enable multi-name search to match across multiple patients
+**Current Limitation:**
+`find -n Bob Amy` only returns matches where both keywords are found in the same patient name. It does not return separate matches for “Bob” and “Amy.”
 
-6. **Color-code urgent appointments in the UI**
-
-   **Current Flaw:** All appointments look the same regardless of urgency.
-
-   **Planned Enhancement:** Use colored backgrounds (e.g. red, orange, yellow) in appointment cards to indicate urgency.
-
-   **Sample UI:**
-    * Red background → urgent
-    * Orange background → moderate urgency
-    * Yellow background → low urgency
-
-7. **Allow users to choose sorting method**
-
-   **Current Flaw:** Appointments are sorted by date only, and users cannot change this.
-
-   **Planned Enhancement:** Provide a command like `sort name`, `sort medicine`, or `sort date`.
-
-   **Sample Input:** `sort name`
-
-   **Sample Output:** Sorted contact list by name (A-Z)
-
-8. **Change command input field from single line to text box**
-
-   **Current Flaw:** Long input commands are hard to navigate and edit due to the limited width of the input field.
-
-   **Planned Enhancement:** Replace the single-line input with a multi-line text box to improve visibility and ease of editing.
-
-   **Sample UI:** A resizable input box that allows scrolling and full command visibility.
-
-9. **Allow uploading of patient images**
-
-   **Current Flaw:** Users rely solely on names to identify patients, which may lead to errors.
-
-   **Planned Enhancement:** Allow users to attach an image file to each patient profile for clearer visual identification.
-
-   **Sample Input:** `add -n John -img /path/to/john_photo.jpg`
+**Planned Enhancement:**
+Allow find -n to return results for any of the keywords (logical OR), not just matches containing all of them.

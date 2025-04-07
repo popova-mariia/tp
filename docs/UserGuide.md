@@ -17,6 +17,7 @@ There are also a few helpful buttons for things like getting help, changing the 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
 1. Check if Java is installed
@@ -97,7 +98,7 @@ Before jumping into the features, here are a few simple tips on how commands wor
 
 > **Tip for PDF users:** If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.
 >
-> Additionally, be aware that some symbols (such as hyphens: `-`) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
+> Also, be aware that some symbols (such as hyphens: `-`) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
 
 </div>
 
