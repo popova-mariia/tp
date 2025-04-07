@@ -201,7 +201,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             personListPanelPlaceholder.getChildren().clear();
             personListPanel = new PersonListPanel(
@@ -210,11 +209,8 @@ public class MainWindow extends UiPart<Stage> {
             );
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-            if (commandResult.getDisplayType() == CommandResult.DisplayType.WARNING) {
-                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), true);
-            } else {
-                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), false);
-            }
+            boolean isWarning = commandResult.getDisplayType() == CommandResult.DisplayType.WARNING;
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), isWarning);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -227,7 +223,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), false);
             throw e;
         }
     }
