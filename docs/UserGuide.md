@@ -279,7 +279,7 @@ Use the find command to search for patients by name, appointment date, or to vie
 
 #### 3. Find **Upcoming Appointments**:
 
-`find upcoming` shows all patients with appointment dates that are after today’s date.
+`find upcoming` shows all patients with appointment dates that are after current time.
 
 **Command Format:** `find upcoming`
 * Automatically filters for future appointments.
