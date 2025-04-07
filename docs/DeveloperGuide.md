@@ -360,6 +360,71 @@ Important behavior notes:
   Future operations that require user confirmation can reuse the same pending confirmation mechanism (e.g., batch deletions, bulk updates).
 
 
+### **Find patients by name**
+
+The `find` command allows users to search and filter patients by their name. This is particularly useful for home-visit nurses who need to locate patient records quickly during appointments.
+
+#### **Overview**
+
+* **Find command format:** `find -n KEYWORDS` 
+* `KEYWORDS` can be a full name or a partial name. 
+* Multiple keywords can be provided and are space-separated.
+
+
+* **Example usage:**
+  ```
+  find -n John
+  find -n Alice Bob
+  ```
+
+#### **Behavior**
+
+* Matches patients whose names contain **all** of the specified keywords.
+* Matching is **case-insensitive** and allows for **partial matches**.
+* **All provided keywords must be found in the same patient's name** for a match to occur.
+    - Example: If the user searches `find -n Alice Bob`:
+        - "Alice Tan" matches "Alice" but not "Bob".
+        - "Bob Lee" matches "Bob" but not "Alice".
+        - **Result:** No patient will be displayed because neither patient matches both keywords simultaneously.
+* If no patients match the keywords, an appropriate message is displayed to the user.
+
+
+#### **Key Classes & Logic**
+
+1. `FindCommand`
+    * Accepts a `Predicate<Person>` when constructed.
+    * During execution, calls `model.updateFilteredPersonList(predicate)`.
+    * Returns a `CommandResult` indicating the number of patients found, or a message if none were found.
+
+2. `NameContainsKeywordsPredicate`
+    * Implements `Predicate<Person>`.
+    * Takes a list of keywords.
+    * Returns `true` if the `Person`'s name contains any of the keywords, ignoring case.
+
+3. `ModelManager`
+    * Handles updating the filtered person list via `updateFilteredPersonList(predicate)`.
+    * The updated list is then shown in the UI automatically.
+
+#### **Design Considerations**
+
+* **Case-Insensitive Search:**  
+  Improves usability by ignoring capitalization differences between user input and stored names.
+
+* **Partial Matching:**  
+  Allows flexible searches — e.g., entering "Ann" matches "Annabelle" and "Johann".  
+  This enables nurses to find patients even if they cannot remember the full name or exact spelling, improving efficiency during home visits.
+
+* **Independent Patient Matching:**  
+  Keywords are checked independently against each patient’s name. There is no cross-patient aggregation of keywords.  
+  This ensures that search results accurately reflect a single patient's record matching all criteria, avoiding confusion where unrelated patients might otherwise satisfy different parts of the search unintentionally.
+
+* **Fault Tolerance:**  
+  No crashes occur if there are no matching results. An informative message is displayed.
+
+* **Extensibility:**  
+  The `Predicate<Person>` architecture makes it easy to extend to other fields (e.g., conditions, addresses) without changing the core logic of `FindCommand`.
+
+
 ### Find upcoming appointments
 
 The `upcoming` feature under the `find` command allows users to filter and display only those persons who have future appointments scheduled. This functionality is useful for quickly identifying clients with pending appointments.
@@ -396,9 +461,20 @@ The following class diagram shows the relationship between key classes involved:
 
 #### Design Considerations
 
-* **Fault Tolerance:** Any parsing errors during predicate evaluation result in a safe `false` return, preventing the app from crashing.
-* **Extensibility:** This approach cleanly separates predicates, allowing future filters (e.g., "past appointments", "appointments this week") to be added by introducing new `Predicate<Person>` classes.
-* **Single Responsibility:** Each class follows the SRP principle—e.g., `FindCommandParser` handles parsing, `UpcomingAppointmentPredicate` handles logic, and `AppointmentDate` handles formatting.
+* **Fault Tolerance:**  
+  Parsing errors during predicate evaluation (such as invalid appointment dates) result in a safe `false` return.  
+  This ensures the app remains stable and does not crash even if invalid data is encountered during a search.
+
+* **Extensibility:**  
+  The predicate-based design allows easy addition of new search filters (e.g., finding past appointments, filtering by appointment week) without modifying existing logic.  
+  Developers can simply introduce new `Predicate<Person>` classes to extend functionality.
+
+* **Single Responsibility Principle (SRP):**  
+  Each class involved in the find-upcoming feature has a clear and separate responsibility:
+    - `FindCommandParser` handles parsing the user’s input.
+    - `UpcomingAppointmentPredicate` handles checking appointment timing logic.
+    - `AppointmentDate` handles formatting and validation of date strings.  
+      This separation improves maintainability and readability of the codebase.
 
 --------------------------------------------------------------------------------------------------------------------
 
