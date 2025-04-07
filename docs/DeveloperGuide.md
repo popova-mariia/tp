@@ -388,6 +388,14 @@ The `find` command allows users to search and filter patients by their name. Thi
         - **Result:** No patient will be displayed because neither patient matches both keywords simultaneously.
 * If no patients match the keywords, an appropriate message is displayed to the user.
 
+#### Highlighting Matches
+
+* After search results are displayed, the **matching portions** of the names are **highlighted**.
+* Highlighting is case-insensitive and works even for partial matches.
+    * Example: Searching for `find -n ann` will highlight "Ann" in "Annabelle" and "Johann".
+
+This improves usability by helping users quickly spot the relevant matches in the results list.
+
 
 #### **Key Classes & Logic**
 
@@ -404,6 +412,9 @@ The `find` command allows users to search and filter patients by their name. Thi
 3. `ModelManager`
     * Handles updating the filtered person list via `updateFilteredPersonList(predicate)`.
     * The updated list is then shown in the UI automatically.
+
+4. `PersonCard`
+    * Handles **highlighting** of matching name parts in the UI after a successful search.
 
 #### **Design Considerations**
 
@@ -423,6 +434,94 @@ The `find` command allows users to search and filter patients by their name. Thi
 
 * **Extensibility:**  
   The `Predicate<Person>` architecture makes it easy to extend to other fields (e.g., conditions, addresses) without changing the core logic of `FindCommand`.
+
+#### Example
+
+| User Input | Behavior                                                                                              |
+|------------|-------------------------------------------------------------------------------------------------------|
+| `find -n John` | Displays all patients whose names contain the word "John" (case-insensitive).                         |
+| `find -n joHN` | Displays the same results as `find -n John` — the search is case-insensitive.                         |
+| `find -n` | Error — name keyword cannot be empty.                                                                 |
+| `find -n John Doe` | Displays all patients whose names contain both "John" and "Doe" in that order. |
+| `find -n Annette John` | Displays patients whose names contain both "Annette" and "John".                                      |
+
+
+### Find Patients by Appointment Date
+
+The `find` feature allows users to search for patients who have a specific appointment date scheduled.  
+This functionality is helpful when nurses want to quickly check who they are scheduled to visit on a particular day.
+
+#### Overview
+
+* **Command format:** `find -d APPOINTMENT_DATE`
+* Filters patients whose appointment date exactly matches the provided date input.
+* Supports both date-only format (e.g., `yyyy-MM-dd`) and full datetime format (e.g., `yyyy-MM-dd HH:mm`).
+
+#### Behavior
+
+* Users must provide a valid date format. Otherwise, parsing fails and an error is shown.
+* Matching is **exact** — the appointment must match the date input provided.
+    - If the input includes only the date (e.g., `2025-04-10`), only appointments on that date (ignoring time) are matched.
+    - If the input includes date and time (e.g., `2025-04-10 14:30`), the match is stricter, including both date and time.
+* Partial matches (e.g., just matching the year or month) are not supported.
+
+
+#### Key Classes & Logic
+
+1. `FindCommandParser`
+    * Detects the `-d` prefix in user input.
+    * Parses the appointment date string provided.
+    * Creates a `FindCommand` with an `AppointmentDatePredicate`.
+    * Throws a `ParseException` if the date format is invalid.
+
+2. `AppointmentDatePredicate`
+    * Implements `Predicate<Person>`.
+    * Checks if a patient's appointment date matches the parsed input date.
+    * Supports parsing both:
+        * **Date-only** (`yyyy-MM-dd`) — matches any appointment with that date.
+        * **Datetime** (`yyyy-MM-dd HH:mm`) — matches the exact appointment datetime.
+
+3. `FindCommand`
+    * Accepts the `AppointmentDatePredicate` during construction.
+    * During execution, calls `model.updateFilteredPersonList(predicate)`, updating the view to show only matching patients.
+
+4. `AppointmentDate`
+    * Represents a patient's appointment date field.
+    * Ensures that date strings stored in the system are valid and consistent.
+
+5. `PersonCard`
+    * Handles **highlighting** of matching appointment dates in the UI after a successful search.
+
+
+#### Design Considerations
+
+* **Strict Date Parsing:**  
+  The command enforces strict formatting to prevent confusion caused by ambiguous or partial dates.
+
+* **Two-level Matching Flexibility:**
+    - If users input only the date (no time), matches are based on the date alone.
+    - If users input full date and time, matches are based on both.
+
+  This balances ease of use (for day-based searches) with precision (for exact-time searches).
+
+* **Fault Tolerance:**  
+  When invalid date formats are entered, the system throws a `ParseException` with a clear message, guiding users to correct their input without crashing the app.
+
+* **Extensibility:**  
+  The `Predicate<Person>` structure means the logic for date matching is fully encapsulated. Future enhancements (e.g., range searches, week-based searches) can be added by introducing new predicates without modifying core classes like `FindCommand`.
+
+* **Highlighting Matches:**  
+  Matching appointment dates are **highlighted** in the UI after search results are shown.  
+  This improves visibility and quickly draws attention to relevant fields.
+
+
+#### Example
+
+| User Input | Behavior |
+|------------|----------|
+| `find -d 2025-04-10` | Displays all patients with appointments on 10 April 2025, regardless of time. |
+| `find -d 2025-04-10 14:30` | Displays only patients with an appointment exactly on 10 April 2025 at 2:30 PM. |
+| `find -d 2025-4-10` | Error — invalid format. Requires leading zeros (e.g., `2025-04-10`). |
 
 
 ### Find upcoming appointments
