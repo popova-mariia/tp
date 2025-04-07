@@ -195,89 +195,98 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add New Patient
 
-#### Proposed Implementation
+The `add` feature allows users to register a new **elderly patient** into SilverCare’s address book, ensuring essential information such as name, phone number, address, gender, appointment date, medicines, and medical notes are captured.  
+This feature supports home-visit nurses and healthcare workers in efficiently managing patient records.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Overview
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* **Command format:**  
+  `add -n NAME -p PHONE -a ADDRESS -g GENDER [-d APPOINTMENT_DATE] [-c CONDITION]... [-det DETAIL]... [-med MEDICINE]`
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+* **Required fields:**  
+  `-n` (Name), `-p` (Phone), `-a` (Address), `-g` (Gender)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+* **Optional fields:**  
+  `-d` (Appointment Date), `-c` (Condition Tags), `-det` (Detail Tags), `-med` (Medicine)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+* **Behavior:**
+    * Adds a new patient entry into SilverCare’s records if the command is valid.
+    * Adding beyond the maximum patient limit (30 patients) is disallowed.
+    * Duplicate checking is performed based on custom logic (detailed below).
 
-![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+#### Duplicate Checking Logic
 
-![UndoRedoState1](images/UndoRedoState1.png)
+SilverCare uses a **custom duplicate definition** suited for elderly care contexts:
 
-Step 3. The user executes `add -n David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+* Two persons are treated as **duplicates** **only if both**:
+    * Their **names are identical**, and
+    * Their **phone numbers are identical**.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+* Otherwise, they are treated as **different individuals**, even if:
+    * They share the same phone number but have different names (e.g. shared phones).
+    * They share the same name but have different phone numbers.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+This design acknowledges that in settings like old age homes or multi-residence households, different patients may share contact numbers or addresses.
 
-</div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+#### Key Classes & Logic
 
-![UndoRedoState3](images/UndoRedoState3.png)
+* `AddressBookParser`
+    * Recognizes the `add` command.
+    * Passes arguments to `AddCommandParser`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+* `AddCommandParser`
+    * Tokenizes and parses input arguments based on defined prefixes.
+    * Validates presence of mandatory fields.
+    * Parses fields via `ParserUtil`, applying constraints (e.g., name length, phone format).
+    * Constructs a `Person` object.
+    * Returns an `AddCommand` initialized with the new `Person`.
 
-</div>
+* `AddCommand`
+    * Executes the addition of the new `Person` into the model's address book.
+    * Enforces duplicate checking and the patient limit constraint.
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+* `UniquePersonList`
+    * Adds the `Person` if no duplicate is found and capacity permits.
+    * Automatically sorts the list by upcoming appointment dates.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+* `Person`
+    * Represents an elderly patient record, holding immutable fields such as name, phone, address, gender, appointment date, medicines, conditions, and details.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-</div>
+#### Design Considerations
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+* **Name Length Restriction:**
+    * Names must be between **1 to 50 characters**.
+    * This ensures proper UI display without breaking layout across different window sizes.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+* **Phone Number Validation:**
+    * Must consist of only **numeric digits (0-9)**.
+    * Must be between **3 to 15 digits**.
+    * No `+`, `-`, spaces, or special characters are permitted.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+  *Rationale:*
+    * Ensures simplicity in validation and consistency in stored data.
+    * Avoids ambiguity across international formats if country codes are added separately in the future.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+* **Patient-Focused Data Entry:**
+    * SilverCare is designed to manage elderly patients, not caregivers or next-of-kin.
+    * If the contact number provided belongs to a caregiver or family member instead of the patient, it is recommended to clearly mention this information using the `-det` (detail tag) field.
+    * This helps users maintain clarity when viewing patient records, but it is **not strictly enforced** by the system.
 
-</div>
+* **Fault Tolerance:**
+    * If mandatory fields are missing, field formats are invalid (e.g., wrong phone number, invalid date), or constraints are violated (e.g., exceeding name length), the `add` command fails safely.
+    * Clear error messages guide the user to correct the input without crashing the system.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+* **Extensibility:**
+    * Adding more optional fields (e.g., emergency contacts) can be done by extending `Person`, `AddCommandParser`, and `AddCommand` accordingly.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+* **Consistency:**
+    * All new patients are validated, parsed, and added through a consistent, centralized flow, ensuring system-wide data integrity.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Find upcoming appointments
 
