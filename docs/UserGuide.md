@@ -17,6 +17,8 @@ There are also a few helpful buttons for things like getting help, changing the 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Check if Java is installed
@@ -40,8 +42,11 @@ There are also a few helpful buttons for things like getting help, changing the 
    * For Mac/Linux users, open Terminal and enter the following:
      1. `cd Desktop/SilverCare`
      2. `java -jar silvercare.jar`
+
    
-   ![Ui](images/Ui.png)
+![Ui](images/Ui.png)
+
+<div style="page-break-after: always;"></div>
 
 6. Start fresh!
 
@@ -66,9 +71,12 @@ There are also a few helpful buttons for things like getting help, changing the 
 
 9. You're ready to go! That’s it, SilverCare is set up and ready. Start managing your patient records with ease!
 
-> For a quick overview, check out our [Command Summary](#command-summary), which lists all the key commands in one place.
+<blockquote style="color: #333333;">
+  For a quick overview, check out our <a href="#command-summary">Command Summary</a>, which lists all the key commands in one place.
+</blockquote>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -95,11 +103,13 @@ Before jumping into the features, here are a few simple tips on how commands wor
     **e.g.** `help 123` is treated the same as `help`. 
 * All SilverCare commands are case-sensitive. Please use the lowercase command words exactly as shown in this guide.
 
-> **Tip for PDF users:** If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.
->
-> Also, be aware that some symbols (such as hyphens: `-`) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
-
+<blockquote style="color: #333333;">
+  <strong>Tip for PDF users:</strong> If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.<br><br>
+  Also, be aware that some symbols (such as hyphens: <code>-</code>) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
+</blockquote>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
@@ -116,7 +126,6 @@ The Help window also has a **“View full User Guide”** button that links back
 * **Type**: help
 * **Press F1** on your keyboard
 * Or **click the Help button** in the top menu bar
-
 
 
 ### Adding a person: `add`
@@ -273,7 +282,7 @@ Use the find command to search for patients by name, appointment date, or to vie
 
 #### 1. Find by **Name**: 
 
-    `find -n NAME` searches for patients whose **names** include the keyword you type.
+`find -n NAME` searches for patients whose **names** include the keyword you type.
    
    **Command Format:** `find -n KEYWORD [MORE_KEYWORDS]`
    * **Case-insensitive:** john matches john, John or JOHN.
@@ -282,33 +291,34 @@ Use the find command to search for patients by name, appointment date, or to vie
 
    **Examples:**
    
-    `find -n John`  e.g. returns John Doe and John Lim.
+`find -n John`  e.g. returns John Doe and John Lim.
 
 ![find john](images/findJohn.png)
 
 #### Find by **Appointment Date**: 
 
-    `find -d APPOINTMENT DATE` searches for patients who have an appointment on a **specific date**.
+`find -d APPOINTMENT DATE` searches for patients who have an appointment on a **specific date**.
 
-    **Command Format:** `find -d YYYY-MM-DD [HH:mm]`
+**Command Format:** `find -d YYYY-MM-DD [HH:mm]`
     * Date must be in the **correct format**, with `HH:mm` being optional
     * Date must be a **valid date**
     * Results will include all patients with matching appointment dates.
     * Matching dates will be **highlighted** in the results
 
-      **Example:** `find -d 2026-12-21`
+**Example:** `find -d 2026-12-21`
 
 #### 3. Find **Upcoming Appointments**: 
 
-    `find upcoming` shows all patients with appointment dates that are after today’s date.
+`find upcoming` shows all patients with appointment dates that are after today’s date.
    
    **Command Format:** `find upcoming`
    * Automatically filters for future appointments.
    * Sorted by the nearest upcoming date first.
    * Does not include highlighting in the results.
 
-   > If there are no upcoming appointments, the system will let you know.
-
+<blockquote style="color: #333333;">
+  If there are no upcoming appointments, the system will let you know.
+</blockquote>
 
 
 ### Deleting a person : `delete`
@@ -403,8 +413,7 @@ The data is stored in JSON format, which you can open with any text editor.
 
 <p><strong>Sample JSON Structure (Do not modify unless you understand the format):</strong></p>
 
-<pre><code class="language-json">
-{
+<pre><code class="language-json">{
   "persons": [
     {
       "name": "John Doe",
@@ -446,10 +455,11 @@ You can switch between them anytime:
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
-**Q**: The app doesn’t open when I run it. What should I check?
+**Q: The app doesn’t open when I run it. What should I check?**
 
 **A**: Here are some common issues to troubleshoot:
 * Java not installed or wrong version 
@@ -467,7 +477,7 @@ You can switch between them anytime:
 
 
 
-**Q**: What happens if I type the command wrongly?
+**Q: What happens if I type the command wrongly?**
 
 **A**: Don’t worry, SilverCare has built-in error handling. If you make a mistake in your command format (like missing a field or typing something incorrectly), the app will:
 * Show an error message
@@ -476,7 +486,7 @@ You can switch between them anytime:
     Example: If you type `add -n John`, SilverCare will tell you that required fields are missing and show you the correct format.
 
 
-**Q**: How do I transfer my data to another computer?
+**Q: How do I transfer my data to another computer?**
 
 **A**: When you first run SilverCare on a new computer, it automatically creates a data file in a folder named data, located in the same folder as the app (silvercare.jar).
     
@@ -491,8 +501,10 @@ You can switch between them anytime:
     6. On your new computer, replace the newly created addressbook.json file in the data folder with the one from your old computer.
     7. Reopen SilverCare and your old data should now be visible.
 
-    > If your .jar file is in Documents/SilverCare, your data file will be at:
-    Documents/SilverCare/data/addressbook.json
+<blockquote style="color: #333333;">
+  If your .jar file is in Documents/SilverCare, your data file will be at:
+    <code>Documents/SilverCare/data/addressbook.json</code>
+</blockquote>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -507,6 +519,7 @@ You can switch between them anytime:
 7. **All medical conditions and notes must be retyped when editing.** You cannot edit a single condition or note—editing one requires re-entering all related information.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
