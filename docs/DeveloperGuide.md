@@ -885,8 +885,7 @@ All members contributed equally across design, implementation, and testing phase
 
 ## **Appendix: Planned Enhancements**
 
-Team size: 5 
-
+Team size: 5
 ### 1. Disallow adding past appointment dates
 **Current Limitation:** The system currently allows users to add appointment dates that have already passed.
 
