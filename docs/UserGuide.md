@@ -43,25 +43,24 @@ There are also a few helpful buttons for things like getting help, changing the 
      1. `cd Desktop/SilverCare`
      2. `java -jar silvercare.jar`
 
-   
-![Ui](images/Ui.png)
+   ![Ui](images/Ui.png)
 
-<div style="page-break-after: always;"></div>
+   <div style="page-break-after: always;"></div>
 
 6. Start fresh!
 
    When you first open SilverCare, you might see some sample patient data already filled in.
-   To clear this and start with your own records just follow these simple steps:
+   To **clear** this and start with your own records just follow these simple steps:
 
-   * Type `clear` and press enter
-   * Follow the prompt and type `y` and press enter to clear the sample data!
+   * Type `clear` and press **enter**
+   * Follow the prompt and type `y` and press **enter** to clear the sample data!
 
 7. Need [help](#viewing-help--help)? It’s always nearby
    
    You can open a quick help window anytime by:
-   * Typing: help
-   * Pressing F1, or
-   * Clicking the Help button, followed by Help F1 button, at the top menu bar.
+   * **Typing:** `help`
+   * **Pressing F1**, or
+   * **Clicking the Help button**, followed by Help F1 button, at the top menu bar.
 
     The Help window shows example commands to get you started, and even includes a link back to this full user guide, so you can return here anytime if you need more details.
 
@@ -88,7 +87,7 @@ Before jumping into the features, here are a few simple tips on how commands wor
 
 * Words in **CAPITAL LETTERS** are parameters that you need to fill in.
     
-    **e.g.** `add -n NAME` means you should type something like `add -n John Doe`.
+    **e.g.** `add -n NAME` means you should type something like `add -n John Doe` ([for full command](#command-summary)).
 * Square brackets [ ] mean something is optional.
 
     **e.g.** `-n NAME [-c CONDITION]` can be used as `-n John Doe -c High BP` or just `-n John Doe`.
@@ -101,7 +100,7 @@ Before jumping into the features, here are a few simple tips on how commands wor
 * Extra input won’t break commands like `list`, `help`, `exit`, or `clear`.
 
     **e.g.** `help 123` is treated the same as `help`. 
-* All SilverCare commands are case-sensitive. Please use the lowercase command words exactly as shown in this guide.
+* All SilverCare commands are **case-sensitive**. Please use the lowercase command words exactly as shown in this guide.
 
 <blockquote style="color: #333333;">
   <strong>Tip for PDF users:</strong> If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.<br><br>
@@ -123,10 +122,12 @@ The Help window also has a **“View full User Guide”** button that links back
 
 
 ##### How to open the Help window:
-* **Type**: help
+* **Type**: `help`
 * **Press F1** on your keyboard
 * Or **click the Help button** in the top menu bar
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -141,7 +142,7 @@ Use this command to add a new patient to SilverCare.
 **Required Fields:**
 * **-n NAME:** Patient’s full name
   
-  Accepts alphanumeric characters, spaces, and common special characters:
+  Accepts 1 to 50 characters including alphanumeric characters, spaces, and common special characters:
 
   `, @ / ' . -`
   
@@ -162,9 +163,9 @@ Use this command to add a new patient to SilverCare.
 **Optional Fields:**
 * **-d APPOINTMENT DATE:** Appointment date
 
-    **Formats accepted**: `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` 
+    Formats accepted: `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` 
     
-    Example: `-d 2025-04-10`, `-d 2025-04-10 14:30`)
+    Example: `-d 2025-04-10`, `-d 2025-04-10 14:30`
 
 * **-c CONDITION:** Medical condition(s)
 
@@ -174,7 +175,7 @@ Use this command to add a new patient to SilverCare.
     
     * You may include multiple conditions by repeating `-c`.
 
-* **-det DETAIL:** Additional notes or details (e.g. lives alone)
+* **-det DETAIL:** Additional notes or details 
 
     Follows the same format rules as conditions
 
@@ -214,6 +215,8 @@ Use this command to add a new patient to SilverCare.
 
 ![add success](images/addSuccessMessage.png)
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -228,6 +231,67 @@ When you run this command, SilverCare shows a list of all patients:
 
 This way, you can **easily focus on who you need to see** soon, while still keeping track of everyone else.
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+### Locating persons: `find`
+
+Use the find command to search for patients by name, appointment date, or to view upcoming appointments. This helps you quickly **locate the right records**, especially when your patient list grows.
+
+<div class="alert alert-primary">
+  <strong>ℹ️ Highlight Feature:</strong>  
+  Matches found in <strong>names</strong> and <strong>appointment dates</strong> will be highlighted in the results for better visibility!
+</div>
+
+
+<div class="alert alert-warning"> 
+  <strong>⚠️ Important:</strong> 
+  Do not mix prefixes in a single `find` command. Each `find` variation must be used separately. For example, <code>find -n John -d 2025-04-02</code> is invalid. 
+  Use one prefix at a time: <br> <code>find -n John</code> or <code>find -d 2025-04-02</code>
+</div>
+
+#### 1. Find by **Name**:
+
+`find -n NAME` searches for patients whose **names** include the keyword you type.
+
+**Command Format:** `find -n KEYWORD [MORE_KEYWORDS]`
+* **Case-insensitive:** john matches john, John or JOHN.
+* **Partial matches allowed:** typing Ann will match Anna, Annabelle, etc.
+* Matching name part will be **highlighted** in the results
+
+  **Examples:**
+
+`find -n John`  e.g. returns John Doe and John Lim.
+
+![find john](images/findJohn.png)
+
+#### 2. Find by **Appointment Date**:
+
+`find -d APPOINTMENT DATE` searches for patients who have an appointment on a **specific date**.
+
+**Command Format:** `find -d YYYY-MM-DD [HH:mm]`
+* Date must be in the **correct format**, with `HH:mm` being optional
+* Date must be a **valid date**
+* Results will include all patients with matching appointment dates.
+* Matching dates will be **highlighted** in the results
+
+**Example:** `find -d 2026-12-21`
+
+#### 3. Find **Upcoming Appointments**:
+
+`find upcoming` shows all patients with appointment dates that are after current time.
+
+**Command Format:** `find upcoming`
+* Automatically filters for future appointments.
+* Sorted by the nearest upcoming date first.
+* Does not include highlighting in the results.
+
+<blockquote style="color: #333333;">
+  If there are no upcoming appointments, the system will let you know.
+</blockquote>
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -264,62 +328,8 @@ Use this command to update the details of an existing patient.
 * `edit 3 -det Follow-up in 2 weeks -det NKA -med Ibuprofen, Cetirizine` e.g. replaces all existing details with two new ones and updates medication info.
 
 
-### Locating persons: `find`
-
-Use the find command to search for patients by name, appointment date, or to view upcoming appointments. This helps you quickly **locate the right records**, especially when your patient list grows.
-
-<div class="alert alert-primary">
-  <strong>ℹ️ Highlight Feature:</strong>  
-  Matches found in <strong>names</strong> and <strong>appointment dates</strong> will be highlighted in the results for better visibility!
-</div>
-
-
-<div class="alert alert-warning"> 
-  <strong>⚠️ Important:</strong> 
-  Do not mix prefixes in a single `find` command. Each `find` variation must be used separately. For example, <code>find -n John -d 2025-04-02</code> is invalid. 
-  Use one prefix at a time: <br> <code>find -n John</code> or <code>find -d 2025-04-02</code>
-</div>
-
-#### 1. Find by **Name**: 
-
-`find -n NAME` searches for patients whose **names** include the keyword you type.
-   
-   **Command Format:** `find -n KEYWORD [MORE_KEYWORDS]`
-   * **Case-insensitive:** john matches john, John or JOHN.
-   * **Partial matches allowed:** typing Ann will match Anna, Annabelle, etc.
-   * Matching name part will be **highlighted** in the results
-
-   **Examples:**
-   
-`find -n John`  e.g. returns John Doe and John Lim.
-
-![find john](images/findJohn.png)
-
-#### Find by **Appointment Date**: 
-
-`find -d APPOINTMENT DATE` searches for patients who have an appointment on a **specific date**.
-
-**Command Format:** `find -d YYYY-MM-DD [HH:mm]`
-    * Date must be in the **correct format**, with `HH:mm` being optional
-    * Date must be a **valid date**
-    * Results will include all patients with matching appointment dates.
-    * Matching dates will be **highlighted** in the results
-
-**Example:** `find -d 2026-12-21`
-
-#### 3. Find **Upcoming Appointments**: 
-
-`find upcoming` shows all patients with appointment dates that are after today’s date.
-   
-   **Command Format:** `find upcoming`
-   * Automatically filters for future appointments.
-   * Sorted by the nearest upcoming date first.
-   * Does not include highlighting in the results.
-
-<blockquote style="color: #333333;">
-  If there are no upcoming appointments, the system will let you know.
-</blockquote>
-
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete`
 
@@ -368,6 +378,9 @@ Before the deletion happens, SilverCare will show the patient’s details and as
   </ul>
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 This command removes all patient records from SilverCare.
@@ -378,6 +391,9 @@ Before clearing, the app will ask you to confirm by typing 'y' (yes) or 'n' (no)
 
 ![clear confirmation message](images/clearConfirmation.png)
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
 Closes the SilverCare app.
@@ -386,6 +402,8 @@ Closes the SilverCare app.
 
 You can also close the app using the Exit button in the top menu.
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
@@ -439,6 +457,9 @@ The data is stored in JSON format, which you can open with any text editor.
 }
 </code></pre>
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Switch Themes: Toggle Theme
 SilverCare supports both **light** and **dark** modes.
 
@@ -462,15 +483,15 @@ You can switch between them anytime:
 **Q: The app doesn’t open when I run it. What should I check?**
 
 **A**: Here are some common issues to troubleshoot:
-* Java not installed or wrong version 
+* **Java not installed or wrong version** 
 
   Make sure Java 17 or above is installed.
   
   You can check this by running: `java -version`
-* File name or location changed 
+* **File name or location changed** 
 
   Make sure the file is still named silvercare.jar and hasn't been renamed by accident.
-* Not in the right folder
+* **Not in the right folder**
 
    Open your terminal or command prompt and navigate (cd) to the folder where silvercare.jar is located before running:
    `java -jar silvercare.jar`
@@ -483,7 +504,7 @@ You can switch between them anytime:
 * Show an error message
 * Give you an example of the correct format so you can try again
 
-    Example: If you type `add -n John`, SilverCare will tell you that required fields are missing and show you the correct format.
+    **Example:** If you type `add -n John`, SilverCare will tell you that required fields are missing and show you the correct format.
 
 
 **Q: How do I transfer my data to another computer?**
@@ -516,7 +537,7 @@ You can switch between them anytime:
 4. **No warning is shown for overlapping appointments.** The system allows multiple appointments at the same time without any alerts. You may need to check manually to prevent double-bookings.
 5. **Recurring appointments must be entered individually.** The system does not yet support repeating weekly or monthly appointments. Each date must be added separately.
 6. **Medicine field does not include dosage or frequency.** Only the name of the medicine can be recorded. If needed, dosage and timing details can be added in the notes section manually.
-7. **All medical conditions and notes must be retyped when editing.** You cannot edit a single condition or note—editing one requires re-entering all related information.
+7. **All medical conditions and details must be retyped when editing.** You cannot edit a single condition or details—editing one requires re-entering all related information.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -530,7 +551,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g. `delete 3` (Asks for confirmation before deleting the selected patient)
 **Edit** | `edit INDEX [-n NAME] [-p PHONE] [-a ADDRESS] [-g GENDER] [-d APPOINTMENT_DATE] [-c CONDITION]…​[-det DETAILS]…​[-med MEDICINE]`<br> e.g.`edit 2 -n James Lee -p 92131231 -c Asthma -med panadol, omeprazole`
 **Find** name | `find -n KEYWORD [MORE_KEYWORDS]`<br> e.g. `find -n James Jake `
-**Find** date | `find -nd yyyy-MM-dd [HH:mm]`<br> e.g. `find -d 2025-06-12`
+**Find** date | `find -d yyyy-MM-dd [HH:mm]`<br> e.g. `find -d 2025-06-12`
 **Find** upcoming | `find upcoming`
 **List** | `list` (Sorted by upcoming appointments first. Those without dates appear in order added.)
 **Help** | `help` or click the Help button in the menu bar
@@ -546,10 +567,11 @@ Each flag is followed by the actual input (e.g., `-n John Doe`).
 
 **Command Prompt**  
 - A text-based interface on Windows where you type commands to run apps or perform actions.  
-**Windows users:**
-- Press `Windows + R`, type `cmd`, then press `Enter`
-- Or, search for **Command Prompt** in the Start menu  
-  You’ll need to use this to navigate to your SilverCare folder and run the app.
+
+- **Windows users:**
+  - Press `Windows + R`, type `cmd`, then press `Enter`
+  - Or, search for **Command Prompt** in the Start menu  
+    You’ll need to use this to navigate to your SilverCare folder and run the app.
 
 **Terminal**  
 - A general term for text-based command input tools on macOS/Linux.  
