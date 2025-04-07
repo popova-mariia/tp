@@ -17,7 +17,6 @@ There are also a few helpful buttons for things like getting help, changing the 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -44,8 +43,6 @@ There are also a few helpful buttons for things like getting help, changing the 
      2. `java -jar silvercare.jar`
 
    ![Ui](images/Ui.png)
-
-   <div style="page-break-after: always;"></div>
 
 6. Start fresh!
 
@@ -75,7 +72,6 @@ There are also a few helpful buttons for things like getting help, changing the 
 </blockquote>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -108,7 +104,6 @@ Before jumping into the features, here are a few simple tips on how commands wor
 </blockquote>
 </div>
 
-<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
@@ -216,7 +211,6 @@ Use this command to add a new patient to SilverCare.
 ![add success](images/addSuccessMessage.png)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -232,7 +226,6 @@ When you run this command, SilverCare shows a list of all patients:
 This way, you can **easily focus on who you need to see** soon, while still keeping track of everyone else.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Locating persons: `find`
 
@@ -291,7 +284,6 @@ Use the find command to search for patients by name, appointment date, or to vie
 </blockquote>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -329,7 +321,6 @@ Use this command to update the details of an existing patient.
 
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete`
 
@@ -379,7 +370,6 @@ Before the deletion happens, SilverCare will show the patient’s details and as
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -392,7 +382,6 @@ Before clearing, the app will ask you to confirm by typing 'y' (yes) or 'n' (no)
 ![clear confirmation message](images/clearConfirmation.png)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -403,7 +392,6 @@ Closes the SilverCare app.
 You can also close the app using the Exit button in the top menu.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
@@ -469,6 +457,8 @@ You can switch between them anytime:
 **Dark Mode**
 
 ![dark theme](images/darkThemeExample.png)
+
+<div style="page-break-after: always;"></div>
 
 **Light Mode**
 
