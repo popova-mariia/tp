@@ -29,9 +29,11 @@ public class ResultDisplay extends UiPart<Region> {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
         if (isWarning) {
-            resultDisplay.getStyleClass().add("warning-text");
+            if (!resultDisplay.getStyleClass().contains("warning-text")) {
+                resultDisplay.getStyleClass().add("warning-text");
+            }
         } else {
-            resultDisplay.getStyleClass().remove("warning-text");
+            resultDisplay.getStyleClass().removeAll("warning-text");
         }
     }
 
