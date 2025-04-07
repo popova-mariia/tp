@@ -524,7 +524,7 @@ This functionality is helpful when nurses want to quickly check who they are sch
 | `find -d 2025-4-10` | Error — invalid format. Requires leading zeros (e.g., `2025-04-10`). |
 
 
-### Find upcoming appointments
+### Find Upcoming Appointments
 
 The `upcoming` feature under the `find` command allows users to filter and display only those persons who have future appointments scheduled. This functionality is useful for quickly identifying clients with pending appointments.
 
@@ -574,6 +574,98 @@ The following class diagram shows the relationship between key classes involved:
     - `UpcomingAppointmentPredicate` handles checking appointment timing logic.
     - `AppointmentDate` handles formatting and validation of date strings.  
       This separation improves maintainability and readability of the codebase.
+
+
+### Edit patient details
+
+The `edit` feature allows users to modify the details of an existing patient in SilverCare’s address book.
+
+#### Overview
+
+* **Edit command format:** `edit INDEX [-n NAME] [-p PHONE] [-a ADDRESS] [-g GENDER] [-d APPOINTMENT_DATE] [-c CONDITION]... [-det DETAIL]... [-med MEDICINE]`
+
+* **Required fields:** `INDEX` (the index of the patient to edit, from the displayed list)
+
+* **Optional fields:** Any combination of `-n`, `-p`, `-a`, `-g`, `-d`, `-c`, `-det`, `-med`
+
+* **Example usage:**
+  ```
+  edit 1 -n John Doe -p 91234567 -a 123 Clementi Ave 3 -g Male
+  edit 2 -d 2025-05-01
+  edit 3 -c High BP -c Diabetes -det wheelchair-bound -med Panadol
+  ```
+
+#### Behavior
+
+* The `edit` command allows **selective field updates** — only the fields provided are modified.
+* Fields not specified remain unchanged.
+* Editing patient information that would cause duplication (e.g., creating two patients with identical name and phone number) is disallowed.
+* After editing, the patient list is **re-sorted automatically by upcoming appointment dates**, if the appointment date was changed.
+
+> 📌 **Important:**  
+> If a patient's appointment date is edited, the patient list dynamically reorders itself to maintain chronological sorting of upcoming appointments.  
+> This ensures that nurses always view patients in order of scheduled visits.
+
+* If no fields are provided to edit, the system shows an error:  
+  `At least one field to edit must be provided.`
+
+* If the provided index is invalid (e.g., out of bounds), an appropriate error message is shown.
+
+---
+
+#### Key Classes & Logic
+
+1. `EditCommand`
+    * Receives the index and an `EditPersonDescriptor` containing the new field values.
+    * Retrieves the corresponding `Person` from the current filtered list.
+    * Creates a new `Person` by combining the existing fields and the edited ones.
+    * Validates against duplication rules.
+    * Updates the model with the edited person.
+    * Refreshes the filtered list with `PREDICATE_SHOW_ALL_PERSONS`.
+    * **If appointment date was modified:**  
+      The person list is automatically re-sorted by upcoming appointment dates.
+
+2. `EditCommand.editPersonDescriptor`
+    * A helper class that stores which fields are edited.
+    * Supports checking whether any field was actually modified.
+    * Makes defensive copies of tag sets (`conditionTags`, `detailTags`).
+
+3. `ModelManager`
+    * `setPerson(Person target, Person editedPerson)` updates the address book entry.
+    * `updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` refreshes the patient list.
+    * The person list is **automatically sorted by appointment date** after any addition or edit that modifies appointment dates.
+
+4. `UniquePersonList`
+    * Handles person uniqueness checks when replacing a person.
+    * Ensures that two persons with the same identifying information cannot coexist.
+
+5. `PersonCard`
+    * Displays updated patient information in the GUI.
+    * **Highlights** search keyword matches for names and appointment dates if a find operation is active.
+
+---
+
+#### Design Considerations
+
+* **Minimal disruption:**  
+  Only the specified fields are updated; all other information remains unchanged, reducing the risk of unintentional data loss.
+
+* **Fault tolerance:**
+    - Prevents edits that would result in duplicate patients.
+    - Provides clear error messages when index is invalid or no fields are specified.
+    - Ensures system remains stable and data remains consistent even if partial input is provided.
+
+* **Automatic sorting:**  
+  Whenever appointment dates are edited, the patient list is **re-sorted automatically** without requiring manual intervention.  
+  This guarantees that the nurse's view remains organized by upcoming visits.
+
+* **Consistency with add flow:**  
+  Editing fields uses the same validation rules as adding a patient (e.g., name format, phone number restrictions), ensuring consistent data quality.
+
+* **Extensibility:**  
+  Future fields (e.g., adding emergency contacts, allergies) can be incorporated easily into the edit mechanism by expanding `EditPersonDescriptor` and adjusting parsing logic.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
