@@ -288,6 +288,78 @@ This design acknowledges that in settings like old age homes or multi-residence 
     * All new patients are validated, parsed, and added through a consistent, centralized flow, ensuring system-wide data integrity.
 
 
+### Delete Patient or Clear List
+
+The `delete` and `clear` commands allow users to remove individual patients or clear the entire address book.  
+Both operations require confirmation (`y` to proceed, `n` to abort) before the action is finalized.  
+This two-step process helps prevent accidental data loss.
+
+#### Overview
+
+* **Delete command format:** `delete INDEX` – Initiates a request to delete the patient at the specified index from the displayed list.
+* **Clear command format:** `clear` – Initiates a request to clear all patient records from the address book.
+* **Confirmation format:** `y` – Confirms and proceeds with the pending delete or clear operation.
+* **Abort format:** `n` – Cancels the pending delete or clear operation.
+
+Important behavior notes:
+* The deletion or clearing does **not** happen immediately upon `delete` or `clear`.
+* The system enters a **pending** state, waiting for explicit user confirmation.
+* If the user types a recognized new command (other than `y` or `n`), the pending operation is **abandoned** automatically.
+* If the user types an unrecognized input while a pending operation exists, the system **prompts the user again** for a clear yes (`y`) or no (`n`).
+
+---
+
+#### Key Classes & Logic
+
+1. `DeleteCommand`
+    * Parses the provided index.
+    * Validates that the index is within bounds and refers to an existing patient.
+    * Sets the `pendingDeletion` field in `ModelManager`.
+    * Returns a `CommandResult` prompting the user to confirm or abort.
+
+2. `ClearCommand`
+    * Checks if there are any patients to clear.
+    * Sets the `pendingClear` flag in `ModelManager`.
+    * Returns a `CommandResult` prompting the user to confirm or abort.
+
+3. `ConfirmCommand`
+    * If a pending deletion exists, deletes the targeted `Person`.
+    * If a pending clear exists, clears the entire address book.
+    * If both deletion and clear are pending simultaneously (should not normally happen), throws a `CommandException`.
+
+4. `AbortCommand`
+    * If a pending deletion exists, cancels the pending delete operation.
+    * If a pending clear exists, cancels the pending clear operation.
+    * If both are pending simultaneously, throws a `CommandException`.
+
+5. `ModelManager`
+    * `pendingDeletion`: holds the `Person` object marked for deletion (or `null` if none).
+    * `pendingClear`: boolean flag indicating if a clear operation is pending.
+    * Provides methods to set, check, and clear these pending states.
+
+6. `LogicManager`
+    * `checkPendingConfirmation(String commandText)` method checks for pending confirmations.
+    * If user input is unrelated to confirmation:
+        * If input is a **recognized command**, pending operations are **cleared automatically**.
+        * If input is **unrecognized**, the system **throws a `ParseException`** prompting the user to confirm properly.
+
+---
+
+#### Design Considerations
+
+* **Fault Tolerance:**  
+  Deleting or clearing does not happen immediately, ensuring users cannot accidentally delete important data with a single misclick.
+
+* **User Flexibility:**  
+  If users change their mind midway and type another valid command, the app cancels the pending operation and executes the new command normally.
+
+* **Consistent Confirmation Flow:**  
+  Whether deleting one patient or clearing the whole address book, users confirm with a simple `y` (yes) or `n` (no).
+
+* **Extensibility:**  
+  Future operations that require user confirmation can reuse the same pending confirmation mechanism (e.g., batch deletions, bulk updates).
+
+
 ### Find upcoming appointments
 
 The `upcoming` feature under the `find` command allows users to filter and display only those persons who have future appointments scheduled. This functionality is useful for quickly identifying clients with pending appointments.
