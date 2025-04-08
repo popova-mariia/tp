@@ -1,0 +1,23 @@
+@startuml
+hide members
+hide footbox
+hide circle
+
+skinparam arrowColor DARKRED
+
+class EditCommand
+class "EditCommand.editPersonDescriptor" as EditDescriptor
+class ModelManager
+class UniquePersonList
+class Person
+class AppointmentDate
+class PersonCard
+
+EditCommand --> EditDescriptor : uses
+EditCommand --> ModelManager : calls setPerson()
+ModelManager --> UniquePersonList : updates address book
+UniquePersonList --> Person : holds
+Person *--> "1" AppointmentDate
+ModelManager --> PersonCard : refreshes view
+
+@enduml
