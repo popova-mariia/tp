@@ -673,7 +673,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact Details**: A patient’s phone number, address, and any other means of communication stored within the system.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient Record**: A stored entry containing a patient's personal details, contact information, and relevant medical notes.
-* **Unique Identifier (Patient Index)**: A system-generated number assigned to each patient record to ensure easy identification and management.
+* **Patient Index**: A system-generated number assigned to each patient record to ensure easy identification and management.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -719,7 +719,7 @@ testers are expected to do more *exploratory* testing.
   - Command format for each field should follow as stated in [User Guide](UserGuide.md#field-options)
 
     
-- **Test case 1 (With compulosry fields):**
+- **Test case 1 (With compulsory fields):**
   ```sh
   add -n John Doe -p 91234567 -a 123 Clementi Ave 34 -g Male
   ```
@@ -957,3 +957,10 @@ Improve result rendering to highlight all matched words in multi-keyword searche
 
 **Planned Enhancement:**
 Allow find -n to return results for any of the keywords (logical OR), not just matches containing all of them.
+
+### 9. Improve robustness of flag handling 
+**Current Limitation:**
+`edit 1 -med panadol -cough syrup` causes medicine field to be edited to `panadol` while conditions to `ough syrup`.
+
+**Planned Enhancement:**
+Better flag handling to ensure the intended field is updated as expected when the input contains other flags.
