@@ -567,6 +567,8 @@ The `upcoming` feature under the `find` command allows users to filter and displ
 
 #### Key Classes & Logic
 
+![UpcomingAppointmentClassDiagram](images/UpcomingAppointmentClassDiagram.png)
+
 1. `FindCommandParser`
     * Detects if the user input is exactly `"upcoming"` (case-insensitive).
     * If matched, it returns a `FindCommand` initialized with an `UpcomingAppointmentPredicate`.
@@ -584,10 +586,6 @@ The `upcoming` feature under the `find` command allows users to filter and displ
    * Helps maintain consistent formatting throughout the system.
 4. `FindCommand`
    * When executed, it passes the predicate to the model's `updateFilteredPersonList()`, causing the filtered list to update with only persons matching the predicate.
-
-The following class diagram shows the relationship between key classes involved:
-
-![UpcomingAppointmentClassDiagram](images/UpcomingAppointmentClassDiagram.png)
 
 
 <div class="alert alert-warning">
