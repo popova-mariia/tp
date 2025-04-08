@@ -98,6 +98,10 @@ Before jumping into the features, here are a few simple tips on how commands wor
     **e.g.** `help 123` is treated the same as `help`. 
 * All SilverCare commands are **case-sensitive**. Please use the lowercase command words exactly as shown in this guide.
 
+* Command inputs containing other flags might cause unintended fields to be updated. Do not include spaces between the flag and the previous character in such cases.
+    
+    **e.g.** use `edit 1 -med panadol-cough syrup` instead of `edit 1 -med panadol -cough syrup` to edit medicine to `pandaol-cough syrup`.
+
 <blockquote style="color: #333333;">
   <strong>Tip for PDF users:</strong> If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.<br><br>
   Also, be aware that some symbols (such as hyphens: <code>-</code>) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.
@@ -446,7 +450,6 @@ The data is stored in JSON format, which you can open with any text editor.
 </code></pre>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Switch Themes: Toggle Theme
 SilverCare supports both **light** and **dark** modes.
@@ -527,7 +530,7 @@ You can switch between them anytime:
 4. **No warning is shown for overlapping appointments.** The system allows multiple appointments at the same time without any alerts. You may need to check manually to prevent double-bookings.
 5. **Recurring appointments must be entered individually.** The system does not yet support repeating weekly or monthly appointments. Each date must be added separately.
 6. **Medicine field does not include dosage or frequency.** Only the name of the medicine can be recorded. If needed, dosage and timing details can be added in the notes section manually.
-7. **All medical conditions and details must be retyped when editing.** You cannot edit a single condition or details—editing one requires re-entering all related information.
+7. **All medical conditions and details must be retyped when editing.** You cannot edit a single condition or detail—editing one requires re-entering all related information.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
