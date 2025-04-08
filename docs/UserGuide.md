@@ -421,6 +421,8 @@ The data is stored in JSON format, which you can open with any text editor.
   </ul>
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <p><strong>Sample JSON Structure (Do not modify unless you understand the format):</strong></p>
 
 <pre><code class="language-json">{

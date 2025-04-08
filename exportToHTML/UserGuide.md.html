@@ -1,0 +1,593 @@
+<html>
+<head>
+<title>UserGuide.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #080808;}
+.s3 { color: #006dcc;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+UserGuide.md</font>
+</center></td></tr></table>
+<pre><span class="s0">---</span>
+<span class="s1">layout: page 
+title: User Guide</span>
+<span class="s0">---</span>
+
+<span class="s1">**</span><span class="s2">Welcome to SilverCare</span><span class="s1">!**</span>
+
+<span class="s2">SilverCare is a </span><span class="s1">**</span><span class="s2">simple desktop app</span><span class="s1">** </span><span class="s2">that helps you keep track of your patients during home visits.</span>
+<span class="s2">It’s built to be </span><span class="s1">**</span><span class="s2">fast</span><span class="s1">** </span><span class="s2">and </span><span class="s1">**</span><span class="s2">easy</span><span class="s1">** </span><span class="s2">to use, so you can spend less time on admin and more time with your patients.</span>
+
+<span class="s2">Most actions, like adding a new patient or looking someone up, are done by typing </span><span class="s1">**</span><span class="s2">short commands</span><span class="s1">**</span><span class="s2">.</span>
+<span class="s2">It might seem unfamiliar initially, but it becomes second nature with some practice.</span>
+
+<span class="s2">There are also a few helpful buttons for things like getting help, changing the colour theme, or closing the app, just what you need, without the clutter.</span>
+
+<span class="s0">* </span><span class="s2">Table of Contents</span>
+<span class="s2">{</span><span class="s1">:</span><span class="s2">toc}</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">## </span><span class="s2">Quick start</span>
+
+<span class="s0">1. </span><span class="s2">Check if Java is installed</span>
+   
+    <span class="s0">* </span><span class="s2">Make sure your computer has Java 17 or above installed.</span>
+   
+    <span class="s0">* </span><span class="s1">**</span><span class="s2">Installation</span><span class="s1">:** </span><span class="s2">Please follow the installation instructions for </span><span class="s1">[</span><span class="s2">Windows</span><span class="s1">](</span><span class="s3">https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html#GUID-DAF345BA-B3E7-4CF2-B87A-B6662D691840</span><span class="s1">)</span><span class="s2">/</span><span class="s1">[</span><span class="s2">Mac</span><span class="s1">](</span><span class="s3">https://se-education.org/guides/tutorials/javaInstallationMac.html</span><span class="s1">)</span><span class="s2">/</span><span class="s1">[</span><span class="s2">Linux</span><span class="s1">](</span><span class="s3">https://docs.oracle.com/en/java/javase/17/install/installation-jdk-linux-platforms.html</span><span class="s1">) </span><span class="s2">users.</span>
+
+<span class="s0">2. </span><span class="s2">Click </span><span class="s1">[</span><span class="s2">here</span><span class="s1">](</span><span class="s3">https://github.com/AY2425S2-CS2103T-T12-4/tp/releases</span><span class="s1">) </span><span class="s2">to download SilverCare's latest .jar file </span><span class="s1">(</span><span class="s2">this is the app</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s0">3. </span><span class="s2">Create a folder named ‘SilverCare’ in your Desktop.</span>
+
+<span class="s0">4. </span><span class="s2">Move the downloaded file into the folder.</span>
+
+<span class="s0">5. </span><span class="s2">Open the app</span>
+   <span class="s0">* </span><span class="s2">For Windows users, open Command Prompt and enter the following</span><span class="s1">:</span>
+     <span class="s0">1. </span><span class="s2">`cd Desktop/SilverCare`</span>
+     
+        <span class="s2">OR `cd OneDrive/Desktop/SilverCare` if your Desktop is in OneDrive</span>
+     <span class="s0">2. </span><span class="s2">`java -jar silvercare.jar`</span>
+   <span class="s0">* </span><span class="s2">For Mac/Linux users, open Terminal and enter the following</span><span class="s1">:</span>
+     <span class="s0">1. </span><span class="s2">`cd Desktop/SilverCare`</span>
+     <span class="s0">2. </span><span class="s2">`java -jar silvercare.jar`</span>
+
+   <span class="s1">![</span><span class="s2">Ui</span><span class="s1">](</span><span class="s2">images/Ui.png</span><span class="s1">)</span>
+
+<span class="s0">6. </span><span class="s2">Start fresh</span><span class="s1">!</span>
+
+   <span class="s2">When you first open SilverCare, you might see some sample patient data already filled in.</span>
+   <span class="s2">To </span><span class="s1">**</span><span class="s2">clear</span><span class="s1">** </span><span class="s2">this and start with your own records just follow these simple steps</span><span class="s1">:</span>
+
+   <span class="s0">* </span><span class="s2">Type `clear` and press </span><span class="s1">**</span><span class="s2">enter</span><span class="s1">**</span>
+   <span class="s0">* </span><span class="s2">Follow the prompt and type `y` and press </span><span class="s1">**</span><span class="s2">enter</span><span class="s1">** </span><span class="s2">to clear the sample data</span><span class="s1">!</span>
+
+<span class="s0">7. </span><span class="s2">Need </span><span class="s1">[</span><span class="s2">help</span><span class="s1">](</span><span class="s2">#viewing-help--help</span><span class="s1">)</span><span class="s2">? It’s always nearby</span>
+   
+   <span class="s2">You can open a quick help window anytime by</span><span class="s1">:</span>
+   <span class="s0">* </span><span class="s1">**</span><span class="s2">Typing</span><span class="s1">:** </span><span class="s2">`help`</span>
+   <span class="s0">* </span><span class="s1">**</span><span class="s2">Pressing F1</span><span class="s1">**</span><span class="s2">, or</span>
+   <span class="s0">* </span><span class="s1">**</span><span class="s2">Clicking the Help button</span><span class="s1">**</span><span class="s2">, followed by Help F1 button, at the top menu bar.</span>
+
+    <span class="s2">The Help window shows example commands to get you started, and even includes a link back to this full user guide, so you can return here anytime if you need more details.</span>
+
+<span class="s0">8. </span><span class="s2">Explore more </span><span class="s1">[</span><span class="s2">features</span><span class="s1">](</span><span class="s2">#features</span><span class="s1">) </span><span class="s2">below</span>
+   
+   <span class="s2">Scroll down to learn how to add, search for, and manage your patients using simple commands.</span>
+
+<span class="s0">9. </span><span class="s2">You're ready to go</span><span class="s1">! </span><span class="s2">That’s it, SilverCare is set up and ready. Start managing your patient records with ease</span><span class="s1">!</span>
+
+<span class="s1">&lt;blockquote style=&quot;color: #333333;&quot;&gt;</span>
+  <span class="s1">For a quick overview, check out our &lt;a href=&quot;#command-summary&quot;&gt;Command Summary&lt;/a&gt;, which lists all the key commands in one place.</span>
+<span class="s1">&lt;/blockquote&gt;</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">## </span><span class="s2">Features</span>
+
+<span class="s1">&lt;div markdown=&quot;block&quot; class=&quot;alert alert-info&quot;&gt;</span>
+
+<span class="s1">**:</span><span class="s2">information_source</span><span class="s1">: </span><span class="s2">Notes on Command Format</span><span class="s1">:**&lt;br&gt;</span>
+
+<span class="s2">Before jumping into the features, here are a few simple tips on how commands work in SilverCare</span><span class="s1">:</span>
+
+<span class="s0">* </span><span class="s2">Words in </span><span class="s1">**</span><span class="s2">CAPITAL LETTERS</span><span class="s1">** </span><span class="s2">are parameters that you need to fill in.</span>
+    
+    <span class="s1">**</span><span class="s2">e.g.</span><span class="s1">** </span><span class="s2">`add -n NAME` means you should type something like `add -n John Doe` </span><span class="s1">([</span><span class="s2">for full command</span><span class="s1">](</span><span class="s2">#command-summary</span><span class="s1">))</span><span class="s2">.</span>
+<span class="s0">* </span><span class="s2">Square brackets </span><span class="s1">[ ] </span><span class="s2">mean something is optional.</span>
+
+    <span class="s1">**</span><span class="s2">e.g.</span><span class="s1">** </span><span class="s2">`-n NAME </span><span class="s1">[</span><span class="s2">-c CONDITION</span><span class="s1">]</span><span class="s2">` can be used as `-n John Doe -c High BP` or just `-n John Doe`.</span>
+<span class="s0">* </span><span class="s2">Three dots </span><span class="s1">(</span><span class="s2">…​</span><span class="s1">) </span><span class="s2">mean you can include that part as many times as you need.</span>
+
+    <span class="s1">**</span><span class="s2">e.g.</span><span class="s1">** </span><span class="s2">`</span><span class="s1">[</span><span class="s2">-c CONDITION</span><span class="s1">]</span><span class="s2">…​` allows you to type nothing e.g. `-c` or `-c High BP -c Diabetic -c Asthma`</span>
+<span class="s0">* </span><span class="s2">Command parts can be entered in any order.</span>
+
+    <span class="s2">So `-n John -p 91234567` and `-p 91234567 -n John` both function the same.</span>
+<span class="s0">* </span><span class="s2">Extra input won’t break commands like `list`, `help`, `exit`, or `clear`.</span>
+
+    <span class="s1">**</span><span class="s2">e.g.</span><span class="s1">** </span><span class="s2">`help 123` is treated the same as `help`. </span>
+<span class="s0">* </span><span class="s2">All SilverCare commands are </span><span class="s1">**</span><span class="s2">case-sensitive</span><span class="s1">**</span><span class="s2">. Please use the lowercase command words exactly as shown in this guide.</span>
+
+<span class="s0">* </span><span class="s2">Command inputs containing other flags might cause unintended fields to be updated. Do not include spaces between the flag and the previous character in such cases.</span>
+    
+    <span class="s1">**</span><span class="s2">e.g.</span><span class="s1">** </span><span class="s2">use `edit 1 -med panadol-cough syrup` instead of `edit 1 -med panadol -cough syrup` to edit medicine to `pandaol-cough syrup`.</span>
+
+<span class="s1">&lt;blockquote style=&quot;color: #333333;&quot;&gt;</span>
+  <span class="s1">&lt;strong&gt;Tip for PDF users:&lt;/strong&gt; If you’re copying commands from a PDF version of this guide, double-check that no spaces are missing around line breaks, as sometimes PDF formatting removes them.&lt;br&gt;&lt;br&gt;</span>
+  <span class="s1">Also, be aware that some symbols (such as hyphens: &lt;code&gt;-&lt;/code&gt;) might be substituted with similar-looking characters that may not work correctly in commands — if in doubt, retype these symbols.</span>
+<span class="s1">&lt;/blockquote&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+
+<span class="s0">### </span><span class="s2">Viewing help </span><span class="s1">: </span><span class="s2">`help`</span>
+
+<span class="s2">Typing `help` opens a small window that gives you a quick overview of basic commands you can try out. It’s a great way to get started without needing to remember everything right away.</span>
+
+<span class="s1">![</span><span class="s2">help message</span><span class="s1">](</span><span class="s2">images/helpMessage.png</span><span class="s1">)</span>
+
+<span class="s0">##### </span><span class="s2">Need more info?</span>
+
+<span class="s2">The Help window also has a </span><span class="s1">**</span><span class="s2">“View full User Guide”</span><span class="s1">** </span><span class="s2">button that links back to this page, so you can always come back here anytime you need more detailed instructions.</span>
+
+
+<span class="s0">##### </span><span class="s2">How to open the Help window</span><span class="s1">:</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">`help`</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">Press F1</span><span class="s1">** </span><span class="s2">on your keyboard</span>
+<span class="s0">* </span><span class="s2">Or </span><span class="s1">**</span><span class="s2">click the Help button</span><span class="s1">** </span><span class="s2">in the top menu bar</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+<span class="s1">&lt;div style=&quot;page-break-after: always;&quot;&gt;&lt;/div&gt;</span>
+
+<span class="s0">### </span><span class="s2">Adding a person</span><span class="s1">: </span><span class="s2">`add`</span>
+
+<span class="s2">Use this command to add a new patient to SilverCare.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:**</span>
+
+<span class="s2">`add -n NAME -p PHONE -a ADDRESS -g GENDER </span><span class="s1">[</span><span class="s2">-d APPOINTMENT DATE</span><span class="s1">] [</span><span class="s2">-c CONDITION</span><span class="s1">]</span><span class="s2">…​ </span><span class="s1">[</span><span class="s2">-det DETAIL</span><span class="s1">]</span><span class="s2">…​ </span><span class="s1">[</span><span class="s2">-med MEDICINE</span><span class="s1">]</span><span class="s2">`</span>
+
+<span class="s0">##### </span><span class="s2">Field options</span><span class="s1">:</span>
+
+<span class="s1">**</span><span class="s2">Required Fields</span><span class="s1">:**</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-n NAME</span><span class="s1">:** </span><span class="s2">Patient’s full name</span>
+  
+  <span class="s2">Accepts 1 to 50 characters including alphanumeric characters, spaces, and common special characters</span><span class="s1">:</span>
+
+  <span class="s2">`, @ / </span><span class="s1">' </span><span class="s2">. -`</span>
+  
+  <span class="s2">Example</span><span class="s1">: </span><span class="s2">`-n John O'Connor`, `-n Tan Mei-Ling`</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-p PHONE</span><span class="s1">:** </span><span class="s2">Contact number</span>
+  
+  <span class="s2">Must be numeric and between 3 to 15 digits</span>
+  
+  <span class="s2">Example</span><span class="s1">: </span><span class="s2">`-p 91234567`, `-p 62345678`</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-a ADDRESS</span><span class="s1">:** </span><span class="s2">Home address </span><span class="s1">(</span><span class="s2">e.g. 45 Bukit Timah Rd</span><span class="s1">)</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-g GENDER</span><span class="s1">:** </span><span class="s2">Gender</span>
+
+  <span class="s2">Accepted values</span><span class="s1">: </span><span class="s2">male, female, m, f, M, F</span>
+
+  <span class="s2">Example</span><span class="s1">: </span><span class="s2">`-g male`, `-g F`</span>
+
+
+<span class="s1">**</span><span class="s2">Optional Fields</span><span class="s1">:**</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-d APPOINTMENT DATE</span><span class="s1">:** </span><span class="s2">Appointment date</span>
+
+    <span class="s2">Formats accepted</span><span class="s1">: </span><span class="s2">`yyyy-MM-dd` or `yyyy-MM-dd HH</span><span class="s1">:</span><span class="s2">mm` </span>
+    
+    <span class="s2">Example</span><span class="s1">: </span><span class="s2">`-d 2025-04-10`, `-d 2025-04-10 14</span><span class="s1">:</span><span class="s2">30`</span>
+
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-c CONDITION</span><span class="s1">:** </span><span class="s2">Medical condition</span><span class="s1">(</span><span class="s2">s</span><span class="s1">)</span>
+
+    <span class="s2">Accepts alphanumeric input with spaces, apostrophes </span><span class="s1">(')</span><span class="s2">, and hyphens </span><span class="s1">(</span><span class="s2">-</span><span class="s1">)</span>
+
+    <span class="s2">Example</span><span class="s1">: </span><span class="s2">`-c High BP`, `-c Crohn's Disease`</span>
+    
+    <span class="s0">* </span><span class="s2">You may include multiple conditions by repeating `-c`.</span>
+
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-det DETAIL</span><span class="s1">:** </span><span class="s2">Additional notes or details </span>
+
+    <span class="s2">Follows the same format rules as conditions</span>
+
+    <span class="s2">Example</span><span class="s1">: </span><span class="s2">`-det lives alone`, `-det requires translator`</span>
+
+    <span class="s0">* </span><span class="s2">You may include multiple details by repeating `-det`.</span>
+
+<span class="s0">* </span><span class="s1">**</span><span class="s2">-med MEDICINE</span><span class="s1">:** </span><span class="s2">Prescribed medicines</span>
+
+  <span class="s2">Multiple items must be comma-separated in a single `-med` field.</span>
+  
+  <span class="s2">Example</span><span class="s1">: </span><span class="s2">`-med Panadol, Omeprazole`</span>
+
+
+<span class="s1">&lt;div class=&quot;alert alert-primary&quot;&gt;</span>
+  <span class="s1">&lt;strong&gt;💡 Tips:&lt;/strong&gt;</span>
+  <span class="s1">&lt;ul&gt;</span>
+    <span class="s1">&lt;li&gt;List all medicines as one string, separated by commas. (No need to repeat &lt;code&gt;-med&lt;/code&gt; for each item.)&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;A person can have any number of conditions and details (including 0).&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;Exact duplicates in &lt;code&gt;-c&lt;/code&gt; and &lt;code&gt;-det&lt;/code&gt; will be treated as one entry. For example, entering &lt;code&gt;-c diabetes -c diabetes&lt;/code&gt; adds only one condition.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;However, &lt;code&gt;-c High BP&lt;/code&gt; and &lt;code&gt;-c high bp&lt;/code&gt; are considered different due to case sensitivity, and both will be added.&lt;/li&gt;</span>
+  <span class="s1">&lt;/ul&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+
+<span class="s1">&lt;div class=&quot;alert alert-warning&quot;&gt;</span>
+  <span class="s1">&lt;strong&gt;⚠️ Important Notes:&lt;/strong&gt;</span>
+  <span class="s1">&lt;ul&gt;</span>
+    <span class="s1">&lt;li&gt;You can store up to &lt;strong&gt;30 patients&lt;/strong&gt; in SilverCare. Adding beyond this limit will not be allowed.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;Patients with the same &lt;strong&gt;name and phone number&lt;/strong&gt; are treated as duplicates and trying to add them will result in an error.&lt;/li&gt;</span>
+  <span class="s1">&lt;/ul&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">**</span><span class="s2">Examples</span><span class="s1">:**</span>
+<span class="s0">* </span><span class="s2">`add -n John Doe -p 98765432 -a 123 Clementi Rd -g male`</span>
+<span class="s0">* </span><span class="s2">`add -n Mary Tan -p 91234567 -a 45 Bukit Timah Ave -g female -d 2025-04-10 -c Diabetes -c High BP -det Allergic to penicillin -med Metformin, Aspirin`</span>
+
+<span class="s1">![</span><span class="s2">add success</span><span class="s1">](</span><span class="s2">images/addSuccessMessage.png</span><span class="s1">)</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Listing all persons </span><span class="s1">: </span><span class="s2">`list`</span>
+
+<span class="s2">Use this command to view all the patients currently in your SilverCare records.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span><span class="s2">`list`</span>
+
+<span class="s2">When you run this command, SilverCare shows a list of all patients</span><span class="s1">:</span>
+
+<span class="s0">* </span><span class="s2">Patients with appointment dates are shown first and sorted by the nearest upcoming appointment.</span>
+<span class="s0">* </span><span class="s2">Patients without appointment dates appear after, in the order they were added, newest at the bottom.</span>
+
+<span class="s2">This way, you can </span><span class="s1">**</span><span class="s2">easily focus on who you need to see</span><span class="s1">** </span><span class="s2">soon, while still keeping track of everyone else.</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Locating persons</span><span class="s1">: </span><span class="s2">`find`</span>
+
+<span class="s2">Use the find command to search for patients by name, appointment date, or to view upcoming appointments. This helps you quickly </span><span class="s1">**</span><span class="s2">locate the right records</span><span class="s1">**</span><span class="s2">, especially when your patient list grows.</span>
+
+<span class="s1">&lt;div class=&quot;alert alert-primary&quot;&gt;</span>
+  <span class="s1">&lt;strong&gt;ℹ️ Highlight Feature:&lt;/strong&gt;  </span>
+  <span class="s1">Matches found in &lt;strong&gt;names&lt;/strong&gt; and &lt;strong&gt;appointment dates&lt;/strong&gt; will be highlighted in the results for better visibility!</span>
+<span class="s1">&lt;/div&gt;</span>
+
+
+<span class="s1">&lt;div class=&quot;alert alert-warning&quot;&gt; </span>
+  <span class="s1">&lt;strong&gt;⚠️ Important:&lt;/strong&gt; </span>
+  <span class="s1">Do not mix prefixes in a single `find` command. Each `find` variation must be used separately. For example, &lt;code&gt;find -n John -d 2025-04-02&lt;/code&gt; is invalid. </span>
+  <span class="s1">Use one prefix at a time: &lt;br&gt; &lt;code&gt;find -n John&lt;/code&gt; or &lt;code&gt;find -d 2025-04-02&lt;/code&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s0">#### </span><span class="s2">1. Find by </span><span class="s1">**</span><span class="s2">Name</span><span class="s1">**:</span>
+
+<span class="s2">`find -n NAME` searches for patients whose </span><span class="s1">**</span><span class="s2">names</span><span class="s1">** </span><span class="s2">include the keyword you type.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span><span class="s2">`find -n KEYWORD </span><span class="s1">[</span><span class="s2">MORE_KEYWORDS</span><span class="s1">]</span><span class="s2">`</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">Case-insensitive</span><span class="s1">:** </span><span class="s2">john matches john, John or JOHN.</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">Partial matches allowed</span><span class="s1">:** </span><span class="s2">typing Ann will match Anna, Annabelle, etc.</span>
+<span class="s0">* </span><span class="s2">Matching name part will be </span><span class="s1">**</span><span class="s2">highlighted</span><span class="s1">** </span><span class="s2">in the results</span>
+
+  <span class="s1">**</span><span class="s2">Examples</span><span class="s1">:**</span>
+
+<span class="s2">`find -n John`  e.g. returns John Doe and John Lim.</span>
+
+<span class="s1">![</span><span class="s2">find john</span><span class="s1">](</span><span class="s2">images/findJohn.png</span><span class="s1">)</span>
+
+<span class="s0">#### </span><span class="s2">2. Find by </span><span class="s1">**</span><span class="s2">Appointment Date</span><span class="s1">**:</span>
+
+<span class="s2">`find -d APPOINTMENT DATE` searches for patients who have an appointment on a </span><span class="s1">**</span><span class="s2">specific date</span><span class="s1">**</span><span class="s2">.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span><span class="s2">`find -d YYYY-MM-DD </span><span class="s1">[</span><span class="s2">HH</span><span class="s1">:</span><span class="s2">mm</span><span class="s1">]</span><span class="s2">`</span>
+<span class="s0">* </span><span class="s2">Date must be in the </span><span class="s1">**</span><span class="s2">correct format</span><span class="s1">**</span><span class="s2">, with `HH</span><span class="s1">:</span><span class="s2">mm` being optional</span>
+<span class="s0">* </span><span class="s2">Date must be a </span><span class="s1">**</span><span class="s2">valid date</span><span class="s1">**</span>
+<span class="s0">* </span><span class="s2">Results will include all patients with matching appointment dates.</span>
+<span class="s0">* </span><span class="s2">Matching dates will be </span><span class="s1">**</span><span class="s2">highlighted</span><span class="s1">** </span><span class="s2">in the results</span>
+
+<span class="s1">**</span><span class="s2">Example</span><span class="s1">:** </span><span class="s2">`find -d 2026-12-21`</span>
+
+<span class="s0">#### </span><span class="s2">3. Find </span><span class="s1">**</span><span class="s2">Upcoming Appointments</span><span class="s1">**:</span>
+
+<span class="s2">`find upcoming` shows all patients with appointment dates that are after current time.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span><span class="s2">`find upcoming`</span>
+<span class="s0">* </span><span class="s2">Automatically filters for future appointments.</span>
+<span class="s0">* </span><span class="s2">Sorted by the nearest upcoming date first.</span>
+<span class="s0">* </span><span class="s2">Does not include highlighting in the results.</span>
+
+<span class="s1">&lt;blockquote style=&quot;color: #333333;&quot;&gt;</span>
+  <span class="s1">If there are no upcoming appointments, the system will let you know.</span>
+<span class="s1">&lt;/blockquote&gt;</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Editing a person </span><span class="s1">: </span><span class="s2">`edit`</span>
+
+<span class="s2">Use this command to update the details of an existing patient.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span>
+
+<span class="s2">`edit INDEX </span><span class="s1">[</span><span class="s2">-n NAME</span><span class="s1">] [</span><span class="s2">-p PHONE</span><span class="s1">] [</span><span class="s2">-a ADDRESS</span><span class="s1">] [</span><span class="s2">-g GENDER</span><span class="s1">] [</span><span class="s2">-d APPOINTMENT DATE</span><span class="s1">] [</span><span class="s2">-c CONDITION</span><span class="s1">]</span><span class="s2">…​ </span><span class="s1">[</span><span class="s2">-det DETAIL</span><span class="s1">]</span><span class="s2">…​ </span><span class="s1">[</span><span class="s2">-med MEDICINE</span><span class="s1">]</span><span class="s2">`</span>
+
+<span class="s0">* </span><span class="s2">`INDEX` refers to the number shown beside each patient in the list. It must be a </span><span class="s1">**</span><span class="s2">positive number</span><span class="s1">** (</span><span class="s2">e.g. 1, 2, 3...</span><span class="s1">)</span><span class="s2">.</span>
+<span class="s0">* </span><span class="s2">You must include at least </span><span class="s1">**[</span><span class="s2">one field</span><span class="s1">](</span><span class="s2">#field-options</span><span class="s1">)** </span><span class="s2">to update.</span>
+<span class="s0">* </span><span class="s2">Fields that you don’t specify will remain unchanged.</span>
+
+
+<span class="s1">&lt;div class=&quot;alert alert-primary&quot;&gt;</span>
+<span class="s1">&lt;strong&gt;💡 Tips:&lt;/strong&gt;</span>
+  <span class="s1">&lt;ul&gt;</span>
+    <span class="s1">&lt;li&gt;To remove all conditions or details, simply type &lt;code&gt;-c&lt;/code&gt; or &lt;code&gt;-det&lt;/code&gt; without anything after it.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;Medicine is entered as a single string, not multiple repeated flags. (e.g. &lt;code&gt;-med Panadol, Omeprazole&lt;/code&gt;)&lt;/li&gt;</span>
+  <span class="s1">&lt;/ul&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">&lt;div class=&quot;alert alert-warning&quot;&gt;</span>
+<span class="s1">&lt;strong&gt;⚠️ Important Notes:&lt;/strong&gt;</span>
+  <span class="s1">&lt;ul&gt;</span>
+    <span class="s1">&lt;li&gt;When editing conditions or details, existing entries will be &lt;strong&gt;fully replaced&lt;/strong&gt;. This means the previous conditions/details will be cleared before your new ones are added.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;&lt;strong&gt;Phone numbers must be unique.&lt;/strong&gt; If you try to edit a patient’s phone number to one that already exists in the system, the command will fail.&lt;/li&gt;</span>
+  <span class="s1">&lt;/ul&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">**</span><span class="s2">Examples</span><span class="s1">:**</span>
+<span class="s0">* </span><span class="s2">`edit 1 -p 91234567` e.g. changes the phone number of the first patient to 91234567.</span>
+<span class="s0">* </span><span class="s2">`edit 2 -n Betsy Crower -c ` e.g. changes the name of the second patient and removes all existing conditions.</span>
+<span class="s0">* </span><span class="s2">`edit 3 -det Follow-up in 2 weeks -det NKA -med Ibuprofen, Cetirizine` e.g. replaces all existing details with two new ones and updates medication info.</span>
+
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Deleting a person </span><span class="s1">: </span><span class="s2">`delete`</span>
+
+<span class="s2">Use this command to remove a patient’s contact and medical information from SilverCare.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span>
+
+<span class="s2">`delete INDEX`</span>
+
+<span class="s0">* </span><span class="s2">`INDEX` refers to the number shown beside the patient in the list.</span>
+<span class="s0">* </span><span class="s2">It must be a </span><span class="s1">**</span><span class="s2">positive whole number</span><span class="s1">** (</span><span class="s2">e.g. 1, 2, 3...</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s2">Before the deletion happens, SilverCare will show the patient’s details and ask you to confirm</span><span class="s1">:</span>
+
+<span class="s2">`Are you sure you want to delete the contact with the following details? </span><span class="s1">(</span><span class="s2">y/n</span><span class="s1">)</span><span class="s2">`</span>
+<span class="s0">* </span><span class="s2">Type `y` to </span><span class="s1">**</span><span class="s2">confirm deletion</span><span class="s1">**</span>
+<span class="s0">* </span><span class="s2">Type `n` to </span><span class="s1">**</span><span class="s2">cancel</span><span class="s1">**</span>
+
+<span class="s1">![</span><span class="s2">delete confirmation message</span><span class="s1">](</span><span class="s2">images/deleteConfirmation.png</span><span class="s1">)</span>
+
+<span class="s1">&lt;div class=&quot;alert alert-primary&quot;&gt;</span>
+  <span class="s1">&lt;strong&gt;💡 Tips:&lt;/strong&gt;</span>
+  <span class="s1">&lt;ul&gt;</span>
+    <span class="s1">&lt;li&gt;If you enter an &lt;strong&gt;invalid index&lt;/strong&gt; (like 0, -1, or something that doesn’t exist), the system will prompt you to try again.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;If you cancel the deletion (press &lt;code&gt;n&lt;/code&gt;), the patient’s data will stay safe.&lt;/li&gt;</span>
+  <span class="s1">&lt;/ul&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">**</span><span class="s2">Examples</span><span class="s1">:**</span>
+<span class="s0">* </span><span class="s2">Deleting through main list</span>
+  <span class="s0">1. </span><span class="s2">`list` returns list of patients.</span>
+  <span class="s0">2. </span><span class="s2">`delete 2` prompts a confirmation to delete patient with the 2nd index.</span>
+  <span class="s0">3. </span><span class="s2">`y` will result in the 2nd patient deleted from the full list.</span>
+<span class="s0">* </span><span class="s2">Deleting through filtered search</span>
+  <span class="s0">1. </span><span class="s2">`find -n` Betsy returns list of patients names containing Betsy.</span>
+  <span class="s0">2. </span><span class="s2">`delete 1` prompts a confirmation to delete patient with the 1st index.</span>
+  <span class="s0">3. </span><span class="s2">`y` will result in the 1st patient deleted from the filtered search results.</span>
+
+
+<span class="s1">&lt;div class=&quot;alert alert-warning&quot;&gt;</span>
+  <span class="s1">&lt;strong&gt;⚠️ Important Notes:&lt;/strong&gt;</span>
+  <span class="s1">&lt;ul&gt;</span>
+    <span class="s1">&lt;li&gt;If you enter an unrecognized input like &lt;code&gt;hello&lt;/code&gt; or &lt;code&gt;dslkfjdslf&lt;/code&gt; instead of &lt;code&gt;y&lt;/code&gt; or &lt;code&gt;n&lt;/code&gt;, the app will keep prompting until a clear answer is given.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;If you run a valid command (like &lt;code&gt;list&lt;/code&gt;, &lt;code&gt;help&lt;/code&gt;, etc.) during the prompt, the deletion will automatically be cancelled.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;Even if you type an invalid or incomplete command (like &lt;code&gt;add&lt;/code&gt;), the app still treats it as a command and cancels the deletion.&lt;/li&gt;</span>
+  <span class="s1">&lt;/ul&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Clearing all entries </span><span class="s1">: </span><span class="s2">`clear`</span>
+
+<span class="s2">This command removes all patient records from SilverCare.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span><span class="s2">`clear`</span>
+
+<span class="s2">Before clearing, the app will ask you to confirm by typing </span><span class="s1">'</span><span class="s2">y' </span><span class="s1">(</span><span class="s2">yes</span><span class="s1">) </span><span class="s2">or </span><span class="s1">'</span><span class="s2">n' </span><span class="s1">(</span><span class="s2">no</span><span class="s1">)</span><span class="s2">, so you won’t accidentally lose your data.</span>
+
+<span class="s1">![</span><span class="s2">clear confirmation message</span><span class="s1">](</span><span class="s2">images/clearConfirmation.png</span><span class="s1">)</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Exiting the program </span><span class="s1">: </span><span class="s2">`exit`</span>
+
+<span class="s2">Closes the SilverCare app.</span>
+
+<span class="s1">**</span><span class="s2">Command Format</span><span class="s1">:** </span><span class="s2">`exit`</span>
+
+<span class="s2">You can also close the app using the Exit button in the top menu.</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Saving the data</span>
+
+<span class="s2">There’s </span><span class="s1">**</span><span class="s2">no need to manually save</span><span class="s1">** </span><span class="s2">anything, SilverCare automatically saves your data after every change </span><span class="s1">(</span><span class="s2">like adding or editing a patient</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s0">### </span><span class="s2">Editing the data file </span><span class="s1">(</span><span class="s2">Optional</span><span class="s1">)</span>
+
+<span class="s2">If you're an advanced user, you can find and edit SilverCare's data directly</span><span class="s1">:</span>
+
+<span class="s1">**</span><span class="s2">Location</span><span class="s1">:** </span><span class="s2">`</span><span class="s1">[</span><span class="s2">JAR file folder</span><span class="s1">]</span><span class="s2">/data/addressbook.json`</span>
+
+<span class="s2">The data is stored in JSON format, which you can open with any text editor.</span>
+
+
+
+<span class="s1">&lt;div class=&quot;alert alert-warning&quot;&gt;</span>
+  <span class="s1">&lt;strong&gt;⚠️ Important Notes:&lt;/strong&gt;</span>
+  <span class="s1">&lt;ul&gt;</span>
+    <span class="s1">&lt;li&gt;Be sure to follow the correct JSON structure when editing this file.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;A small mistake (like a missing comma or quotation mark) can cause the app to stop working properly.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;If you're unsure, it's best to make changes through the app itself using commands.&lt;/li&gt;</span>
+    <span class="s1">&lt;li&gt;&lt;strong&gt;If the file is not formatted correctly, SilverCare will fail to load your data and open with a blank address book instead.&lt;/strong&gt;&lt;/li&gt;</span>
+  <span class="s1">&lt;/ul&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">&lt;div style=&quot;page-break-after: always;&quot;&gt;&lt;/div&gt;</span>
+
+<span class="s1">&lt;p&gt;&lt;strong&gt;Sample JSON Structure (Do not modify unless you understand the format):&lt;/strong&gt;&lt;/p&gt;</span>
+
+<span class="s1">&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{</span>
+  <span class="s1">&quot;persons&quot;: [</span>
+    <span class="s1">{</span>
+      <span class="s1">&quot;name&quot;: &quot;John Doe&quot;,</span>
+      <span class="s1">&quot;phone&quot;: &quot;98765432&quot;,</span>
+      <span class="s1">&quot;address&quot;: &quot;311, Clementi Ave 2, #02-25&quot;,</span>
+      <span class="s1">&quot;gender&quot;: &quot;Male&quot;,</span>
+      <span class="s1">&quot;medicine&quot;: &quot;paracetamol&quot;,</span>
+      <span class="s1">&quot;appointmentDate&quot;: &quot;2025-01-17 16:30&quot;,</span>
+      <span class="s1">&quot;conditionTags&quot;: [</span>
+        <span class="s1">{</span>
+          <span class="s1">&quot;tagName&quot;: &quot;dementia&quot;,</span>
+          <span class="s1">&quot;tagType&quot;: &quot;CONDITION&quot;</span>
+        <span class="s1">}</span>
+      <span class="s1">],</span>
+      <span class="s1">&quot;detailTags&quot;: [</span>
+        <span class="s1">{</span>
+          <span class="s1">&quot;tagName&quot;: &quot;lives alone&quot;,</span>
+          <span class="s1">&quot;tagType&quot;: &quot;DETAIL&quot;</span>
+        <span class="s1">}</span>
+      <span class="s1">]</span>
+    <span class="s1">}</span>
+  <span class="s1">]</span>
+<span class="s1">}</span>
+<span class="s1">&lt;/code&gt;&lt;/pre&gt;</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">### </span><span class="s2">Switch Themes</span><span class="s1">: </span><span class="s2">Toggle Theme</span>
+<span class="s2">SilverCare supports both </span><span class="s1">**</span><span class="s2">light</span><span class="s1">** </span><span class="s2">and </span><span class="s1">**</span><span class="s2">dark</span><span class="s1">** </span><span class="s2">modes.</span>
+
+<span class="s2">You can switch between them anytime</span><span class="s1">:</span>
+<span class="s0">* </span><span class="s2">Click the </span><span class="s1">**</span><span class="s2">Toggle Theme button</span><span class="s1">** </span><span class="s2">under the View menu in the top-left corner.</span>
+
+<span class="s1">**</span><span class="s2">Dark Mode</span><span class="s1">**</span>
+
+<span class="s1">![</span><span class="s2">dark theme</span><span class="s1">](</span><span class="s2">images/darkThemeExample.png</span><span class="s1">)</span>
+
+<span class="s1">&lt;div style=&quot;page-break-after: always;&quot;&gt;&lt;/div&gt;</span>
+
+<span class="s1">**</span><span class="s2">Light Mode</span><span class="s1">**</span>
+
+<span class="s1">![</span><span class="s2">img.png</span><span class="s1">](</span><span class="s2">images/lightThemeExample.png</span><span class="s1">)</span>
+
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+<span class="s1">&lt;div style=&quot;page-break-after: always;&quot;&gt;&lt;/div&gt;</span>
+
+<span class="s0">## </span><span class="s2">FAQ</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">The app doesn’t open when I run it. What should I check?</span><span class="s1">**</span>
+
+<span class="s1">**</span><span class="s2">A</span><span class="s1">**: </span><span class="s2">Here are some common issues to troubleshoot</span><span class="s1">:</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">Java not installed or wrong version</span><span class="s1">** </span>
+
+  <span class="s2">Make sure Java 17 or above is installed.</span>
+  
+  <span class="s2">You can check this by running</span><span class="s1">: </span><span class="s2">`java -version`</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">File name or location changed</span><span class="s1">** </span>
+
+  <span class="s2">Make sure the file is still named silvercare.jar and hasn't been renamed by accident.</span>
+<span class="s0">* </span><span class="s1">**</span><span class="s2">Not in the right folder</span><span class="s1">**</span>
+
+   <span class="s2">Open your terminal or command prompt and navigate </span><span class="s1">(</span><span class="s2">cd</span><span class="s1">) </span><span class="s2">to the folder where silvercare.jar is located before running</span><span class="s1">:</span>
+   <span class="s2">`java -jar silvercare.jar`</span>
+
+
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">What happens if I type the command wrongly?</span><span class="s1">**</span>
+
+<span class="s1">**</span><span class="s2">A</span><span class="s1">**: </span><span class="s2">Don’t worry, SilverCare has built-in error handling. If you make a mistake in your command format </span><span class="s1">(</span><span class="s2">like missing a field or typing something incorrectly</span><span class="s1">)</span><span class="s2">, the app will</span><span class="s1">:</span>
+<span class="s0">* </span><span class="s2">Show an error message</span>
+<span class="s0">* </span><span class="s2">Give you an example of the correct format so you can try again</span>
+
+    <span class="s1">**</span><span class="s2">Example</span><span class="s1">:** </span><span class="s2">If you type `add -n John`, SilverCare will tell you that required fields are missing and show you the correct format.</span>
+
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">How do I transfer my data to another computer?</span><span class="s1">**</span>
+
+<span class="s1">**</span><span class="s2">A</span><span class="s1">**: </span><span class="s2">When you first run SilverCare on a new computer, it automatically creates a data file in a folder named data, located in the same folder as the app </span><span class="s1">(</span><span class="s2">silvercare.jar</span><span class="s1">)</span><span class="s2">.</span>
+    
+<span class="s0">- </span><span class="s2">To transfer your data</span><span class="s1">:</span>
+    <span class="s0">1. </span><span class="s2">Install Java and place silvercare.jar on the new computer.</span>
+    <span class="s0">2. </span><span class="s2">Run the app once, this will create the default data file </span><span class="s1">(</span><span class="s2">data/addressbook.json</span><span class="s1">)</span><span class="s2">.</span>
+    <span class="s0">3. </span><span class="s2">Close the app.</span>
+    <span class="s0">4. </span><span class="s2">On your old computer, go to the folder where you last used SilverCare. Inside the data folder, find the file named</span><span class="s1">:</span>
+
+       <span class="s2">`addressbook.json`</span>
+    <span class="s0">5. </span><span class="s2">Copy this file to a USB drive or cloud storage.</span>
+    <span class="s0">6. </span><span class="s2">On your new computer, replace the newly created addressbook.json file in the data folder with the one from your old computer.</span>
+    <span class="s0">7. </span><span class="s2">Reopen SilverCare and your old data should now be visible.</span>
+
+<span class="s1">&lt;blockquote style=&quot;color: #333333;&quot;&gt;</span>
+  <span class="s1">If your .jar file is in Documents/SilverCare, your data file will be at:</span>
+    <span class="s1">&lt;code&gt;Documents/SilverCare/data/addressbook.json&lt;/code&gt;</span>
+<span class="s1">&lt;/blockquote&gt;</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">## </span><span class="s2">Known issues</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">When using multiple screens</span><span class="s1">**</span><span class="s2">, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">If you minimize the Help Window</span><span class="s1">** </span><span class="s2">and then run the `help` command </span><span class="s1">(</span><span class="s2">or use the `Help` menu, or the keyboard shortcut `F1`</span><span class="s1">) </span><span class="s2">again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Appointments can be scheduled in the past.</span><span class="s1">** </span><span class="s2">The system does not prevent adding past dates for appointments. Please double-check appointment dates when entering them to avoid confusion.</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">No warning is shown for overlapping appointments.</span><span class="s1">** </span><span class="s2">The system allows multiple appointments at the same time without any alerts. You may need to check manually to prevent double-bookings.</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Recurring appointments must be entered individually.</span><span class="s1">** </span><span class="s2">The system does not yet support repeating weekly or monthly appointments. Each date must be added separately.</span>
+<span class="s0">6. </span><span class="s1">**</span><span class="s2">Medicine field does not include dosage or frequency.</span><span class="s1">** </span><span class="s2">Only the name of the medicine can be recorded. If needed, dosage and timing details can be added in the notes section manually.</span>
+<span class="s0">7. </span><span class="s1">**</span><span class="s2">All medical conditions and details must be retyped when editing.</span><span class="s1">** </span><span class="s2">You cannot edit a single condition or detail—editing one requires re-entering all related information.</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+<span class="s1">&lt;div style=&quot;page-break-after: always;&quot;&gt;&lt;/div&gt;</span>
+
+<span class="s0">## </span><span class="s2">Command summary</span>
+
+<span class="s1">Action </span><span class="s0">| </span><span class="s1">Format, Examples</span>
+<span class="s0">--------|------------------</span>
+<span class="s1">**Add** </span><span class="s0">| </span><span class="s1">`add -n NAME -p PHONE -a ADDRESS -g GENDER [-d APPOINTMENT DATE] [-c CONDITION]…​[-det DETAILS]…​[-med MEDICINE]` &lt;br&gt; e.g. `add -n James Ho -p 22224444 -a 123 Clementi Rd -g male -d 2023-10-10 -c HIGH BP -det lives alone -med paracetamol, ibuprofen`</span>
+<span class="s1">**Clear** </span><span class="s0">| </span><span class="s1">`clear` (Asks for confirmation before deleting all records)</span>
+<span class="s1">**Delete** </span><span class="s0">| </span><span class="s1">`delete INDEX`&lt;br&gt; e.g. `delete 3` (Asks for confirmation before deleting the selected patient)</span>
+<span class="s1">**Edit** </span><span class="s0">| </span><span class="s1">`edit INDEX [-n NAME] [-p PHONE] [-a ADDRESS] [-g GENDER] [-d APPOINTMENT_DATE] [-c CONDITION]…​[-det DETAILS]…​[-med MEDICINE]`&lt;br&gt; e.g.`edit 2 -n James Lee -p 92131231 -c Asthma -med panadol, omeprazole`</span>
+<span class="s1">**Find** name </span><span class="s0">| </span><span class="s1">`find -n KEYWORD [MORE_KEYWORDS]`&lt;br&gt; e.g. `find -n James Jake `</span>
+<span class="s1">**Find** date </span><span class="s0">| </span><span class="s1">`find -d yyyy-MM-dd [HH:mm]`&lt;br&gt; e.g. `find -d 2025-06-12`</span>
+<span class="s1">**Find** upcoming </span><span class="s0">| </span><span class="s1">`find upcoming`</span>
+<span class="s1">**List** </span><span class="s0">| </span><span class="s1">`list` (Sorted by upcoming appointments first. Those without dates appear in order added.)</span>
+<span class="s1">**Help** </span><span class="s0">| </span><span class="s1">`help` or click the Help button in the menu bar</span>
+<span class="s1">**Toggle Theme** </span><span class="s0">| </span><span class="s1">**(Button only)** Click the Toggle Theme button under the View menu (top-left) to switch between light and dark modes</span>
+
+<span class="s0">--------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="s0">## </span><span class="s2">Glossary</span>
+
+<span class="s1">**</span><span class="s2">Flag</span><span class="s1">**  </span>
+<span class="s0">- </span><span class="s2">The part of a command that tells the app what type of information is coming next.  </span>
+<span class="s2">Each flag is followed by the actual input </span><span class="s1">(</span><span class="s2">e.g., `-n John Doe`</span><span class="s1">)</span><span class="s2">.</span>
+
+<span class="s1">**</span><span class="s2">Command Prompt</span><span class="s1">**  </span>
+<span class="s0">- </span><span class="s2">A text-based interface on Windows where you type commands to run apps or perform actions.  </span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Windows users</span><span class="s1">:**</span>
+  <span class="s0">- </span><span class="s2">Press `Windows + R`, type `cmd`, then press `Enter`</span>
+  <span class="s0">- </span><span class="s2">Or, search for </span><span class="s1">**</span><span class="s2">Command Prompt</span><span class="s1">** </span><span class="s2">in the Start menu  </span>
+    <span class="s2">You’ll need to use this to navigate to your SilverCare folder and run the app.</span>
+
+<span class="s1">**</span><span class="s2">Terminal</span><span class="s1">**  </span>
+<span class="s0">- </span><span class="s2">A general term for text-based command input tools on macOS/Linux.  </span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">macOS/Linux users</span><span class="s1">:** </span><span class="s2">Search for </span><span class="s1">**</span><span class="s2">Terminal</span><span class="s1">** </span><span class="s2">using </span><span class="s1">**</span><span class="s2">Spotlight</span><span class="s1">** (</span><span class="s2">press `Cmd + Space`, then type `Terminal`</span><span class="s1">) </span><span class="s2">or find it in the </span><span class="s1">**</span><span class="s2">Applications </span><span class="s1">&gt; </span><span class="s2">Utilities</span><span class="s1">** </span><span class="s2">folder.</span>
+</pre>
+</body>
+</html>
