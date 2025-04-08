@@ -1109,7 +1109,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact Details**: A patient’s phone number, address, and any other means of communication stored within the system.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient Record**: A stored entry containing a patient's personal details, contact information, and relevant medical notes.
-* **Unique Identifier (Patient Index)**: A system-generated number assigned to each patient record to ensure easy identification and management.
+* **Patient Index**: A system-generated number assigned to each patient record to ensure easy identification and management.
 
 
 --------------------------------------------------------------------------------------------------------------------
