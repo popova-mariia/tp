@@ -1,0 +1,19 @@
+@startuml
+hide members
+hide footbox
+hide circle
+
+skinparam arrowColor DARKRED
+
+class ListCommand
+class ModelManager
+class "FilteredList<Person>" as FilteredList
+class Person
+class PersonCard
+
+ListCommand --> ModelManager : calls updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+ModelManager --> FilteredList : resets filtered list\n(sorted by appointment date)
+FilteredList --> Person : holds all persons
+PersonCard --> Person : displays details
+
+@enduml

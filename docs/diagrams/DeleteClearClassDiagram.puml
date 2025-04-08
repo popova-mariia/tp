@@ -1,0 +1,23 @@
+@startuml
+hide members
+hide footbox
+hide circle
+
+skinparam arrowColor DARKRED
+
+class DeleteCommand
+class ClearCommand
+class ConfirmCommand
+class AbortCommand
+class ModelManager
+class LogicManager
+class Person
+
+DeleteCommand --> ModelManager : sets pending deletion
+ClearCommand --> ModelManager : sets pending clear
+ConfirmCommand --> ModelManager : confirms operation
+AbortCommand --> ModelManager : aborts operation
+LogicManager --> ModelManager : checks pending confirmations
+ModelManager --> Person : manages
+
+@enduml

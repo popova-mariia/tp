@@ -242,6 +242,8 @@ This feature supports home-visit nurses and healthcare workers in efficiently ma
 
 #### Key Classes & Logic
 
+![AddCommandClassDiagram](images/AddCommandClassDiagram.png)
+
 * `AddressBookParser`
     * Recognizes the `add` command.
     * Passes arguments to `AddCommandParser`.
@@ -324,6 +326,8 @@ This two-step process helps prevent accidental data loss.
 
 
 #### Key Classes & Logic
+
+![DeleteClearClassDiagram](images/DeleteClearClassDiagram.png)
 
 1. `DeleteCommand`
     * Parses the provided index.
@@ -422,6 +426,8 @@ This improves usability by helping users quickly spot the relevant matches in th
 
 #### **Key Classes & Logic**
 
+![FindByNameClassDiagram](images/FindByNameClassDiagram.png)
+
 1. `FindCommand`
     * Accepts a `Predicate<Person>` when constructed.
     * During execution, calls `model.updateFilteredPersonList(predicate)`.
@@ -491,13 +497,15 @@ This functionality is helpful when nurses want to quickly check who they are sch
 
 #### Key Classes & Logic
 
+![FindByAppointmentDateClassDiagram](images/FindByAppointmentDateClassDiagram.png)
+
 1. `FindCommandParser`
     * Detects the `-d` prefix in user input.
     * Parses the appointment date string provided.
     * Creates a `FindCommand` with an `AppointmentDatePredicate`.
     * Throws a `ParseException` if the date format is invalid.
 
-2. `AppointmentDatePredicate`
+2. `AppointmentDateContainsKeywordsPredicate`
     * Implements `Predicate<Person>`.
     * Checks if a patient's appointment date matches the parsed input date.
     * Supports parsing both:
@@ -559,6 +567,8 @@ The `upcoming` feature under the `find` command allows users to filter and displ
 
 #### Key Classes & Logic
 
+![UpcomingAppointmentClassDiagram](images/UpcomingAppointmentClassDiagram.png)
+
 1. `FindCommandParser`
     * Detects if the user input is exactly `"upcoming"` (case-insensitive).
     * If matched, it returns a `FindCommand` initialized with an `UpcomingAppointmentPredicate`.
@@ -576,10 +586,6 @@ The `upcoming` feature under the `find` command allows users to filter and displ
    * Helps maintain consistent formatting throughout the system.
 4. `FindCommand`
    * When executed, it passes the predicate to the model's `updateFilteredPersonList()`, causing the filtered list to update with only persons matching the predicate.
-
-The following class diagram shows the relationship between key classes involved:
-
-![UpcomingAppointmentClassDiagram](images/UpcomingAppointmentClassDiagram.png)
 
 
 <div class="alert alert-warning">
@@ -656,6 +662,8 @@ The `edit` feature allows users to modify the details of an existing patient in 
 
 #### Key Classes & Logic
 
+![EditCommandClassDiagram](images/EditCommandClassDiagram.png)
+
 1. `EditCommand`
     * Receives the index and an `EditPersonDescriptor` containing the new field values.
     * Retrieves the corresponding `Person` from the current filtered list.
@@ -723,6 +731,8 @@ This is particularly useful after performing a search, filter, or any operation 
     * No parameters are needed — simply typing `list` is sufficient.
 
 #### Key Classes & Logic
+
+<img src="images/ListCommandClassDiagram.png" width="450" />
 
 1. `ListCommand`
     * Implements the `Command` interface.
@@ -947,7 +957,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System informs the Nurse that the date entered does not exist.
     * 3b2. System requests a valid date input.
     * 3b3. Nurse provides a new date.
-    * Steps 3b1–3b3 are repeated until a valid date is entered.
+     * Steps 3b1–3b3 are repeated until a valid date is entered.
     * Use case resumes from step 4.
 
 * 4a. No matching patient records found.

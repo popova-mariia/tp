@@ -1,0 +1,21 @@
+@startuml
+hide members
+hide footbox
+hide circle
+
+skinparam arrowColor DARKRED
+
+class AddressBookParser
+class AddCommandParser
+class AddCommand
+class UniquePersonList
+class Person
+class AppointmentDate
+
+AddressBookParser --> AddCommandParser : delegates
+AddCommandParser --> AddCommand : creates
+AddCommand --> Person : creates new
+AddCommand --> UniquePersonList : calls add()
+UniquePersonList --> Person : holds
+Person *--> "1" AppointmentDate
+@enduml
