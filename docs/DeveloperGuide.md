@@ -594,7 +594,7 @@ The following class diagram shows the relationship between key classes involved:
       </ul>
     </li>
     <br>
-    <li>Combining multiple types in one command (e.g., <code>find -n John -d 2025-12-12</code>) is <strong>not supported</strong> and will result in an error.</li>
+    <li>Combining multiple types in one command (e.g., <code>find -n John -d 2025-12-12</code>) is <strong>not supported</strong> and will result in an error displayed to users.</li>
   </ul>
 </div>
 
