@@ -581,6 +581,24 @@ The following class diagram shows the relationship between key classes involved:
 
 ![UpcomingAppointmentClassDiagram](images/UpcomingAppointmentClassDiagram.png)
 
+
+<div class="alert alert-warning">
+  <strong>⚠️ Important Limitation:</strong><br><br>
+  Each <code>find</code> command is designed to accept only <strong>one search type at a time</strong>.<br><br>
+  <ul>
+    <li>You must choose either:
+      <ul>
+        <li>Find by <code>-n</code> (Name),</li>
+        <li>Find by <code>-d</code> (Appointment Date), or</li>
+        <li>Find <code>upcoming</code> appointments.</li>
+      </ul>
+    </li>
+    <br>
+    <li>Combining multiple types in one command (e.g., <code>find -n John -d 2025-12-12</code>) is <strong>not supported</strong> and will result in an error.</li>
+  </ul>
+</div>
+
+
 #### Design Considerations
 
 * **Fault Tolerance:**  
