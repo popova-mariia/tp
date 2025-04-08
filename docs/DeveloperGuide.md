@@ -906,14 +906,17 @@ This makes it easier to store, update, and display individual medication records
 **Sample Input (future):**
 `-med Paracetamol (500mg, twice a day) -med Omeprazole (20mg, once daily)`
 
-### 3. Improve input validation for name-based search
+### 3. Improve input validation and matching for name-based search
 **Current Limitation:**
-The `find -n` command accepts any non-empty input and defaults to “no patients found.”
+The `find -n` command accepts any non-empty input and defaults to “no patients found.” and has a strict matching format. 
 
 **Planned Enhancement:**
-Detect clearly invalid inputs (e.g. empty, all-symbol, extremely short) and display a more meaningful error message.
+* Detect clearly invalid inputs (e.g. empty, all-symbol, extremely short) and display a more meaningful error message.
+* Allow less strict matching such as correct/partial name match in wrong order and partial matches in correct order.
 
-**Sample Output:** `Search term is invalid. Please enter a proper name.`
+**Sample Output:** 
+* `Search term is invalid. Please enter a proper name.` 
+* `find -n Doe John`, `find -n Do Jo`, `find -n Jo Do` and `find -n John Doe` all returning patient John Doe.
 
 ### 4. Allow appointment date to be cleared using the edit command
 **Current Limitation:**
@@ -960,7 +963,7 @@ Allow find -n to return results for any of the keywords (logical OR), not just m
 
 ### 9. Improve robustness of flag handling 
 **Current Limitation:**
-`edit 1 -med panadol -cough syrup` causes medicine field to be edited to `panadol` while conditions to `ough syrup`.
+`edit 1 -med panadol -cough syrup` causes medicine field to be edited to `panadol` while conditions field to `ough syrup` due to the `-c` flag present.
 
 **Planned Enhancement:**
 Better flag handling to ensure the intended field is updated as expected when the input contains other flags.
